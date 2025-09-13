@@ -7,7 +7,8 @@ import org.springframework.security.web.DefaultSecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
-
+/* this disables the authentication requirement to send HTTP requests, so that I can test controllers
+without getting a 401 error*/
     @Bean
     public DefaultSecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
