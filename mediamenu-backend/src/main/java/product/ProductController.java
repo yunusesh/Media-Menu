@@ -7,38 +7,43 @@ import org.springframework.web.bind.annotation.*;
 //examples of controllers that are used to write and read data with HTTP requests
 @RestController
 public class ProductController {
-    @Autowired
-    private PostProductService PostProductService;
+    private final PostProductService PostProductService;
 
-    @Autowired
-    private PutProductService PutProductService;
+    private final PutProductService PutProductService;
 
-    @Autowired
-    private GetProductService GetProductService;
+    private final GetProductService GetProductService;
 
-    @Autowired
-    private DeleteProductService DeleteProductService;
+    private final DeleteProductService DeleteProductService;
 
+
+    public ProductController(PostProductService postProductService,
+                             PutProductService putProductService,
+                             GetProductService getProductService,
+                             DeleteProductService deleteProductService) {
+        PostProductService = postProductService;
+        PutProductService = putProductService;
+        GetProductService = getProductService;
+        DeleteProductService = deleteProductService;
+    }
 
     @PostMapping
     public ResponseEntity<String> createProduct() {
-        return PostProductService.execute();
+        return PostProductService.execute(null);
     }
 
     @GetMapping
     public ResponseEntity<String> getProduct() {
-        return GetProductService.execute();
+        return GetProductService.execute(null);
     }
-
 
     @PutMapping
     public ResponseEntity<String> updateProduct() {
-        return PutProductService.execute();
+        return PutProductService.execute(null);
     }
 
     @DeleteMapping
     public ResponseEntity<String> deleteProduct() {
-        return DeleteProductService.execute();
+        return DeleteProductService.execute(null);
     }
 
 

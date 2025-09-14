@@ -5,10 +5,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GetProductService {
-    public ResponseEntity<String> execute(){
+public class GetProductService implements Query<Void, String> {
+
+    @Override
+    public ResponseEntity<String> execute(Void input) {
         return ResponseEntity.status(HttpStatus.OK).body("Got Product");
-
     }
-
 }
