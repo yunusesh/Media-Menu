@@ -36,16 +36,16 @@ public class ProductController {
     }
 
     @PostMapping("/product")
-    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
+    public ResponseEntity<ProductDTO> createProduct(@RequestBody Product product) {
         return createProductService.execute(product);
     }
 
-    @GetMapping("/product/{id}")
+    @GetMapping("/products")
     public ResponseEntity<List<ProductDTO>> getProducts() {
         return getProductsService.execute(null);
     }
 
-    @GetMapping("/products")
+    @GetMapping("/product/{id}")
     public ResponseEntity<ProductDTO> getProductById(@PathVariable Integer id){
         return getProductService.execute(id);
     }
@@ -55,7 +55,7 @@ public class ProductController {
         return updateProductService.execute(new UpdateProductCommand(id, product));
     }
 
-    @DeleteMapping("/product/{id}") // id here must match id in line 64
+    @DeleteMapping("/product/{id}") // id here must match id in ??
     public ResponseEntity<Void> deleteProduct(@PathVariable Integer id) {
         return deleteProductService.execute(id);
     }

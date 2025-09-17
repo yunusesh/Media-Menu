@@ -6,9 +6,10 @@ import org.springframework.stereotype.Service;
 import product.Command;
 import product.ProductRepository;
 import product.model.Product;
+import product.model.ProductDTO;
 
 @Service
-public class CreateProductService implements Command<Product, Product> {
+public class CreateProductService implements Command<Product, ProductDTO> {
 
     private final ProductRepository productRepository;
 
@@ -17,9 +18,9 @@ public class CreateProductService implements Command<Product, Product> {
     }
 
     @Override
-    public ResponseEntity<Product> execute(Product product) {
+    public ResponseEntity<ProductDTO> execute(Product product) {
         Product savedProduct = productRepository.save(product);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedProduct);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new ProductDTO(savedProduct));
     }
 }

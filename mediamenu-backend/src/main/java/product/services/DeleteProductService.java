@@ -13,7 +13,7 @@ import java.util.Optional;
 public class DeleteProductService implements Command<Integer, Void> {
     private ProductRepository productRepository;
 
-    public DeleteProductService(ProductRepository privateRespitory) {
+    public DeleteProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
