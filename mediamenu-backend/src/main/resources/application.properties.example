@@ -1,13 +1,21 @@
+#spring
+
+server.port=8081
 spring.application.name=mediamenu-backend
 
-#mySql:
+#postgreSql:
 
-spring.datasource.url=jdbc:mysql://localhost:3306/MediaMenu
-spring.data.source.username=your_username_here
-spring.datasource.password=your_password_here
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
+spring.datasource.url=jdbc:postgresql://localhost:5432/MediaMenu
+spring.datasource.username=postgres
+spring.datasource.password=yourpassword
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.hibernate.ddl-auto=validate
+
+discogs:
+
+consumer-key: your_consumer_key_here
+
+consumer-secret: your_consumer_secret_here
 
 spotify:
 client-id: your_clientid_here
