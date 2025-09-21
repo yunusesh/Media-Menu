@@ -15,6 +15,7 @@ public class GetProductService implements Query<Integer, ProductDTO> {
     private final ProductRepository productRepository;
 
     public GetProductService(ProductRepository productRepository) {
+
         this.productRepository = productRepository;
     }
 

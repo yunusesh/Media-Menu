@@ -17,6 +17,8 @@ consumer-key: your_consumer_key_here
 
 consumer-secret: your_consumer_secret_here
 
+discogs.token= your_token_here
+
 spotify:
 client-id: your_clientid_here
 
