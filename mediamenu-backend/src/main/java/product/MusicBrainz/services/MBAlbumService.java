@@ -1,4 +1,4 @@
-package product.MusicBrainz;
+package product.MusicBrainz.services;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;

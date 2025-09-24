@@ -1,4 +1,4 @@
-package product.MusicBrainz;
+package product.MusicBrainz.services;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -9,10 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import product.Query;
 import product.MusicBrainz.model.MBArtistResponse;
-
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
 
 @Service
 public class MBArtistService implements Query<String, MBArtistDTO> {

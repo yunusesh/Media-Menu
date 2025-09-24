@@ -4,14 +4,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
-public class MBTrackDTO {
-    private String title;
-
+public class MBReleaseDTO {
     @JsonProperty("release-group")
     private MBAlbumDTO releaseGroup;
-
 }
+//holy slop i have to find a way to delete this file
