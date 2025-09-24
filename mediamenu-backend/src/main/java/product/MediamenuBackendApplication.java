@@ -8,7 +8,6 @@ public class MediamenuBackendApplication {
 	public static void main(String[] args) {
         System.out.println("hello world");
 
-
         SpringApplication.run(MediamenuBackendApplication.class, args);
 	}
 }

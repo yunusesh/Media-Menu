@@ -11,14 +11,6 @@ spring.datasource.password=yourpassword
 spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
 spring.jpa.hibernate.ddl-auto=validate
 
-discogs:
-
-consumer-key: your_consumer_key_here
-
-consumer-secret: your_consumer_secret_here
-
-discogs.token= your_token_here
-
 spotify:
 client-id: your_clientid_here
 
