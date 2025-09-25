@@ -1,4 +1,4 @@
-package Spotify;
+package product.Spotify;
 
 import lombok.Data;
 

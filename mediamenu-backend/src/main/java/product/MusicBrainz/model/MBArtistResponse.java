@@ -2,6 +2,9 @@ package product.MusicBrainz.model;
 
 import lombok.Data;
 
+import java.util.List;
+
+//all the data i currently need from a musicbrainz artist json
 @Data
 public class MBArtistResponse {
     private String id;
@@ -9,4 +12,5 @@ public class MBArtistResponse {
     private String year; //year of first release
     private String genre;
     private String imageurl;
+    private List<MBArtistDTO> artists;
 }

@@ -1,28 +1,31 @@
 package product.MusicBrainz.services;
 
+
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import product.MusicBrainz.model.MBArtistDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import product.Query;
+import product.MusicBrainz.model.MBArtistDTO;
 import product.MusicBrainz.model.MBArtistResponse;
+import product.MusicBrainz.model.SearchArtistDTO;
+import product.Query;
+
+import java.util.List;
 
 @Service
-public class MBArtistService implements Query<String, MBArtistDTO> {
+public class SearchArtistService implements Query<String, SearchArtistDTO> {
 
     private final RestTemplate restTemplate;
-    private final String url = "https://musicbrainz.org/ws/2/artist/";
+    private final String url = "https://musicbrainz.org/ws/2/artist?query=";
 
-    public MBArtistService(RestTemplate restTemplate) {
-
+    public SearchArtistService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
     @Override
-    public ResponseEntity<MBArtistDTO> execute(String id) {
+    public ResponseEntity<SearchArtistDTO> execute(String name){
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("User-Agent", "MediaMenu/1.0 (yunuseshesh@gmail.com)");
@@ -30,13 +33,20 @@ public class MBArtistService implements Query<String, MBArtistDTO> {
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
         ResponseEntity<MBArtistResponse> response = restTemplate.exchange(
-                url + id + "?inc=aliases&fmt=json",
+                url + name + "&fmt=json",
                 HttpMethod.GET,
                 entity,
                 MBArtistResponse.class
         );
 
-        MBArtistDTO mbArtistDTO = new MBArtistDTO(response.getBody().getName());
-        return ResponseEntity.ok(mbArtistDTO);
+        assert response.getBody() != null;
+        List<MBArtistDTO> artists = response.getBody().getArtists().stream()
+                .map(artist -> new MBArtistDTO(artist.getName()))
+                .toList();
+
+        SearchArtistDTO searchArtistDTO = new SearchArtistDTO(artists);
+        return ResponseEntity.ok(searchArtistDTO);
+
+
     }
 }

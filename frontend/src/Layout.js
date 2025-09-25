@@ -1,4 +1,4 @@
-import { Navbar } from "./Components/Navbar"
+import { Navbar } from "./components/Navbar"
 import { Outlet } from "react-router-dom"
 
 export function Layout(){ // makes the nav bar a constant through all pages

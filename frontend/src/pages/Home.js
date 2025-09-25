@@ -2,7 +2,7 @@ import './Home.css'
 
 export function Home(){
   return(
-    <h1>Rate Your Media</h1>
+    <h1>Media Menu</h1>
 
   )
 }

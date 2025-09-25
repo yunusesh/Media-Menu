@@ -1,11 +1,13 @@
 package product.MusicBrainz.model;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-//all the data that is returned from a getArtist call
+import java.util.List;
+
 @Data
 @AllArgsConstructor
-public class MBArtistDTO {
-    private String name;
+public class SearchArtistDTO {
+    private List<MBArtistDTO> artists;
 }

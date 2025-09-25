@@ -1,13 +1,13 @@
 import './App.css'
 import { HashRouter as Router, Routes, Route} from 'react-router-dom' // Allows for routing through different page files
-import { Home } from './Pages/Home'
-import { Movies } from './Pages/Movies'
-import { Music } from './Pages/Music'
-import { TV } from './Pages/TV'
+import { Home } from './pages/Home'
+import { Movies } from './pages/Movies'
+import { Music } from './pages/Music'
+import { TV } from './pages/TV'
 import { Layout } from './Layout'
 
 function App(){ 
-  //employ the navigation bar outide of routes so it does not hide the other components
+  //employ the navigation bar outside of routes so it does not hide the other components
   return(
     <Router> 
       <Layout/> 
@@ -18,7 +18,6 @@ function App(){
           <Route path = "/TV" element = {<TV/>}/>
       </Routes>
     </Router>
-
   )
   
 }
