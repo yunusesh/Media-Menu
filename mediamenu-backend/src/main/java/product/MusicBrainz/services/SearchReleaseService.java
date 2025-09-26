@@ -1,0 +1,45 @@
+package product.MusicBrainz.services;
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import product.MusicBrainz.model.*;
+import product.Query;
+
+import java.util.List;
+
+@Service
+public class SearchReleaseService implements Query<String, SearchReleaseDTO> {
+    private RestTemplate restTemplate;
+    private String url = "https://musicbrainz.org/ws/2/release-group?query=";
+
+    public SearchReleaseService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+
+    public ResponseEntity<SearchReleaseDTO> execute(String title){
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("User-Agent", "MediaMenu/1.0 (yunuseshesh@gmail.com)");
+
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+
+        ResponseEntity<MBAlbumResponse> response = restTemplate.exchange(
+                url + title + "&fmt=json",
+                HttpMethod.GET,
+                entity,
+                MBAlbumResponse.class
+        );
+
+        assert response.getBody() != null;
+        List<MBAlbumDTO> releases = response.getBody().getReleaseGroups().stream()
+                .map(release -> new MBAlbumDTO(release.getTitle(), release.getArtistCredit()))
+                .toList();
+
+        SearchReleaseDTO searchReleaseDTO = new SearchReleaseDTO(releases);
+        return  ResponseEntity.ok(searchReleaseDTO);
+    }
+
+}

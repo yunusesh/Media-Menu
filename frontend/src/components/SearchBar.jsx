@@ -1,23 +1,27 @@
-import React, { useState, useRef } from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 import "./SearchBar.css"
 import { FaSearch } from "react-icons/fa"
 
 export const SearchBar = ({ setResults }) => {
     const [input, setInput] = useState("");
     const debounceTimeout = useRef(null); // store timeout ID
+    const [searchType, setSearchType] = useState("artists");
 
     const fetchData = (value) => {
         if (!value || value.trim() === "") {
             setResults([]); //set this to recently searched later!
             return;
         }
-
-        fetch(`http://localhost:8081/artists/${value}`)
+        fetch(`http://localhost:8081/${searchType}/${value}`)
             .then((response) => response.json())
             .then((json) => {
                 if (json.artists) {
                     setResults(json.artists);
-                } else {
+                }
+                else if(json.releases){ //NOT RETURNING BC SEARCHRESULT AND SEARCHRESUTL LIST NOT BUILT FOR THIS!
+                    setResults(json.releases);
+                }
+                else{
                     setResults([]);
                 }
             })
@@ -35,17 +39,42 @@ export const SearchBar = ({ setResults }) => {
         // Wait 400ms after typing stops before calling fetch
         debounceTimeout.current = setTimeout(() => {
             fetchData(value);
-        }, 400);
+        }, 200);
     };
 
+    const[visible, setVisible] = useState(false); // on search icon click we toggle searchbar visibility
     return (
-        <div className="input-wrapper">
-            <FaSearch id="search-icon" />
-            <input
-                placeholder="Type to search..."
-                value={input}
-                onChange={(e) => handleChange(e.target.value)}
+        <div className="search-wrapper">
+            <FaSearch
+                id="search-icon"
+                onClick={() =>
+                    setVisible(!visible)
+
+                }
+                style={{ cursor: "pointer" }}
             />
+
+            <div className="artist-search">
+               <button onClick={() => setSearchType("artists")}>
+                   Artists
+               </button>
+            </div>
+
+            <div className="release-search">
+                <button onClick={() => setSearchType("releases")}>
+                    Releases
+                </button>
+            </div>
+
+            {visible && (
+                <div className="input-wrapper">
+                    <input
+                        placeholder="Type to search..."
+                        value={input}
+                        onChange={(e) => handleChange(e.target.value)}
+                    />
+                </div>
+            )}
         </div>
     );
 }

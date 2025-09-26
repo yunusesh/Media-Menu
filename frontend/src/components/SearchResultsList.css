@@ -1,11 +1,14 @@
 .results-list{
-    width: 100%;
-    background-color: white;
+    background-color: #4c4c4c;
     display: flex;
     flex-direction: column;
-    box-shadow: 0px 0px 8px #ddd;
+    box-shadow: 0px 0px 8px #4c4c4c;
     border-radius: 10px;
     margin-top: 1rem;
     max-height: 300px;
     overflow-y: scroll;
+    position:relative;
+    bottom:65px;
+    left:95px;
+    width:30%;
 }

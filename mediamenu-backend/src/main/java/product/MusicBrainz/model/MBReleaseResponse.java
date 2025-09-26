@@ -8,15 +8,12 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class MBTrackResponse {
+public class MBReleaseResponse {
     private String id;
-    private String title;
-
-    @JsonProperty("artist-credit")
-    private List<MBArtistDTO> artistCredit;
-
-    private List<MBReleaseDTO> releases;
 
     @JsonProperty("release-group")
-    private MBAlbumDTO releaseGroup;
+    private List<MBAlbumDTO> releaseGroup;
+
+    private String name;
+    private String title;
 }

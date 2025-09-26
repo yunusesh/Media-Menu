@@ -2,13 +2,13 @@ import React from "react";
 import "./SearchResultsList.css"
 import {SearchResult} from "./SearchResult";
 
-export const SearchResultsList = ({ results }) => {
+export const SearchResultsList = ({ results, searchType }) => {
     return (
         <div className="results-list">
             {
                 results.map((result, id) =>{
-                return <SearchResult result={result} key={id}/>
-            })}
+                    return <SearchResult result={result} searchType ={searchType} key={id}/>
+                })}
         </div>
     );
 };

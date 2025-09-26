@@ -1,15 +1,9 @@
 package product.MusicBrainz;
 
-import product.MusicBrainz.model.MBAlbumDTO;
-import product.MusicBrainz.model.MBArtistDTO;
+import product.MusicBrainz.model.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import product.MusicBrainz.model.MBTrackDTO;
-import product.MusicBrainz.model.SearchArtistDTO;
-import product.MusicBrainz.services.MBAlbumService;
-import product.MusicBrainz.services.MBArtistService;
-import product.MusicBrainz.services.MBTrackService;
-import product.MusicBrainz.services.SearchArtistService;
+import product.MusicBrainz.services.*;
 
 import java.util.List;
 
@@ -19,16 +13,19 @@ public class MBController {
     private final MBAlbumService mbAlbumService;
     private final MBTrackService mbTrackService;
     private final SearchArtistService searchArtistService;
+    private final SearchReleaseService searchReleaseService;
 
     public MBController(MBArtistService mbArtistService,
                         MBAlbumService mbAlbumService,
                         MBTrackService mbTrackService,
-                        SearchArtistService searchArtistService)
+                        SearchArtistService searchArtistService,
+                        SearchReleaseService searchReleaseService)
     {
         this.mbArtistService = mbArtistService;
         this.mbAlbumService = mbAlbumService;
         this.mbTrackService = mbTrackService;
         this.searchArtistService = searchArtistService;
+        this.searchReleaseService = searchReleaseService;
     }
 
     @GetMapping("/artist")
@@ -53,4 +50,9 @@ public class MBController {
     public ResponseEntity<SearchArtistDTO> searchArtist(@PathVariable String name){
         return searchArtistService.execute(name);
         }
+
+    @GetMapping("/releases/{title}")
+    public ResponseEntity<SearchReleaseDTO> searchRelease(@PathVariable String title){
+        return searchReleaseService.execute(title);
+    }
 }
