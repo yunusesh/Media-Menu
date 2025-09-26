@@ -2,10 +2,9 @@ import React, {useState, useRef, useEffect} from 'react'
 import "./SearchBar.css"
 import { FaSearch } from "react-icons/fa"
 
-export const SearchBar = ({ setResults }) => {
+export const SearchBar = ({ setResults, searchType, setSearchType}) => {
     const [input, setInput] = useState("");
     const debounceTimeout = useRef(null); // store timeout ID
-    const [searchType, setSearchType] = useState("artists");
 
     const fetchData = (value) => {
         if (!value || value.trim() === "") {
@@ -18,7 +17,7 @@ export const SearchBar = ({ setResults }) => {
                 if (json.artists) {
                     setResults(json.artists);
                 }
-                else if(json.releases){ //NOT RETURNING BC SEARCHRESULT AND SEARCHRESUTL LIST NOT BUILT FOR THIS!
+                else if(json.releases){
                     setResults(json.releases);
                 }
                 else{
@@ -55,13 +54,13 @@ export const SearchBar = ({ setResults }) => {
             />
 
             <div className="artist-search">
-               <button onClick={() => setSearchType("artists")}>
+               <button className = "artist-button" onClick={() => setSearchType("artists")}>
                    Artists
                </button>
             </div>
 
             <div className="release-search">
-                <button onClick={() => setSearchType("releases")}>
+                <button className = "release-button" onClick={() => setSearchType("releases")}>
                     Releases
                 </button>
             </div>

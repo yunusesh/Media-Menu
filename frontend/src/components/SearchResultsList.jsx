@@ -7,7 +7,7 @@ export const SearchResultsList = ({ results, searchType }) => {
         <div className="results-list">
             {
                 results.map((result, id) =>{
-                    return <SearchResult result={result} searchType ={searchType} key={id}/>
+                    return <SearchResult result={result} searchType={searchType} key={id}/>
                 })}
         </div>
     );

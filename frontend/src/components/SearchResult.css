@@ -4,5 +4,6 @@
 }
 
 .search-result:hover{
-    background-color: #efefef
+    background-color: #efefef;
+    cursor: pointer;
 }

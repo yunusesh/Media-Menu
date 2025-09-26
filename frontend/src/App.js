@@ -5,12 +5,15 @@ import { Movies } from './pages/Movies'
 import { Music } from './pages/Music'
 import { TV } from './pages/TV'
 import { Layout } from './Layout'
+import {useState} from "react";
+import {SearchBar} from "./components/SearchBar";
+import {SearchResult} from "./components/SearchResult";
 
-function App(){ 
-  //employ the navigation bar outside of routes so it does not hide the other components
+function App(){
+    //employ the navigation bar outside of routes so it does not hide the other components
   return(
-    <Router> 
-      <Layout/> 
+    <Router>
+      <Layout/>
       <Routes>
           <Route path = "/" element = {<Home/>}/>
           <Route path = "/Music" element = {<Music/>}/>
