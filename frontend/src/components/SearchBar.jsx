@@ -41,6 +41,12 @@ export const SearchBar = ({ setResults, searchType, setSearchType}) => {
         }, 200);
     };
 
+    const handleSearchTypeChange = (type) =>{
+        setInput("")
+        setSearchType(type)
+        setResults([])
+    }
+
     const[visible, setVisible] = useState(false); // on search icon click we toggle searchbar visibility
     return (
         <div className="search-wrapper">
@@ -48,19 +54,25 @@ export const SearchBar = ({ setResults, searchType, setSearchType}) => {
                 id="search-icon"
                 onClick={() =>
                     setVisible(!visible)
-
                 }
-                style={{ cursor: "pointer" }}
             />
 
             <div className="artist-search">
-               <button className = "artist-button" onClick={() => setSearchType("artists")}>
+               <button className = "artist-button" onClick={() =>
+                   handleSearchTypeChange("artists")}
+                       style={{ backgroundColor: searchType === "artists" ? "#00ffd5" : "#1d6fa3"}}
+                       //if artist button is clicked we highlight by changing color
+                >
                    Artists
                </button>
             </div>
 
             <div className="release-search">
-                <button className = "release-button" onClick={() => setSearchType("releases")}>
+                <button className = "release-button" onClick={() =>
+                    handleSearchTypeChange("releases")}
+                    style={{ backgroundColor: searchType === "releases" ? "#00ffd5" : "#1d6fa3"}}
+
+                >
                     Releases
                 </button>
             </div>

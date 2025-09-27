@@ -12,7 +12,6 @@ export const SearchResult = ({ result, searchType } ) => {
                  else alert('Invalid search type')
              }
         }
-
         >
             {
                 searchType === "artists"

@@ -10,11 +10,10 @@ export function Music(){
     //search results list is the list of elements under the search
     return(
         <div>
-            <h1>Music</h1>
+            <h1></h1>
     <div className="search-bar-container">
         <SearchBar setResults={setResults} setSearchType={setSearchType} searchType={searchType}/>
         <SearchResultsList results={results} searchType={searchType}/>
-
     </div>
         </div>
     )
