@@ -39,7 +39,6 @@ public class SearchArtistService implements Query<String, SearchArtistDTO> {
                 MBArtistResponse.class
         );
 
-        assert response.getBody() != null;
         List<MBArtistDTO> artists = response.getBody().getArtists().stream()
                 .map(artist -> new MBArtistDTO(artist.getName()))
                 .toList();

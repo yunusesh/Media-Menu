@@ -7,8 +7,8 @@
     margin-top: 1rem;
     max-height: 300px;
     overflow-y: scroll;
-    position:relative;
-    bottom:90px;
-    left:95px;
-    width:30%;
+    position:absolute;
+    bottom:230px;
+    left:1165px;
+    width:23%;
 }

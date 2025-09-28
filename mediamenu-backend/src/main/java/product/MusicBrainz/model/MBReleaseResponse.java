@@ -11,9 +11,12 @@ import java.util.List;
 public class MBReleaseResponse {
     private String id;
 
+    private String name;
+    private String title;
+
     @JsonProperty("release-group")
     private List<MBAlbumDTO> releaseGroup;
 
-    private String name;
-    private String title;
+    @JsonProperty("artist-credit")
+    private List<MBArtistDTO> artistCredit;
 }

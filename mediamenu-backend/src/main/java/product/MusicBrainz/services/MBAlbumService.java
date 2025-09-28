@@ -36,11 +36,17 @@ public class MBAlbumService implements Query<String, MBAlbumDTO> {
                 MBAlbumResponse.class
         );
     //json -> find artist credit list -> return all artists in that list
+        assert response.getBody() != null;
         List<MBArtistDTO> artists = response.getBody().getArtistCredit().stream()
                 .map(artist -> new MBArtistDTO(artist.getName()))
                 .toList();
 
-            MBAlbumDTO mbAlbumDTO = new MBAlbumDTO(response.getBody().getTitle(), artists);
+            MBAlbumDTO mbAlbumDTO = new MBAlbumDTO(
+                    response.getBody().getTitle(),
+                    response.getBody().getId(),
+                    response.getBody().getDate(),
+                    artists
+            );
             return ResponseEntity.ok(mbAlbumDTO);
     }
 }

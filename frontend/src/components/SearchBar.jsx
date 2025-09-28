@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react'
+import React, {useState, useRef} from 'react'
 import "./SearchBar.css"
 import { FaSearch } from "react-icons/fa"
 
@@ -58,9 +58,8 @@ export const SearchBar = ({ setResults, searchType, setSearchType}) => {
             />
 
             <div className="artist-search">
-               <button className = "artist-button" onClick={() =>
+               <button className =  {`artist-button ${searchType === "artists" ? "active" : ""}`} onClick={() =>
                    handleSearchTypeChange("artists")}
-                       style={{ backgroundColor: searchType === "artists" ? "#00ffd5" : "#1d6fa3"}}
                        //if artist button is clicked we highlight by changing color
                 >
                    Artists
@@ -68,10 +67,8 @@ export const SearchBar = ({ setResults, searchType, setSearchType}) => {
             </div>
 
             <div className="release-search">
-                <button className = "release-button" onClick={() =>
+                <button className = {`release-button ${searchType === "releases" ? "active" : ""}`} onClick={() =>
                     handleSearchTypeChange("releases")}
-                    style={{ backgroundColor: searchType === "releases" ? "#00ffd5" : "#1d6fa3"}}
-
                 >
                     Releases
                 </button>

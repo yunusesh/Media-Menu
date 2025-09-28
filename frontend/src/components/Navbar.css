@@ -52,11 +52,23 @@
     cursor: pointer;
     margin: 0 30px;
     background: rgba(29, 111, 163, 0.8);
+}
+
+.item.active{
+    transform: translateZ(0) rotate(0deg) skew(10deg) translate(0, 0);
+    transition: transform 400ms linear;
+}
+
+.item:hover.active{
+    transform: translateZ(0) rotate(0deg) skew(10deg) translate(10px, -10px);
+
+}
+.item:not(.active){
     transform: translateZ(0) rotate(-30deg) skew(25deg) translate(0, 0);
     transition: transform 400ms linear;
 }
 
-.item:hover {
+.item:hover:not(.active) {
     transform: translateZ(0) rotate(-30deg) skew(25deg) translate(10px, -10px);
 }
 

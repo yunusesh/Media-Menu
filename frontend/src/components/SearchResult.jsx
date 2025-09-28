@@ -1,14 +1,17 @@
 import React from 'react'
 import "./SearchResult.css"
+import {useNavigate} from "react-router-dom";
+
 
 export const SearchResult = ({ result, searchType } ) => {
+    const navigate = useNavigate();
     return(
         <div className="search-result"
              onClick={(e) => {
                  if (searchType === "artists")
-                     alert(`You clicked on ${result.name}`);
+                    {navigate("/music/artist")}
                  else if (searchType === "releases")
-                     alert(`You clicked on ${result.title} by ${result["artist-credit"][0]?.name}`);
+                    {navigate("/music/album")}
                  else alert('Invalid search type')
              }
         }

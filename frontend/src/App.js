@@ -8,6 +8,8 @@ import { Layout } from './Layout'
 import {useState} from "react";
 import {SearchBar} from "./components/SearchBar";
 import {SearchResult} from "./components/SearchResult";
+import {Artist} from "./pages/music-pages/Artist";
+import {Album} from "./pages/music-pages/Album";
 
 function App(){
     //employ the navigation bar outside of routes so it does not hide the other components
@@ -16,9 +18,11 @@ function App(){
       <Layout/>
       <Routes>
           <Route path = "/" element = {<Home/>}/>
-          <Route path = "/Music" element = {<Music/>}/>
-          <Route path = "/Movies" element = {<Movies/>}/>
-          <Route path = "/TV" element = {<TV/>}/>
+          <Route path = "/music" element = {<Music/>}/>
+          <Route path = "/movies" element = {<Movies/>}/>
+          <Route path = "/tv" element = {<TV/>}/>
+          <Route path = "/music/artist" element = {<Artist/>}/>
+          <Route path = "/music/album" element = {<Album/>}/>
       </Routes>
     </Router>
   )
