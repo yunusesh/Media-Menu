@@ -1,13 +1,10 @@
 import './App.css'
-import { HashRouter as Router, Routes, Route} from 'react-router-dom' // Allows for routing through different page files
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom' // Allows for routing through different page files
 import { Home } from './pages/Home'
 import { Movies } from './pages/Movies'
 import { Music } from './pages/Music'
 import { TV } from './pages/TV'
-import { Layout } from './Layout'
-import {useState} from "react";
-import {SearchBar} from "./components/SearchBar";
-import {SearchResult} from "./components/SearchResult";
+import { Layout } from './Layout';
 import {Artist} from "./pages/music-pages/Artist";
 import {Album} from "./pages/music-pages/Album";
 
@@ -21,8 +18,8 @@ function App(){
           <Route path = "/music" element = {<Music/>}/>
           <Route path = "/movies" element = {<Movies/>}/>
           <Route path = "/tv" element = {<TV/>}/>
-          <Route path = "/music/artist" element = {<Artist/>}/>
-          <Route path = "/music/album" element = {<Album/>}/>
+          <Route path = "/music/artist/:id" element = {<Artist/>}/>
+          <Route path = "/music/album/:id" element = {<Album/>}/>
       </Routes>
     </Router>
   )

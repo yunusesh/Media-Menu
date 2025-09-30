@@ -40,7 +40,7 @@ public class SearchArtistService implements Query<String, SearchArtistDTO> {
         );
 
         List<MBArtistDTO> artists = response.getBody().getArtists().stream()
-                .map(artist -> new MBArtistDTO(artist.getName()))
+                .map(artist -> new MBArtistDTO(artist.getName(), artist.getId()))
                 .toList();
 
         SearchArtistDTO searchArtistDTO = new SearchArtistDTO(artists);

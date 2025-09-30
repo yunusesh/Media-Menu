@@ -26,20 +26,22 @@ public class SearchReleaseService implements Query<String, SearchReleaseDTO> {
 
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
-        ResponseEntity<MBAlbumResponse> response = restTemplate.exchange(
+        ResponseEntity<MBReleaseGroupResponse> response = restTemplate.exchange(
                 url + title + "&fmt=json",
                 HttpMethod.GET,
                 entity,
-                MBAlbumResponse.class
+                MBReleaseGroupResponse.class
         );
 
-        assert response.getBody() != null;
-        List<MBAlbumDTO> releases = response.getBody().getReleaseGroups().stream()
-                .map(release -> new MBAlbumDTO(release.getTitle(), release.getArtistCredit()))
-                .toList();
+        List<MBReleaseDTO> releaseGroups = response.getBody().getReleaseGroups().stream()
+                .map(album -> new MBReleaseDTO(
+                        album.getTitle(),
+                        album.getArtistCredit(),
+                        album.getReleases().get(0).getId()))
+                        .toList();
 
-        SearchReleaseDTO searchReleaseDTO = new SearchReleaseDTO(releases);
-        return  ResponseEntity.ok(searchReleaseDTO);
+        SearchReleaseDTO searchReleaseDTO = new SearchReleaseDTO(releaseGroups);
+        return ResponseEntity.ok(searchReleaseDTO);
     }
 
 }

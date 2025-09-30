@@ -7,16 +7,12 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
+//#TO-DO refactor most of these DTOs to be children of release
 public class MBReleaseResponse {
-    private String id;
-
-    private String name;
     private String title;
-
-    @JsonProperty("release-group")
-    private List<MBAlbumDTO> releaseGroup;
 
     @JsonProperty("artist-credit")
     private List<MBArtistDTO> artistCredit;
+
+    private List<MBAlbumDTO> releases;
 }

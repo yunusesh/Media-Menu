@@ -7,14 +7,18 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 public class MBReleaseDTO {
-    private String name;
     private String title;
-
-    @JsonProperty("release-group")
-    private List<MBAlbumDTO> releaseGroup;
+    private String id;
 
     @JsonProperty("artist-credit")
     private List<MBArtistDTO> artistCredit;
+
+    private List<MBAlbumDTO> releases;
+
+    public MBReleaseDTO(String title, List<MBArtistDTO> artistCredit, String id){
+        this.title = title;
+        this.artistCredit = artistCredit;
+        this.id = id;
+    }
 }

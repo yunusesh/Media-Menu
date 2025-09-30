@@ -22,10 +22,13 @@ public class MBAlbumDTO {
     @JsonProperty("primary-type")
     private String primaryType;
 
-    public MBAlbumDTO(String title, String primaryType, List<MBArtistDTO> artistCredit) {
+    public MBAlbumDTO(){
+
+    }
+
+    public MBAlbumDTO(String id, String title){
+        this.id = id;
         this.title = title;
-        this.primaryType = primaryType;
-        this.artistCredit = artistCredit;
     }
 
     public MBAlbumDTO(String title, String id, String date, List<MBArtistDTO> artistCredit) {
@@ -35,10 +38,18 @@ public class MBAlbumDTO {
         this.artistCredit = artistCredit;
     }
 
-    public MBAlbumDTO(String title, List<MBArtistDTO> artistCredit) {
+    public MBAlbumDTO(String title, String id, List<MBArtistDTO> artistCredit){
+        this.title = title;
+        this.id = id;
+        this.artistCredit = artistCredit;
+    }
+
+    public MBAlbumDTO(String title, List<MBArtistDTO> artistCredit){
         this.title = title;
         this.artistCredit = artistCredit;
     }
+
+
 
 
 }

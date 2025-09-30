@@ -1,0 +1,57 @@
+.search-bar-container{
+    position:relative;
+}
+
+.artist-button{
+    width: 100px;
+    height: 40px;
+    position: absolute;
+    bottom: 90px;
+    left: 1180px;
+    font-size: 16px;
+    font-family: Monaco, monospace;
+    color: #ffffff;
+    background-color: #1d6fa3;
+    box-shadow: 2px 2px 1px black;
+
+    border: #1E2023;
+    border-radius: 5px;
+    outline: none;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease-in-out;
+}
+
+.release-button {
+    width: 100px;
+    height: 40px;
+    position: absolute;
+    bottom: 90px;
+    left: 1300px;
+    font-size: 16px;
+    font-family: Monaco, monospace;
+    color: #ffffff;
+    background-color: #1d6fa3;
+    box-shadow: 2px 2px 1px black;
+    border: #1E2023;
+    border-radius: 5px;
+    outline: none;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease-in-out;
+}
+
+.release-button:hover, .artist-button:hover {
+    background-color: #1090e0;
+}
+
+.release-button.active, .artist-button.active{
+    background-color: #00ffd5;
+}
+
+.release-button.active:hover, .artist-button.active:hover {
+    background-color: #5eFFE7;
+}
+

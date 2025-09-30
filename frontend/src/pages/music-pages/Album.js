@@ -1,17 +1,28 @@
-import {useState} from "react";
-import {SearchBar} from "../../components/SearchBar";
-import {SearchResultsList} from "../../components/SearchResultsList";
 import './Album.css'
+import {MusicSearchBar} from "../../components/MusicSearchBar";
+import {useParams} from "react-router-dom";
+import {useEffect, useState} from "react";
 
 export function Album(){
-    const [results, setResults] = useState([]);
-    const [searchType, setSearchType] = useState("artists");
+    const {id} = useParams();
+
+    const [album, setAlbum] = useState("");
+    useEffect(() => {
+        fetch(`http://localhost:8081/album/${id}`)
+            .then((response) => response.json())
+            .then((json) => {
+                setAlbum(json)
+        })
+    }, []);
 
     return(
 
         <div className = "album-page">
-            <div className = "artist-title">
-                <h1>Title year by Artist </h1>
+            <div className="search-bar">
+                <MusicSearchBar></MusicSearchBar>
+            </div>
+            <div className = "album-title">
+                <h1>{album.title} - {album.date} by {album["artist-credit"]?.[0]?.name}</h1>
             </div>
             <div className = "artist-image">
                 Image
@@ -21,10 +32,6 @@ export function Album(){
             </div>
             <div>
                 tracklist
-            </div>
-            <div className="search-bar-container">
-                <SearchBar setResults={setResults} setSearchType={setSearchType} searchType={searchType}/>
-                <SearchResultsList results={results} searchType={searchType}/>
             </div>
         </div>
 

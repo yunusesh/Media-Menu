@@ -2,7 +2,7 @@ import React, {useState, useRef} from 'react'
 import "./SearchBar.css"
 import { FaSearch } from "react-icons/fa"
 
-export const SearchBar = ({ setResults, searchType, setSearchType}) => {
+export const SearchBar = ({ setResults, searchType}) => {
     const [input, setInput] = useState("");
     const debounceTimeout = useRef(null); // store timeout ID
 
@@ -17,8 +17,8 @@ export const SearchBar = ({ setResults, searchType, setSearchType}) => {
                 if (json.artists) {
                     setResults(json.artists);
                 }
-                else if(json.releases){
-                    setResults(json.releases);
+                else if(json.releaseGroups){
+                    setResults(json.releaseGroups);
                 }
                 else{
                     setResults([]);
@@ -41,12 +41,6 @@ export const SearchBar = ({ setResults, searchType, setSearchType}) => {
         }, 200);
     };
 
-    const handleSearchTypeChange = (type) =>{
-        setInput("")
-        setSearchType(type)
-        setResults([])
-    }
-
     const[visible, setVisible] = useState(false); // on search icon click we toggle searchbar visibility
     return (
         <div className="search-wrapper">
@@ -56,24 +50,6 @@ export const SearchBar = ({ setResults, searchType, setSearchType}) => {
                     setVisible(!visible)
                 }
             />
-
-            <div className="artist-search">
-               <button className =  {`artist-button ${searchType === "artists" ? "active" : ""}`} onClick={() =>
-                   handleSearchTypeChange("artists")}
-                       //if artist button is clicked we highlight by changing color
-                >
-                   Artists
-               </button>
-            </div>
-
-            <div className="release-search">
-                <button className = {`release-button ${searchType === "releases" ? "active" : ""}`} onClick={() =>
-                    handleSearchTypeChange("releases")}
-                >
-                    Releases
-                </button>
-            </div>
-
             {visible && (
                 <div className="input-wrapper">
                     <input

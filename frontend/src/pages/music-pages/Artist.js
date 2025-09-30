@@ -1,18 +1,30 @@
-import { SearchBar } from '../../components/SearchBar'
-import { SearchResultsList } from '../../components/SearchResultsList'
-import {useState} from "react";
+import {MusicSearchBar} from "../../components/MusicSearchBar";
 import './Artist.css'
+import {useParams} from "react-router-dom";
+import {useEffect, useState} from "react";
 
 export function Artist(){
+    const {id} = useParams();
 
-    const [results, setResults] = useState([]);
-    const [searchType, setSearchType] = useState("artists");
+    const [artist, setArtist] = useState("");
+    useEffect(() => {
+        fetch(`http://localhost:8081/artist/${id}`)
+            .then((response) => response.json())
+            .then((json) => {
+                setArtist(json)
+            })
+    }, []);
 
     return(
 
-    <div className="search-bar-container">
-        <SearchBar setResults={setResults} setSearchType={setSearchType} searchType={searchType}/>
-        <SearchResultsList results={results} searchType={searchType}/>
+    <div className = "artist-page">
+        <div className="search-bar">
+            <MusicSearchBar></MusicSearchBar>
+        </div>
+
+        <div className = "artist-name">
+            {artist.name}
+        </div>
     </div>
 )
 }

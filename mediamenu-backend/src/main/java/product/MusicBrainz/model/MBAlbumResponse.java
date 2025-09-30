@@ -17,12 +17,7 @@ public class MBAlbumResponse {
     @JsonProperty("artist-credit")
     private List<MBArtistDTO> artistCredit;
 
-    @JsonProperty("release-group")
-    private MBAlbumDTO releaseGroup;
-
-    @JsonProperty("release-groups")
-    private List<MBReleaseDTO> releaseGroups;
-
     @JsonProperty("primary-type")
     private String primaryType;
 }
+
