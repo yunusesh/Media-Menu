@@ -1,7 +1,10 @@
 package product;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Collections;
 
 @org.springframework.context.annotation.Configuration
 public class Configuration {
@@ -10,6 +13,8 @@ public class Configuration {
     //beans get injected into spring container
     //gives access to rest template throughout app
     public RestTemplate restTemplate(){
+        final RestTemplate restTemplate = new RestTemplate();
+        restTemplate.setMessageConverters(Collections.singletonList(new MappingJackson2HttpMessageConverter()));
         //configure your rest template options
         return new RestTemplate();
     }

@@ -14,6 +14,7 @@ export const SearchResult = ({ result, searchType } ) => {
                     {navigate(`/music/album/${result.id}`)}
                     //grab id and reroute then refresh page so changes take place (maybe this isnt best practice idk)
                  else alert('Invalid search type')
+                 window.location.reload();
              }
         }
         >
