@@ -7,6 +7,7 @@ import { TV } from './pages/TV'
 import { Layout } from './Layout';
 import {Artist} from "./pages/music-pages/Artist";
 import {Album} from "./pages/music-pages/Album";
+import {Navbar} from "./components/Navbar";
 
 function App(){
     //employ the navigation bar outside of routes so it does not hide the other components

@@ -1,4 +1,3 @@
-import {MusicSearchBar} from "../../components/MusicSearchBar";
 import './Artist.css'
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
@@ -18,10 +17,6 @@ export function Artist(){
     return(
 
     <div className = "artist-page">
-        <div className="search-bar">
-            <MusicSearchBar></MusicSearchBar>
-        </div>
-
         <div className = "artist-name">
             {artist.name}
         </div>

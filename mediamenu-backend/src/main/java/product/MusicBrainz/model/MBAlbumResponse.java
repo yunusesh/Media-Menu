@@ -12,7 +12,7 @@ public class MBAlbumResponse {
     private String id;
     private String date;
     private String link; // #TO-DO
-    private String imageurl; // # TO-DO
+    private String image; // # TO-DO
 
     @JsonProperty("artist-credit")
     private List<MBArtistDTO> artistCredit;

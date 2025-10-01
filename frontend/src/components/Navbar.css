@@ -17,7 +17,7 @@
 
 .navbarLink {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
     height: 80px;
@@ -93,3 +93,118 @@
     top: 40px;
     transform: translateZ(0) rotate(0deg) skewX(-45deg) translate(2px, 0px);
 }
+
+.results-list{
+    position: absolute;
+    width: 22%;
+    background-color: #4c4c4c;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 8px #4c4c4c;
+    border-radius: 10px;
+    margin-top: 1rem;
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+.search-result{
+    padding: 10px 20px;
+}
+
+.search-result:hover{
+    background-color: #efefef;
+    color: black;
+    cursor: pointer;
+}
+
+.search-wrapper{
+    width: 50%;
+    display:inline-block;
+}
+
+.input-wrapper {
+    background-color: #4c4c4c;
+    border-radius: 10px;
+    height: 2.5rem;
+    padding: 0 35px;
+    box-shadow: 0px 0px 8px #4c4c4c;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+input{
+    background-color: transparent;
+    color: #FFFF;
+    border: none;
+    height: 100%;
+    font-size: 1.25rem;
+    width: 100%;
+    margin-left: 5px;
+}
+
+input:focus{
+    outline: none;
+}
+
+#search-icon{
+    color: royalblue;
+    z-index:1;
+    cursor: pointer;
+}
+
+.search-bar-container{
+    position:relative;
+}
+
+.search-buttons{
+    display: inline;
+}
+
+.artist-button{
+    width: 100px;
+    height: 40px;
+    font-size: 16px;
+    font-family: Monaco, monospace;
+    color: #ffffff;
+    background-color: #1d6fa3;
+    box-shadow: 2px 2px 1px black;
+
+    border: #1E2023;
+    border-radius: 5px;
+    outline: none;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease-in-out;
+}
+
+.release-button {
+    width: 100px;
+    height: 40px;
+    font-size: 16px;
+    font-family: Monaco, monospace;
+    color: #ffffff;
+    background-color: #1d6fa3;
+    box-shadow: 2px 2px 1px black;
+    border: #1E2023;
+    border-radius: 5px;
+    outline: none;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease-in-out;
+}
+
+.release-button:hover, .artist-button:hover {
+    background-color: #1090e0;
+}
+
+.release-button.active, .artist-button.active{
+    background-color: #00ffd5;
+}
+
+.release-button.active:hover, .artist-button.active:hover {
+    background-color: #5eFFE7;
+}
+

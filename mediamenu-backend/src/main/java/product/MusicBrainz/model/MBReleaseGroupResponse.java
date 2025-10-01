@@ -11,4 +11,5 @@ public class MBReleaseGroupResponse {
     public List<MBReleaseDTO> releaseGroups;
     @JsonProperty("release-group")
     public List<MBAlbumDTO> releaseGroup;
+
 }

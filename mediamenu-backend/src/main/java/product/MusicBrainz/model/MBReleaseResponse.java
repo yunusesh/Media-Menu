@@ -10,6 +10,7 @@ import java.util.List;
 //#TO-DO refactor most of these DTOs to be children of release
 public class MBReleaseResponse {
     private String title;
+    public List <MBAlbumDTO> images;
 
     @JsonProperty("artist-credit")
     private List<MBArtistDTO> artistCredit;
