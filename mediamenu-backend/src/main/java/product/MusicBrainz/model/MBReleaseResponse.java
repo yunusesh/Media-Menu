@@ -12,6 +12,9 @@ public class MBReleaseResponse {
     private String title;
     public List <MBAlbumDTO> images;
 
+    @JsonProperty("cover-art-archive")
+    private MBCoverArtArchiveDTO coverArtArchive;
+
     @JsonProperty("artist-credit")
     private List<MBArtistDTO> artistCredit;
 

@@ -43,7 +43,7 @@ export function Navbar(){
             // Wait 400ms after typing stops before calling fetch
             debounceTimeout.current = setTimeout(() => {
                 fetchData(value);
-            }, 200);
+            }, 400);
         };
 
         const[visible, setVisible] = useState(false); // on search icon click we toggle searchbar visibility
