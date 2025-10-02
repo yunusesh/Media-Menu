@@ -40,10 +40,10 @@ export function Navbar(){
                 clearTimeout(debounceTimeout.current);
             }
 
-            // Wait 400ms after typing stops before calling fetch
+            // Wait 200ms after typing stops before calling fetch
             debounceTimeout.current = setTimeout(() => {
                 fetchData(value);
-            }, 400);
+            }, 200);
         };
 
         const[visible, setVisible] = useState(false); // on search icon click we toggle searchbar visibility

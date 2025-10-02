@@ -15,7 +15,7 @@ public class Configuration {
     public RestTemplate restTemplate(){
         final RestTemplate restTemplate = new RestTemplate();
         restTemplate.setMessageConverters(Collections.singletonList(new MappingJackson2HttpMessageConverter()));
-        //configure your rest template options
+        //should convert any response to json
         return new RestTemplate();
     }
 

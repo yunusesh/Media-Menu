@@ -13,14 +13,13 @@
     import product.Query;
     
     import java.util.List;
-    
+
     @Service
     public class MBAlbumService implements Query<String, MBAlbumDTO> {
     
         private final RestTemplate restTemplate;
         private final String url = "https://musicbrainz.org/ws/2/release/";
-        private final String coverArtUrl = "http://coverartarchive.org/release/";
-    
+
         public MBAlbumService(RestTemplate restTemplate) {
             this.restTemplate = restTemplate;
         }
@@ -37,24 +36,8 @@
                     entity,
                     MBAlbumResponse.class
             );
+            //json -> find artist credit list -> return all artists in that list
 
-            System.out.println(response.getStatusCode());
-            System.out.println(response.getBody());
-
-            ResponseEntity<MBReleaseResponse> imageResponse = restTemplate.exchange(
-                    coverArtUrl + id,
-                    HttpMethod.GET,
-                    entity,
-                    MBReleaseResponse.class
-            );
-
-            System.out.println(imageResponse.getStatusCode());
-            System.out.println(imageResponse.getBody());
-
-            String imageUrl = imageResponse.getBody().getImages().get(0).getImage();
-            System.out.println(imageUrl);
-        //json -> find artist credit list -> return all artists in that list
-            assert response.getBody() != null;
             List<MBArtistDTO> artists = response.getBody().getArtistCredit().stream()
                     .map(artist -> new MBArtistDTO(artist.getName()))
                     .toList();
@@ -63,7 +46,6 @@
                         response.getBody().getTitle(),
                         response.getBody().getId(),
                         response.getBody().getDate(),
-                        imageUrl,
                         artists
                 );
                 return ResponseEntity.ok(mbAlbumDTO);

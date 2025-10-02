@@ -17,17 +17,28 @@ export function Album(){
     return(
 
         <div className = "album-page">
-            <div className = "artist-image">
-                <img className = "img" src = {album.image} alt = {album.title}/>
+            <div className="links-under-img">
+                <img className = "img" src = {`https://coverartarchive.org/release/${album.id}/front`}/>
+                <div className = "album-links">
+                    <h5>www.youtube.com/album</h5>
+                    <h5>www.spotify.com/album</h5>
+                    <h5>www.applemusic.com/album</h5>
+                </div>
             </div>
-            <div className = "album-title">
-                <h1>{album.title} - {album.date} by {album["artist-credit"]?.[0]?.name}</h1>
-            </div>
-            <div className = "album-links">
-                links
-            </div>
-            <div>
-                tracklist
+            <div className = "list-under-title">
+                <div className = "album-title">
+                    <h1 className = "title">{album.title}</h1>
+                    <h3 className = "date"> {album.date} by </h3>
+                    <h2 className = "artist">{album["artist-credit"]?.[0]?.name}</h2>
+                </div>
+                <div className = "tracklist">
+                    <h4>song 1</h4>
+                    <h4>song 2</h4>
+                    <h4>song 3</h4>
+                    <h4>song 4</h4>
+                    <h4>song 5</h4>
+                    <h4>song 6</h4>
+                </div>
             </div>
         </div>
 

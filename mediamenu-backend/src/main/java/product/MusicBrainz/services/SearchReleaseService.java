@@ -38,9 +38,7 @@ public class SearchReleaseService implements Query<String, SearchReleaseDTO> {
                 .map(album -> new MBReleaseDTO(
                         album.getTitle(),
                         album.getArtistCredit(),
-
                         album.getReleases().get(validRelease(album, response)).getId()))
-
                         .toList();
 
         SearchReleaseDTO searchReleaseDTO = new SearchReleaseDTO(releaseGroups);
@@ -68,7 +66,9 @@ public class SearchReleaseService implements Query<String, SearchReleaseDTO> {
     private int validRelease(MBReleaseDTO album, ResponseEntity<MBReleaseGroupResponse> response){
         int i = 0;
         while(i < album.getReleases().size() - 1){
+
             System.out.println(album.getReleases().get(i).getId());
+
             if(hasArt(album.getReleases().get(i).getId(), response)) return i;
             else i++;
         }
