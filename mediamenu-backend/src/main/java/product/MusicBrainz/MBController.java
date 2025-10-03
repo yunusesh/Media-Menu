@@ -33,7 +33,6 @@ public class MBController {
 
     @GetMapping("/album/{id}")
     public ResponseEntity<MBAlbumDTO> getAlbum(@PathVariable String id){
-
         return mbAlbumService.execute(id);
     }
 

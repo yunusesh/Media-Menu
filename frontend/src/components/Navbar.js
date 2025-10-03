@@ -10,7 +10,14 @@ export function Navbar(){
         const [input, setInput] = useState("");
         const debounceTimeout = useRef(null); // store timeout ID
         const [results, setResults] = useState([]);
-        const [searchType, setSearchType] = useState("artists");
+        const [searchType, setSearchType] =
+            useState(
+                location.pathname.includes("/artist")
+                    ? "artists"
+                    : location.pathname.includes("/album")
+                        ? "releases"
+                        : ""
+            );
         const fetchData = (value) => {
             if (!value || value.trim() === "") {
                 setResults([]); //set this to recently searched later!
@@ -55,6 +62,7 @@ export function Navbar(){
 
         return(
             <div className="container">
+                <div className="fullNavBar">
                 <nav className="navbarLink">
                     <ul className="nav--list">
                         <Link  to="/" className={`item ${location.pathname === "/" ? "active" : ""}`}
@@ -73,7 +81,6 @@ export function Navbar(){
                                 setVisible(!visible)
                             }
                         />
-                        {visible && (
                             <div className="input-wrapper">
                                 <input
                                     placeholder="Type to search..."
@@ -81,8 +88,8 @@ export function Navbar(){
                                     onChange={(e) => handleChange(e.target.value)}
                                 />
                             </div>
-                        )}
 
+                        {visible && (
                         <div className = "search-buttons">
                             <button className =  {`artist-button ${searchType === "artists" ? "active" : ""}`} onClick={() =>
                                 handleSearchTypeChange("artists")}
@@ -96,6 +103,7 @@ export function Navbar(){
                                 Releases
                             </button>
                         </div>
+                            )}
                         <div className="results-list">
                             {
                                 results.map((result, id) =>{
@@ -105,7 +113,7 @@ export function Navbar(){
                     </div>
 
                 </nav>
-
+                </div>
             </div>
 
         )

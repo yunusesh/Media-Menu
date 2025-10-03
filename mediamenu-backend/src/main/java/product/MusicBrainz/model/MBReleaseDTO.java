@@ -21,4 +21,5 @@ public class MBReleaseDTO {
         this.artistCredit = artistCredit;
         this.id = id;
     }
+
 }

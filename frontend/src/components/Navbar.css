@@ -15,6 +15,9 @@
     background: #1E2023;
 }
 
+.fullNavBar{
+    display: inline;
+}
 .navbarLink {
     display: flex;
     justify-content: space-between;
@@ -29,6 +32,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+
 }
 
 .item {
@@ -96,7 +100,7 @@
 
 .results-list{
     position: absolute;
-    width: 22%;
+    width: 100%;
     background-color: #4c4c4c;
     display: flex;
     flex-direction: column;
@@ -119,18 +123,21 @@
 
 .search-wrapper{
     width: 50%;
-    display:inline-block;
+    display:inline;
+    align-items: center;
+    position: relative;
 }
 
 .input-wrapper {
     background-color: #4c4c4c;
     border-radius: 10px;
     height: 2.5rem;
-    padding: 0 35px;
+    padding: 8px 35px 6px 24px;
     box-shadow: 0px 0px 8px #4c4c4c;
     display: flex;
     align-items: center;
     width: 100%;
+    margin-bottom:10px;
 }
 
 input{
@@ -148,20 +155,21 @@ input:focus{
 }
 
 #search-icon{
+    position: absolute;
+    right: 20px;
+    top: 10px;
     color: royalblue;
+    font-size: 1.2rem;
     z-index:1;
     cursor: pointer;
 }
 
-.search-bar-container{
-    position:relative;
-}
-
 .search-buttons{
-    display: inline;
+    align-items: center;
 }
 
 .artist-button{
+    margin-right: 10px;
     width: 100px;
     height: 40px;
     font-size: 16px;
@@ -169,7 +177,6 @@ input:focus{
     color: #ffffff;
     background-color: #1d6fa3;
     box-shadow: 2px 2px 1px black;
-
     border: #1E2023;
     border-radius: 5px;
     outline: none;
