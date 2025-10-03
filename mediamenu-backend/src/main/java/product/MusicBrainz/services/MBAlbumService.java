@@ -3,13 +3,10 @@
     import org.springframework.http.HttpEntity;
     import org.springframework.http.HttpHeaders;
     import org.springframework.http.HttpMethod;
-    import product.MusicBrainz.model.MBAlbumDTO;
-    import product.MusicBrainz.model.MBAlbumResponse;
-    import product.MusicBrainz.model.MBArtistDTO;
+    import product.MusicBrainz.model.*;
     import org.springframework.http.ResponseEntity;
     import org.springframework.stereotype.Service;
     import org.springframework.web.client.RestTemplate;
-    import product.MusicBrainz.model.MBReleaseResponse;
     import product.Query;
     
     import java.util.List;
@@ -41,12 +38,17 @@
             List<MBArtistDTO> artists = response.getBody().getArtistCredit().stream()
                     .map(artist -> new MBArtistDTO(artist.getName()))
                     .toList();
-    
+
+            List<MBTrackDTO> tracklist = response.getBody().getMedia()[0].getTracks().stream()
+                    .map(track -> new MBTrackDTO(track.getTitle(), track.getId(), track.getPosition()))
+                    .toList();
+
             MBAlbumDTO mbAlbumDTO = new MBAlbumDTO(
                         response.getBody().getTitle(),
                         response.getBody().getId(),
                         response.getBody().getDate(),
-                        artists
+                        artists,
+                        tracklist
                 );
                 return ResponseEntity.ok(mbAlbumDTO);
         }

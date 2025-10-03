@@ -17,7 +17,6 @@
 
 .title, .artist, .date{
     display:inline;
-
 }
 
 .title{
@@ -25,9 +24,15 @@
     font-variant: small-caps;
 }
 
-.artist, .date, .tracklist{
+.artist, .date{
     font-family: serif;
     font-variant: normal;
+}
+
+.track-items{
+    font-family:serif;
+    font-variant: normal;
+    margin-left: 5px;
 }
 
 .links-under-img {
@@ -35,6 +40,7 @@
     flex-direction: column; /* stack link under image */
     align-items: center;
 }
+
 .album-links{
     display:flex;
     flex-direction: column;

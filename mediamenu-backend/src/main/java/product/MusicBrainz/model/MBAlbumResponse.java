@@ -14,6 +14,10 @@ public class MBAlbumResponse {
     private String link; // #TO-DO
     private String image; // # TO-DO
 
+    private List<MBTrackDTO> tracks;
+
+    private MBMediaDTO[] media;
+
     @JsonProperty("artist-credit")
     private List<MBArtistDTO> artistCredit;
 

@@ -1,6 +1,7 @@
 import './Album.css'
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
+import {forEach} from "lodash";
 
 export function Album(){
     const {id} = useParams();
@@ -31,13 +32,10 @@ export function Album(){
                     <h3 className = "date"> {album.date} by </h3>
                     <h2 className = "artist">{album["artist-credit"]?.[0]?.name}</h2>
                 </div>
-                <div className = "tracklist">
-                    <h4>song 1</h4>
-                    <h4>song 2</h4>
-                    <h4>song 3</h4>
-                    <h4>song 4</h4>
-                    <h4>song 5</h4>
-                    <h4>song 6</h4>
+                <div id = "tracklist">
+                    {album.tracks?.map(track => (
+                        <h4 className = "track-items" key = {track.id}>{track.position} {track.title}</h4>
+                    ))}
                 </div>
             </div>
         </div>
