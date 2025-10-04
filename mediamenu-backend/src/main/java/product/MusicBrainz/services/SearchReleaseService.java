@@ -1,5 +1,6 @@
 package product.MusicBrainz.services;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -15,13 +16,16 @@ import java.util.List;
 public class SearchReleaseService implements Query<String, SearchReleaseDTO> {
 
     private RestTemplate restTemplate;
-    private String url = "https://musicbrainz.org/ws/2/release-group?query=";
 
     public SearchReleaseService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
+    @Override
+    @Cacheable("searchAlbumCache")
     public ResponseEntity<SearchReleaseDTO> execute(String title){
+        final String url = "https://musicbrainz.org/ws/2/release-group?query=";
+
         HttpHeaders headers = new HttpHeaders();
         headers.set("User-Agent", "MediaMenu/1.0 (yunuseshesh@gmail.com)");
 

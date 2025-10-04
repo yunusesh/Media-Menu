@@ -1,7 +1,6 @@
 import './Album.css'
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {forEach} from "lodash";
 
 export function Album(){
     const {id} = useParams();
@@ -13,13 +12,13 @@ export function Album(){
             .then((json) => {
                 setAlbum(json)
         })
-    }, []);
+    });
 
     return(
 
         <div className = "album-page">
             <div className="links-under-img">
-                <img className = "img" src = {`https://coverartarchive.org/release/${album.id}/front`}/>
+                <img className = "img" src = {`https://coverartarchive.org/release/${album.id}/front`} alt = "placeholder.jpg"/>
                 <div className = "album-links">
                     <h5>www.youtube.com/album</h5>
                     <h5>www.spotify.com/album</h5>

@@ -23,5 +23,4 @@ public class MBAlbumResponse {
 
     @JsonProperty("primary-type")
     private String primaryType;
-}
-
+} 

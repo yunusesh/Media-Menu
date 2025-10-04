@@ -1,6 +1,7 @@
 package product.MusicBrainz.services;
 
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -25,6 +26,7 @@ public class SearchArtistService implements Query<String, SearchArtistDTO> {
     }
 
     @Override
+    @Cacheable("searchAlbumCache")
     public ResponseEntity<SearchArtistDTO> execute(String name){
 
         HttpHeaders headers = new HttpHeaders();
