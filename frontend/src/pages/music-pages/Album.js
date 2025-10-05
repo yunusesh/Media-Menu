@@ -1,11 +1,13 @@
 import './Album.css'
-import {useParams} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 
 export function Album(){
     const {id} = useParams();
-
+    // grab releaseGroupId from search query b/c it is has the most general album cover (not specific to release)
+    const { state } = useLocation();
     const [album, setAlbum] = useState("");
+
     useEffect(() => {
         fetch(`http://localhost:8081/album/${id}`)
             .then((response) => response.json())
@@ -18,7 +20,7 @@ export function Album(){
 
         <div className = "album-page">
             <div className="links-under-img">
-                <img className = "img" src = {`https://coverartarchive.org/release/${album.id}/front`} alt = "placeholder.jpg"/>
+                <img className = "img" src = {`https://coverartarchive.org/release-group/${state.releaseGroupId}/front`} alt = "placeholder.jpg"/>
                 <div className = "album-links">
                     <h5>www.youtube.com/album</h5>
                     <h5>www.spotify.com/album</h5>
@@ -33,7 +35,8 @@ export function Album(){
                 </div>
                 <div id = "tracklist">
                     {album.tracks?.map(track => (
-                        <h4 className = "track-items" key = {track.id}>{track.position} {track.title}</h4>
+                        <h4 className = "track-items" key = {track.id}>{track.title}</h4>
+                        //we have position and it resets the # per album side, find a way to make this show side A, B etc.
                     ))}
                 </div>
             </div>

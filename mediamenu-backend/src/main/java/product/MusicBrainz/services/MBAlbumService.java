@@ -11,6 +11,7 @@
     import org.springframework.web.client.RestTemplate;
     import product.Query;
 
+    import java.util.Arrays;
     import java.util.List;
 
     @Service
@@ -43,8 +44,8 @@
                     .map(artist -> new MBArtistDTO(artist.getName()))
                     .toList();
 
-            List<MBTrackDTO> tracklist = response.getBody().getMedia()[0].getTracks().stream()
-                    .map(track -> new MBTrackDTO(track.getTitle(), track.getId(), track.getPosition()))
+            List<MBTrackDTO> tracklist = response.getBody().getMedia().stream()
+                    .flatMap(media -> media.getTracks().stream())
                     .toList();
 
             MBAlbumDTO mbAlbumDTO = new MBAlbumDTO(

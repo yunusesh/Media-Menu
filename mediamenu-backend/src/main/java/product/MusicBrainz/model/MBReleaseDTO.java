@@ -9,6 +9,7 @@ import java.util.List;
 @Data
 public class MBReleaseDTO {
     private String title;
+    private String releaseGroupId;
     private String id;
 
     @JsonProperty("artist-credit")
@@ -16,7 +17,8 @@ public class MBReleaseDTO {
 
     private List<MBAlbumDTO> releases;
 
-    public MBReleaseDTO(String title, List<MBArtistDTO> artistCredit, String id){
+    public MBReleaseDTO(String releaseGroupId, String title, List<MBArtistDTO> artistCredit, String id){
+        this.releaseGroupId = releaseGroupId;
         this.title = title;
         this.artistCredit = artistCredit;
         this.id = id;

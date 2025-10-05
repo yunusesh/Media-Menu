@@ -40,11 +40,10 @@ public class SearchReleaseService implements Query<String, SearchReleaseDTO> {
 
         List<MBReleaseDTO> releaseGroups = response.getBody().getReleaseGroups().stream()
                 .map(album -> new MBReleaseDTO(
+                        album.getId(),
                         album.getTitle(),
                         album.getArtistCredit(),
-                        album.getReleases().get(album.getReleases().toArray().length - 1).getId()))
-                //return the LAST element in the releases list, b/c the list is sorted from latest release date to earliest
-                //the first release has the most recognized metadata and especially image
+                        album.getReleases().get(0).getId()))
                         .toList();
 
         SearchReleaseDTO searchReleaseDTO = new SearchReleaseDTO(releaseGroups);

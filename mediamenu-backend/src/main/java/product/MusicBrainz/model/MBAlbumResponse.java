@@ -16,7 +16,7 @@ public class MBAlbumResponse {
 
     private List<MBTrackDTO> tracks;
 
-    private MBMediaDTO[] media;
+    private List<MBMediaDTO> media;
 
     @JsonProperty("artist-credit")
     private List<MBArtistDTO> artistCredit;

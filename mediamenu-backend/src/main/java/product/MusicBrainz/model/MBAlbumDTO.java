@@ -15,7 +15,7 @@ public class MBAlbumDTO {
     private String date;
     private String link; // #TO-DO
 
-    private List<MBTrackDTO> tracks;
+    private List<MBTrackDTO>tracks;
 
     @JsonProperty("artist-credit")
     private List<MBArtistDTO> artistCredit;

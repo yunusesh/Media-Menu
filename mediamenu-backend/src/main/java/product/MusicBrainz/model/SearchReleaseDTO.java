@@ -9,5 +9,4 @@ import java.util.List;
 @AllArgsConstructor
 public class SearchReleaseDTO {
     private List<MBReleaseDTO> releaseGroups;
-
 }
