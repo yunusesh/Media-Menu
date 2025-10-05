@@ -26,7 +26,7 @@ public class SearchArtistService implements Query<String, SearchArtistDTO> {
     }
 
     @Override
-    @Cacheable("searchAlbumCache")
+    @Cacheable(value = "searchAlbumCache", cacheManager = "searchCacheManager")
     public ResponseEntity<SearchArtistDTO> execute(String name){
 
         HttpHeaders headers = new HttpHeaders();

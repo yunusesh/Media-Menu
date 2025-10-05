@@ -23,7 +23,7 @@ public class MBArtistService implements Query<String, MBArtistDTO> {
     }
 
     @Override
-    @Cacheable("getArtistCache")
+    @Cacheable(value = "getArtistCache", cacheManager = "getCacheManager")
     public ResponseEntity<MBArtistDTO> execute(String id) {
 
         HttpHeaders headers = new HttpHeaders();

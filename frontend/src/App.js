@@ -7,11 +7,14 @@ import { TV } from './pages/TV'
 import { Layout } from './Layout';
 import {Artist} from "./pages/music-pages/Artist";
 import {Album} from "./pages/music-pages/Album";
-import {Navbar} from "./components/Navbar";
+import {QueryClient, QueryClientProvider} from "react-query";
+import {ReactQueryDevtools} from "react-query/devtools";
 
 function App(){
-    //employ the navigation bar outside of routes so it does not hide the other components
+    const queryClient = new QueryClient();
+
   return(
+      <QueryClientProvider client = {queryClient}>
     <Router>
       <Layout/>
       <Routes>
@@ -23,6 +26,8 @@ function App(){
           <Route path = "/music/album/:id" element = {<Album/>}/>
       </Routes>
     </Router>
+          <ReactQueryDevtools/>
+      </QueryClientProvider>
   )
   
 }

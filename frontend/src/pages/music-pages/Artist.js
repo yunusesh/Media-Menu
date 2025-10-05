@@ -1,18 +1,17 @@
 import './Artist.css'
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
+import { useQuery } from "react-query";
 
 export function Artist(){
     const {id} = useParams();
 
     const [artist, setArtist] = useState("");
-    useEffect(() => {
-        fetch(`http://localhost:8081/artist/${id}`)
-            .then((response) => response.json())
-            .then((json) => {
-                setArtist(json)
-            })
-    }, []);
+
+    async function fetchArtist(){
+        const response = await fetchArtist(`http://localhost:8081/artist/${id}`);
+        return response.json()
+    }
 
     return(
 

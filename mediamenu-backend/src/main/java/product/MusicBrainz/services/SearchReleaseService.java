@@ -22,7 +22,7 @@ public class SearchReleaseService implements Query<String, SearchReleaseDTO> {
     }
 
     @Override
-    @Cacheable("searchAlbumCache")
+    @Cacheable(value = "searchAlbumCache", cacheManager = "searchCacheManager")
     public ResponseEntity<SearchReleaseDTO> execute(String title){
         final String url = "https://musicbrainz.org/ws/2/release-group?query=";
 

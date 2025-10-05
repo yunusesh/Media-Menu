@@ -24,7 +24,7 @@
         }
 
         @Override
-        @Cacheable("getAlbumCache")
+        @Cacheable(value = "getAlbumCache", cacheManager = "getCacheManager")
         public ResponseEntity<MBAlbumDTO> execute(String id) {
             final String url = "https://musicbrainz.org/ws/2/release/";
 
