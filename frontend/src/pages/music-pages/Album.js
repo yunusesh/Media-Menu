@@ -1,10 +1,10 @@
 import './Album.css'
 import {useLocation, useParams} from "react-router-dom";
-import { useQuery} from "react-query"
+import { useQuery } from "react-query"
 
 export function Album(){
     const {id} = useParams();
-    // grab releaseGroupId from search query b/c it is has the most general album cover (not specific to release)
+    // grab state of releaseGroupId from search query b/c it is has the most general album cover (not specific to release)
     const { state } = useLocation();
 
     async function fetchAlbum(){
@@ -15,7 +15,7 @@ export function Album(){
     const { data, status} = useQuery({
         queryKey: ['album', id],
         queryFn: () => fetchAlbum(id),
-        enabled: !!id, //refetch and upate page when id changes (we are now on a new album page)
+        enabled: !!id, //refetch and update page when key (id) changes (we are now on a new album page)
     })
 
     if(status === 'loading'){
@@ -43,7 +43,7 @@ export function Album(){
                     <h3 className = "date"> {data.date} by </h3>
                     <h2 className = "artist">{data["artist-credit"]?.[0]?.name}</h2>
                 </div>
-                <div id = "tracklist">
+                <div className = "tracklist">
                     {data.tracks?.map(track => (
                         <h4 className = "track-items" key = {track.id}>{track.title}</h4>
                         //we have position and it resets the # per album side, find a way to make this show side A, B etc.

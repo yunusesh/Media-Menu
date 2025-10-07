@@ -1,8 +1,11 @@
 package product.MusicBrainz.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 //data is getters and setters
 @Data
@@ -10,6 +13,10 @@ import lombok.NoArgsConstructor;
 public class MBArtistDTO {
     private String name;
     private String id;
+    private String url;
+
+    @JsonProperty("release-groups")
+    private List<MBAlbumDTO> releaseGroups;
 
     public MBArtistDTO(String name){
         this.name = name;
@@ -18,5 +25,12 @@ public class MBArtistDTO {
     public MBArtistDTO(String name, String id){
         this.name = name;
         this.id = id;
+    }
+
+    public MBArtistDTO(String id, String name, String url, List<MBAlbumDTO> releaseGroups) {
+        this.id = id;
+        this.name = name;
+        this.url = url;
+        this.releaseGroups = releaseGroups;
     }
 }

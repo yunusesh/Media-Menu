@@ -11,7 +11,7 @@
     margin-top: 10px;
 }
 
-.album.title {
+.album-title {
     display: inline;
 }
 
@@ -20,18 +20,31 @@
 }
 
 .title{
-    font-family: serif;
-    font-variant: small-caps;
+    text-align: center;
+    text-shadow: 2px 2px 1px #333;
+    user-select: none;
+    text-transform: uppercase;
+    color: #fff;
+    letter-spacing: 2px;
+    z-index: 2;
+    text-decoration: none;
 }
 
-.artist, .date{
-    font-family: serif;
-    font-variant: normal;
+.date{
+    color: #fff;
+    letter-spacing: 1px;
+}
+.artist{
+    text-shadow: 2px 2px 1px #333;
+    color: #fff;
+    letter-spacing: 1px;
 }
 
 .track-items{
-    font-family:serif;
-    font-variant: normal;
+    color: #fff;
+    letter-spacing: 1px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     margin-left: 5px;
 }
 

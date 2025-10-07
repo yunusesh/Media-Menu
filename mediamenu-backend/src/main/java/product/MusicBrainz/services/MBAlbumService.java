@@ -30,20 +30,20 @@
 
             HttpHeaders headers = new HttpHeaders();
             headers.set("User-Agent", "MediaMenu/1.0 (yunuseshesh@gmail.com)");
-            //set user agent header so i dont get banned from the api
             HttpEntity<String> entity = new HttpEntity<>(headers);
+
             ResponseEntity<MBAlbumResponse> response = restTemplate.exchange(
                     url + id + "?inc=recordings+artists&fmt=json",
                     HttpMethod.GET,
                     entity,
                     MBAlbumResponse.class
             );
-            //json -> find artist credit list -> return all artists in that list
 
             List<MBArtistDTO> artists = response.getBody().getArtistCredit().stream()
                     .map(artist -> new MBArtistDTO(artist.getName()))
                     .toList();
 
+            //release json -> tracklist in media list, flatten to get all record sides as one list
             List<MBTrackDTO> tracklist = response.getBody().getMedia().stream()
                     .flatMap(media -> media.getTracks().stream())
                     .toList();

@@ -1,5 +1,6 @@
 body{
     overflow: auto;
+    overflow-x: hidden;
     background-color:#1E2023;
     color: #FFFF;
 }

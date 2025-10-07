@@ -7,7 +7,7 @@ export const SearchResult = ({ result, searchType } ) => {
     const releaseGroupId = result.releaseGroupId;
     return(
         <div className="search-result"
-             onClick={(e) => {
+             onClick={() => {
                  if (searchType === "artists")
                      navigate(`/music/artist/${result.id}`, {
                 })

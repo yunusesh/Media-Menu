@@ -1,5 +1,6 @@
 package product.MusicBrainz.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.List;
@@ -11,6 +12,10 @@ public class MBArtistResponse {
     private String name;
     private String year; //year of first release
     private String genre;
-    private String imageurl;
+    private String url;
+    private List<MBImageDTO> artistthumb;
     private List<MBArtistDTO> artists;
+
+    @JsonProperty("release-groups")
+    private List<MBAlbumDTO> releaseGroups;
 }

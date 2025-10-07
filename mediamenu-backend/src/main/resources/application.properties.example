@@ -10,8 +10,8 @@ spring.datasource.password=yourpassword
 spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
 spring.jpa.hibernate.ddl-auto=validate
 
-fanart.tv:
-key: your_key_here
+#fanart.tv:
+fanart_api_key: your_api_key_here
 
 spotify:
 client-id: your_clientid_here

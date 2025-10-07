@@ -3,10 +3,12 @@ package product.MusicBrainz.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
+@NoArgsConstructor
 //here im not gonna use @AllArgsConstructor b/c i need to create more than 1 possible constructor
 
 public class MBAlbumDTO {
@@ -22,10 +24,6 @@ public class MBAlbumDTO {
 
     @JsonProperty("primary-type")
     private String primaryType;
-
-    public MBAlbumDTO(){
-
-    }
 
     public MBAlbumDTO(String id, String title){
         this.id = id;
