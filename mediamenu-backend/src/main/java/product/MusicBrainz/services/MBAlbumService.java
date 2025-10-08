@@ -9,7 +9,10 @@
     import org.springframework.stereotype.Service;
     import org.springframework.web.client.RestTemplate;
     import product.Query;
+    import java.util.ArrayList;
+    import java.util.HashSet;
     import java.util.List;
+    import java.util.Set;
 
     @Service
     public class MBAlbumService implements Query<String, MBAlbumDTO> {
@@ -24,6 +27,7 @@
         @Cacheable(value = "getAlbumCache", cacheManager = "getCacheManager")
         public ResponseEntity<MBAlbumDTO> execute(String id) {
             final String url = "https://musicbrainz.org/ws/2/release-group/";
+            final String releaseUrl = "https://musicbrainz.org/ws/2/release/";
 
             HttpHeaders headers = new HttpHeaders();
             headers.set("User-Agent", "MediaMenu/1.0 (yunuseshesh@gmail.com)");
@@ -36,20 +40,29 @@
                     MBAlbumResponse.class
             );
 
+            String firstRelease = response.getBody().getReleases().get(0).getId();
+
+            ResponseEntity<MBAlbumResponse> releaseResponse = restTemplate.exchange(
+                    releaseUrl + firstRelease + "?inc=recordings+artists&fmt=json",
+                    HttpMethod.GET,
+                    entity,
+                    MBAlbumResponse.class
+            );
+
+            List<MBTrackDTO> tracklist = releaseResponse.getBody().getMedia().stream()
+                    .flatMap(media -> media.getTracks().stream())
+                    .toList();
+
             List<MBArtistDTO> artists = response.getBody().getArtistCredit().stream()
                     .map(artist -> new MBArtistDTO(artist.getName(), artist.getArtist().getId()))
                     .toList();
-
-            //release json -> tracklist in media list, flatten to get all record sides as one list
-     /*       List<MBTrackDTO> tracklist = response.getBody().getMedia().stream()
-                    .flatMap(media -> media.getTracks().stream())
-                    .toList();*/
 
             MBAlbumDTO mbAlbumDTO = new MBAlbumDTO(
                     response.getBody().getTitle(),
                     response.getBody().getId(),
                     response.getBody().getDate(),
-                    artists
+                    artists,
+                    tracklist
             );
             return ResponseEntity.ok(mbAlbumDTO);
         }

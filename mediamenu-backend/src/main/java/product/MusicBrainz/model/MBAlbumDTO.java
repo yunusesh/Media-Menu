@@ -18,7 +18,7 @@ public class MBAlbumDTO {
     private String date;
     private String link; // #TO-DO
 
-    private List<MBTrackDTO>tracks;
+    private List<MBTrackDTO> tracklist;
 
     @JsonProperty("artist-credit")
     private List<MBArtistDTO> artistCredit;
@@ -31,12 +31,12 @@ public class MBAlbumDTO {
         this.title = title;
     }
 
-    public MBAlbumDTO(String title, String id, String date, List<MBArtistDTO> artistCredit, List<MBTrackDTO> tracks) {
+    public MBAlbumDTO(String title, String id, String date, List<MBArtistDTO> artistCredit, List<MBTrackDTO> tracklist){
         this.title = title;
         this.id = id;
         this.date = date;
         this.artistCredit = artistCredit;
-        this.tracks = tracks;
+        this.tracklist = tracklist;
     }
 
     public MBAlbumDTO(String title, String id, String date, List<MBArtistDTO> artistCredit) {

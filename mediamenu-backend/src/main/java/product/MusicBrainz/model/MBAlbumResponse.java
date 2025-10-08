@@ -15,9 +15,11 @@ public class MBAlbumResponse {
     private String link; // #TO-DO
     private String image; // # TO-DO
 
-    private List<MBTrackDTO> tracks;
+    private List<MBTrackDTO> tracklist;
 
     private List<MBMediaDTO> media;
+
+    private List<MBReleaseDTO> releases;
 
     @JsonProperty("artist-credit")
     private List<MBArtistDTO> artistCredit;

@@ -51,7 +51,10 @@ export function Album(){
                     </div>
                 </div>
                 <div className = "tracklist">
-                    <h1>track</h1>
+                    {data.tracklist?.map(track =>(
+                        <h4 className = "tracklist-items" key = {track.id}>{track.title}</h4>
+                    ))}
+                    <h1></h1>
                 </div>
             </div>
         </div>
