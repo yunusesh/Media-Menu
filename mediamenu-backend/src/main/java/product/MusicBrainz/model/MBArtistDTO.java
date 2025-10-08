@@ -14,13 +14,10 @@ public class MBArtistDTO {
     private String name;
     private String id;
     private String url;
+    private MBArtistDTO artist;
 
     @JsonProperty("release-groups")
     private List<MBAlbumDTO> releaseGroups;
-
-    public MBArtistDTO(String name){
-        this.name = name;
-    }
 
     public MBArtistDTO(String name, String id){
         this.name = name;

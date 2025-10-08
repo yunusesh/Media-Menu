@@ -14,6 +14,7 @@ import java.util.List;
 public class MBAlbumDTO {
     private String title;
     private String id;
+    @JsonProperty("first-release-date")
     private String date;
     private String link; // #TO-DO
 
@@ -36,6 +37,13 @@ public class MBAlbumDTO {
         this.date = date;
         this.artistCredit = artistCredit;
         this.tracks = tracks;
+    }
+
+    public MBAlbumDTO(String title, String id, String date, List<MBArtistDTO> artistCredit) {
+        this.title = title;
+        this.id = id;
+        this.date = date;
+        this.artistCredit = artistCredit;
     }
 
     public MBAlbumDTO(String title, String id, List<MBArtistDTO> artistCredit){

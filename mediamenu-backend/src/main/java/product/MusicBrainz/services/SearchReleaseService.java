@@ -43,7 +43,7 @@ public class SearchReleaseService implements Query<String, SearchReleaseDTO> {
                         album.getId(),
                         album.getTitle(),
                         album.getArtistCredit(),
-                        album.getReleases().get(0).getId()))
+                        album.getId()))
                         .toList();
 
         SearchReleaseDTO searchReleaseDTO = new SearchReleaseDTO(releaseGroups);

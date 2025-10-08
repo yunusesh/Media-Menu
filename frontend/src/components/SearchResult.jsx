@@ -4,7 +4,6 @@ import {useNavigate} from "react-router-dom";
 
 export const SearchResult = ({ result, searchType } ) => {
     const navigate = useNavigate();
-    const releaseGroupId = result.releaseGroupId;
     return(
         <div className="search-result"
              onClick={() => {
@@ -12,7 +11,7 @@ export const SearchResult = ({ result, searchType } ) => {
                      navigate(`/music/artist/${result.id}`, {
                 })
                  else if (searchType === "releases")
-                     navigate(`/music/album/${result.id}`, { state: { releaseGroupId }, })
+                     navigate(`/music/album/${result.id}`)
                  else alert('Invalid search type')
              }
         }

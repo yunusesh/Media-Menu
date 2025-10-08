@@ -1,13 +1,12 @@
 import './Artist.css'
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import { useQuery } from "react-query";
 
 export function Artist(){
     const {id} = useParams();
-
+    const navigate = useNavigate();
     const [artist, setArtist] = useState("");
-
     async function fetchArtist(){
         const response = await fetch(`http://localhost:8081/artist/${id}`);
         return response.json()
@@ -36,13 +35,16 @@ export function Artist(){
                  alt = "placeholder.png"/>
         </div>
         <div className = "releases">
-            {data["release-groups"]?.map(release =>(
-                <div className = "release-items">
-                <h4 className = "release-title" key = {release.id}>{release.title}</h4>
-                    <img className = "release-img"
-                         key = {release.id}
-                         src = {`https://coverartarchive.org/release-group/${release.id}/front`}
+            {data["release-groups"]?.map(releaseGroup =>(
+                <div className = "releaseGroup-items" key = {releaseGroup.id}
+                onClick={() => {
+                    navigate(`/music/album/${releaseGroup.id}`)
+                }}
+                >
+                    <img className = "releaseGroup-img"
+                         src = {`https://coverartarchive.org/release-group/${releaseGroup.id}/front`}
                          alt = "placeholder.jpg"/>
+                <h4 className = "releaseGroup-title">{releaseGroup.title}</h4>
                 </div>
 
             ))}
