@@ -33,6 +33,7 @@
             headers.set("User-Agent", "MediaMenu/1.0 (yunuseshesh@gmail.com)");
             HttpEntity<String> entity = new HttpEntity<>(headers);
 
+            //releaseGroup
             ResponseEntity<MBAlbumResponse> response = restTemplate.exchange(
                     url + id + "?inc=releases+artist-credits&fmt=json",
                     HttpMethod.GET,
@@ -40,6 +41,7 @@
                     MBAlbumResponse.class
             );
 
+            //earliest release (for track list)
             String firstRelease = response.getBody().getReleases().get(0).getId();
 
             ResponseEntity<MBAlbumResponse> releaseResponse = restTemplate.exchange(

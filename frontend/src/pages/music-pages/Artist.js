@@ -1,12 +1,11 @@
 import './Artist.css'
 import {useNavigate, useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
 import { useQuery } from "react-query";
+import {useEffect, useState} from "react";
 
 export function Artist(){
     const {id} = useParams();
     const navigate = useNavigate();
-    const [artist, setArtist] = useState("");
     async function fetchArtist(){
         const response = await fetch(`http://localhost:8081/artist/${id}`);
         return response.json()
@@ -17,6 +16,16 @@ export function Artist(){
         queryFn: () => fetchArtist(id),
         enabled: !!id,
     })
+
+    const [artistImage, setArtistImage] = useState();
+
+    useEffect( () => {
+        if(data){
+        if(`${data.url}` == null){
+            setArtistImage(`https://coverartarchive.org/release-group/${data["release-groups"]?.[0]?.id}/front`)
+        }
+        else setArtistImage(`${data.url}`);
+    }}, [data])
 
     if(status === 'loading'){
         return <p>Loading...</p>
@@ -31,9 +40,14 @@ export function Artist(){
         <div className = "name-over-img">
             <h1 className = "artist-name">{data.name}</h1>
             <img className = "artist-img"
-                 src = {data.url}
+                 src = {artistImage}
+                 onError={() =>
+                setArtistImage(
+                    `https://coverartarchive.org/release-group/${data["release-groups"]?.[0]?.id}/front`
+                )}
                  alt = "placeholder.png"/>
         </div>
+
         <div className = "releases">
             {data["release-groups"]?.map(releaseGroup =>(
                 <div className = "releaseGroup-items" key = {releaseGroup.id}
