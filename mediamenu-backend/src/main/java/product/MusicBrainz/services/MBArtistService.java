@@ -62,7 +62,8 @@ public class MBArtistService implements Query<String, MBArtistDTO> {
             }
 
         List<MBAlbumDTO> releases = response.getBody().getReleaseGroups().stream()
-                .map(release -> new MBAlbumDTO(release.getId(), release.getTitle()))
+                .map(release -> new MBAlbumDTO(release.getId(), release.getTitle(), release.getDate(),
+                        release.getPrimaryType(), release.getSecondaryTypes()))
                 .toList();
 
         MBArtistDTO mbArtistDTO = new MBArtistDTO(

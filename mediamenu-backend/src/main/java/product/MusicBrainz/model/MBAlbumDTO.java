@@ -12,10 +12,18 @@ import java.util.List;
 //here im not gonna use @AllArgsConstructor b/c i need to create more than 1 possible constructor
 
 public class MBAlbumDTO {
-    private String title;
     private String id;
+    private String title;
+
     @JsonProperty("first-release-date")
     private String date;
+
+    @JsonProperty("primary-type")
+    private String primaryType;
+
+    @JsonProperty("secondary-types")
+    private List<String> secondaryTypes;
+
     private String link; // #TO-DO
 
     private List<MBTrackDTO> tracklist;
@@ -23,27 +31,23 @@ public class MBAlbumDTO {
     @JsonProperty("artist-credit")
     private List<MBArtistDTO> artistCredit;
 
-    @JsonProperty("primary-type")
-    private String primaryType;
-
-    public MBAlbumDTO(String id, String title){
+    public MBAlbumDTO(String id, String title, String date, String primaryType, List<String> secondaryTypes){
         this.id = id;
         this.title = title;
+        this.date = date;
+        this.primaryType = primaryType;
+        this.secondaryTypes = secondaryTypes;
     }
 
-    public MBAlbumDTO(String title, String id, String date, List<MBArtistDTO> artistCredit, List<MBTrackDTO> tracklist){
+    public MBAlbumDTO(String title, String id, String date,
+                      String primaryType, List<String> secondaryTypes, List<MBArtistDTO> artistCredit, List<MBTrackDTO> tracklist){
         this.title = title;
         this.id = id;
         this.date = date;
+        this.primaryType = primaryType;
         this.artistCredit = artistCredit;
         this.tracklist = tracklist;
-    }
-
-    public MBAlbumDTO(String title, String id, String date, List<MBArtistDTO> artistCredit) {
-        this.title = title;
-        this.id = id;
-        this.date = date;
-        this.artistCredit = artistCredit;
+        this.secondaryTypes = secondaryTypes;
     }
 
     public MBAlbumDTO(String title, String id, List<MBArtistDTO> artistCredit){

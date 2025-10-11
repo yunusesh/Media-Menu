@@ -13,6 +13,22 @@
     border: black solid 4px;
 }
 
+.category {
+    margin: 15px;
+    text-align: center;
+    text-shadow: 2px 2px 1px #333;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.category-releases{
+    display:grid;
+    flex-direction: column;
+    grid-template-columns:repeat(6, 1fr);
+    align-items: center;
+}
+
+
 .releaseGroup-items{
     display: flex;
     flex-direction: column;
@@ -28,15 +44,8 @@
 }
 
 .releaseGroup-img:hover{
-    border: #00ffd5 solid 2px;
+    border: #30DBBF solid 2px;
     cursor: pointer;
-}
-
-.releases{
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(6, 1fr);
-    text-align: center;
 }
 
 .releaseGroup-title{
@@ -44,6 +53,10 @@
     overflow:hidden;
     text-overflow:ellipsis;
     max-width: 20vh;
+}
+
+.releaseGroup-date{
+    color: #525457;
 }
 
 .releaseGroup-title:hover{
@@ -62,6 +75,5 @@
     text-align: center;
     text-shadow: 2px 2px 1px #333;
     text-transform: uppercase;
-    color: #fff;
     letter-spacing: 2px;
 }

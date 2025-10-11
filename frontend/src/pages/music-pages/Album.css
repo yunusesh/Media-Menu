@@ -15,7 +15,7 @@
     display: inline;
 }
 
-.title, .artist, .date{
+.title, .artist, .date-format{
     display:inline;
 }
 
@@ -36,8 +36,8 @@
 .date-artist{
     display: inline;
 }
-.date{
-    color: #fff;
+.date-format{
+    color: #525457;
     letter-spacing: 1px;
 }
 .artist{

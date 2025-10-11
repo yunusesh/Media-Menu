@@ -43,10 +43,12 @@ export function Album(){
                     <h1 className = "title">{data.title}</h1>
                     </div>
                     <div className = "date-artist">
-                    <h3 className = "date"> {data["first-release-date"].substring(0, 4)} by </h3>
+                    <h3 className = "date-format"> {data["first-release-date"].substring(0, 4)} • {data["primary-type"]} by </h3>
+                        {/*(0,4) grabs start of date to end of date i.e. 2014-10-12 becomes 2012) */}
                     <h2 className = "artist" onClick={() => {
                         navigate(`/music/artist/${data["artist-credit"]?.[0]?.id}`)
                     }}
+                        //0 grabs first release/artist
                     >{data["artist-credit"]?.[0]?.name}</h2>
                     </div>
                 </div>

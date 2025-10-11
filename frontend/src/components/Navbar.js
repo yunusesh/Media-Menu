@@ -86,6 +86,8 @@ export function Navbar(){
                                     placeholder="Type to search..."
                                     value={input}
                                     onChange={(e) => handleChange(e.target.value)}
+                                    onClick={() =>
+                                    setVisible(true)}
                                 />
                             </div>
 

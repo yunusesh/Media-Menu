@@ -9,6 +9,7 @@
 .container {
     width: 100vw;
     min-height: 30vh;
+    margin-bottom: 5vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,7 +47,6 @@
     z-index: 2;
     text-decoration: none;
 
-
     position: relative;
     width: 140px;
     height: 40px;
@@ -61,6 +61,8 @@
 .item.active{
     transform: translateZ(0) rotate(0deg) skew(10deg) translate(0, 0);
     transition: transform 400ms linear;
+
+    background: rgba(0, 255, 213, 0.8);
 }
 
 .item:hover.active{
@@ -82,6 +84,14 @@
     position: absolute;
     left: -10px;
     background: #1d6fa3;
+}
+
+.item.active:before,
+.item.active:after {
+    content: "";
+    position: absolute;
+    left: -10px;
+    background: #30DBBF;
 }
 
 .item:before {
@@ -122,7 +132,7 @@
 }
 
 .search-wrapper{
-    width: 50%;
+    width: 65vh;
     display:inline;
     align-items: center;
     position: relative;
@@ -208,10 +218,10 @@ input:focus{
 }
 
 .release-button.active, .artist-button.active{
-    background-color: #00ffd5;
+    background-color: #30DBBF;
 }
 
 .release-button.active:hover, .artist-button.active:hover {
-    background-color: #5eFFE7;
+    background-color: #1eFFE7;
 }
 

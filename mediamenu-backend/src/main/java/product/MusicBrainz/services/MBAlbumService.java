@@ -63,6 +63,8 @@
                     response.getBody().getTitle(),
                     response.getBody().getId(),
                     response.getBody().getDate(),
+                    response.getBody().getPrimaryType(),
+                    response.getBody().getSecondaryTypes(),
                     artists,
                     tracklist
             );
