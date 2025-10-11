@@ -31,13 +31,14 @@ public class MBArtistService implements Query<String, MBArtistDTO> {
 
         final String fetchArtist = "https://musicbrainz.org/ws/2/artist/";
         final String fetchImage = "http://webservice.fanart.tv/v3/music/";
+        final String fetchReleaseGroups = "https://musicbrainz.org/ws/2/release-group?artist=";
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("User-Agent", "MediaMenu/1.0 (yunuseshesh@gmail.com)");
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
         ResponseEntity<MBArtistResponse> response = restTemplate.exchange(
-                fetchArtist + id + "?inc=release-groups&fmt=json",
+                fetchArtist + id + "?&fmt=json",
                 HttpMethod.GET,
                 entity,
                 MBArtistResponse.class
@@ -61,7 +62,19 @@ public class MBArtistService implements Query<String, MBArtistDTO> {
                 image = null;
             }
 
-        List<MBAlbumDTO> releases = response.getBody().getReleaseGroups().stream()
+        int offset = 0;
+        ResponseEntity<MBArtistResponse> releaseGroupsResponse = restTemplate.exchange(
+                fetchReleaseGroups + id + "&limit=100&offset=" + offset + "&fmt=json",
+                HttpMethod.GET,
+                entity,
+                MBArtistResponse.class
+        );
+
+        /* this only fetches the first 100 releases, if there are more, then fetch with increments of 100 offset
+        until offset >= (releaseGroupsResponse.getBody().getReleaseGroupCount()) */
+
+
+        List<MBAlbumDTO> releases = releaseGroupsResponse.getBody().getReleaseGroups().stream()
                 .map(release -> new MBAlbumDTO(release.getId(), release.getTitle(), release.getDate(),
                         release.getPrimaryType(), release.getSecondaryTypes()))
                 .toList();

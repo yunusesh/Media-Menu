@@ -18,4 +18,7 @@ public class MBArtistResponse {
 
     @JsonProperty("release-groups")
     private List<MBAlbumDTO> releaseGroups;
+
+    @JsonProperty("release-group-count")
+    private String releaseGroupCount;
 }

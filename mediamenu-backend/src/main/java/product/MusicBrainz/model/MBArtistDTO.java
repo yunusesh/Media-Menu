@@ -24,7 +24,8 @@ public class MBArtistDTO {
         this.id = id;
     }
 
-    public MBArtistDTO(String id, String name, String url, List<MBAlbumDTO> releaseGroups) {
+    public MBArtistDTO(String id, String name, String url,
+                       List<MBAlbumDTO> releaseGroups) {
         this.id = id;
         this.name = name;
         this.url = url;

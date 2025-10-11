@@ -17,7 +17,7 @@ export function Artist(){
         enabled: !!id,
     })
 
-    const [artistImage, setArtistImage] = useState("");
+    const [artistImage, setArtistImage] = useState(null);
 
     useEffect( () => {
         if(data){
@@ -37,11 +37,11 @@ export function Artist(){
 
     const releaseGroupsByFormat = {
         albums: [],
+        mixtapes: [],
         eps: [],
         singles: [],
-        mixtapes: [],
-        compilations: [],
         live: [],
+        compilations: [],
         others: [],
     };
 
