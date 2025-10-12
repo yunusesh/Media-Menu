@@ -11,7 +11,9 @@ import org.springframework.web.client.RestTemplate;
 import product.Query;
 import product.MusicBrainz.model.MBArtistResponse;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MBArtistService implements Query<String, MBArtistDTO> {
@@ -62,6 +64,7 @@ public class MBArtistService implements Query<String, MBArtistDTO> {
                 image = null;
             }
 
+        List<MBAlbumDTO> releases = new ArrayList<>();
         int offset = 0;
         ResponseEntity<MBArtistResponse> releaseGroupsResponse = restTemplate.exchange(
                 fetchReleaseGroups + id + "&limit=100&offset=" + offset + "&fmt=json",
@@ -69,15 +72,57 @@ public class MBArtistService implements Query<String, MBArtistDTO> {
                 entity,
                 MBArtistResponse.class
         );
+        int numOfReleaseGroups = Integer.parseInt(releaseGroupsResponse.getBody().getReleaseGroupCount());
+        /*JESUS CHRIST!!! If num of releases > 100, then some releases spill over to another page.
+        So we use the offset parameter in the url to iterate through all pages, then flatten them into one list
 
-        /* this only fetches the first 100 releases, if there are more, then fetch with increments of 100 offset
-        until offset >= (releaseGroupsResponse.getBody().getReleaseGroupCount()) */
+        #TO-DO - filter out the duplicates and unofficial releases from the front end
+         */
 
+        if(numOfReleaseGroups > 100) {
+            List<ResponseEntity<MBArtistResponse>> releaseGroupPages = new ArrayList<>();
+            releaseGroupPages.add(releaseGroupsResponse);
 
-        List<MBAlbumDTO> releases = releaseGroupsResponse.getBody().getReleaseGroups().stream()
-                .map(release -> new MBAlbumDTO(release.getId(), release.getTitle(), release.getDate(),
-                        release.getPrimaryType(), release.getSecondaryTypes()))
-                .toList();
+            while (offset < numOfReleaseGroups) {
+                releaseGroupPages.add(restTemplate.exchange(
+                        fetchReleaseGroups + id + "&limit=100&offset=" + offset + "&fmt=json",
+                        HttpMethod.GET,
+                        entity,
+                        MBArtistResponse.class
+                ));
+                offset += 100;
+
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            // we have a list of JSONS that we are parsing
+            // for every json we create a list of album DTOS
+            // we want to flatten this nested list into one big list
+         releases = releaseGroupPages.stream()
+                .flatMap(page ->  page.getBody().getReleaseGroups().stream()
+                        .map(release -> new MBAlbumDTO(
+                                release.getId(),
+                                release.getTitle(),
+                                release.getDate(),
+                                release.getPrimaryType(),
+                                release.getSecondaryTypes()
+                        ))
+                )
+                        .toList();
+        }
+
+        else {
+             releases = releaseGroupsResponse.getBody().getReleaseGroups().stream()
+                    .map(release -> new MBAlbumDTO(release.getId(),
+                            release.getTitle(),
+                            release.getDate(),
+                            release.getPrimaryType(),
+                            release.getSecondaryTypes()))
+                    .toList();
+        }
 
         MBArtistDTO mbArtistDTO = new MBArtistDTO(
                 response.getBody().getId(),

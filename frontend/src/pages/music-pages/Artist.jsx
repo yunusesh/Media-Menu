@@ -46,14 +46,22 @@ export function Artist(){
     };
 
     data["release-groups"]?.forEach(releaseGroup => {
-        let format =
+        const format =
             releaseGroup["secondary-types"]?.includes("Mixtape/Street") ? "mixtapes" :
                 releaseGroup["secondary-types"]?.includes("Compilation") ? "compilations" :
                     releaseGroup["secondary-types"]?.includes("Live") ? "live" :
-                        releaseGroup["primary-type"]?.includes("Album") ? "albums" :
+
+                        ["Broadcast", "Spokenword",
+                            "Interview", "Audiobook", "Audio drama",
+                            "Remix", "DJ-mix", "Demo", "Field recording"]
+                            .some(type => releaseGroup["secondary-types"]?.includes(type))
+                            && releaseGroup["primary-type"]?.includes("Album") ? "others" :
+
+                            releaseGroup["primary-type"]?.includes("Album") ? "albums" :
                             releaseGroup["primary-type"]?.includes("EP") ? "eps" :
                                 releaseGroup["primary-type"]?.includes("Single") ? "singles" :
-                                    "others";
+                                        "others";
+
 
         releaseGroupsByFormat[format].push(releaseGroup);
     });

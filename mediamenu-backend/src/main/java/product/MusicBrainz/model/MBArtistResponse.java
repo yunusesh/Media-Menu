@@ -21,4 +21,7 @@ public class MBArtistResponse {
 
     @JsonProperty("release-group-count")
     private String releaseGroupCount;
+
+    @JsonProperty("release-group-offset")
+    private String releaseGroupOffset;
 }
