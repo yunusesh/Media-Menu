@@ -1,0 +1,41 @@
+.track-page{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.img{
+    height: 50vh;
+    width: 50vh;
+    margin-right: 30px;
+    margin-top: 10px;
+}
+
+.title, .artist, .date{
+    display:inline;
+}
+.date{
+    margin-left: 10px;
+    color: #525457;
+    letter-spacing: 1px;
+}
+.title-date-artist{
+    display: inline;
+}
+
+.title-above-release{
+    display: flex;
+    flex-direction: column;
+}
+
+.release{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #525457;
+    letter-spacing: 1px;
+}
+
+.release-title:hover{
+    cursor:pointer;
+    text-decoration: underline;
+}

@@ -11,15 +11,7 @@
     margin-top: 10px;
 }
 
-.title-date-artist {
-    display: inline;
-}
-
-.title, .artist, .date-format{
-    display:inline;
-}
-
-.title-box{
+.title, .artist, .date-format, .title-box, .date-artist{
     display:inline;
 }
 
@@ -33,9 +25,6 @@
     text-decoration: none;
 }
 
-.date-artist{
-    display: inline;
-}
 .date-format{
     color: #525457;
     letter-spacing: 1px;
