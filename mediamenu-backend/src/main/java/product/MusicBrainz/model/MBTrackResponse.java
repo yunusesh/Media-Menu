@@ -19,4 +19,6 @@ public class MBTrackResponse {
     private List<MBAlbumDTO> releases;
 
     private MBTrackDTO recording;
+
+    private List<MBTrackDTO> recordings;
 }

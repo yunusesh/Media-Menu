@@ -81,7 +81,7 @@ export function Artist(){
 
                 <div className= "releases">
                 {Object.entries(releaseGroupsByFormat).map(([format, groups]) => (
-                    <div className="categories">
+                    <div className="categories" key = {format}>
                         {/* i.e. type albums becomes header Albums */}
                         <h3 className = "category">{format.charAt(0).toUpperCase() + format.slice(1)}</h3>
                         <div className = "category-releases">

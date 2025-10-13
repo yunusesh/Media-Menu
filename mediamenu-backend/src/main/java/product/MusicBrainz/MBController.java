@@ -14,18 +14,21 @@ public class MBController {
     private final MBTrackService mbTrackService;
     private final SearchArtistService searchArtistService;
     private final SearchReleaseService searchReleaseService;
+    private final SearchTrackService searchTrackService;
 
     public MBController(MBArtistService mbArtistService,
                         MBAlbumService mbAlbumService,
                         MBTrackService mbTrackService,
                         SearchArtistService searchArtistService,
-                        SearchReleaseService searchReleaseService)
+                        SearchReleaseService searchReleaseService,
+                        SearchTrackService searchTrackService)
     {
         this.mbArtistService = mbArtistService;
         this.mbAlbumService = mbAlbumService;
         this.mbTrackService = mbTrackService;
         this.searchArtistService = searchArtistService;
         this.searchReleaseService = searchReleaseService;
+        this.searchTrackService = searchTrackService;
     }
 
     @GetMapping("/artist/{id}")
@@ -51,5 +54,10 @@ public class MBController {
     @GetMapping("/releases/{title}")
     public ResponseEntity<SearchReleaseDTO> searchRelease(@PathVariable String title){
         return searchReleaseService.execute(title);
+    }
+
+    @GetMapping("/tracks/{title}")
+    public ResponseEntity<SearchTrackDTO> searchTrack(@PathVariable String title){
+        return searchTrackService.execute(title);
     }
 }

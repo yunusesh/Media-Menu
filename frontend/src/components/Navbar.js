@@ -16,6 +16,8 @@ export function Navbar(){
                 ? "artists"
                 : location.pathname.includes("/album")
                     ? "releases"
+                    : location.pathname.includes("/track")
+                        ? "tracks"
                     : ""
         );
     const fetchData = (value) => {
@@ -23,6 +25,7 @@ export function Navbar(){
             setResults([]); //set this to recently searched later!
             return;
         }
+
         fetch(`http://localhost:8081/${searchType}/${value}`)
             .then((response) => response.json())
             .then((json) => {
@@ -31,6 +34,9 @@ export function Navbar(){
                 }
                 else if(json.releaseGroups){
                     setResults(json.releaseGroups);
+                }
+                else if(json.tracks){
+                    setResults(json.tracks);
                 }
                 else{
                     setResults([]);
@@ -93,16 +99,27 @@ export function Navbar(){
 
                         {visible && (
                             <div className = "search-buttons">
-                                <button className =  {`artist-button ${searchType === "artists" ? "active" : ""}`} onClick={() =>
-                                    handleSearchTypeChange("artists")}
+                                <button className =  {`artist-button ${searchType === "artists" ? "active" : ""}`} onClick={() =>{
+                                    handleSearchTypeChange("artists")
+                                    console.log(searchType)
+                                }}
                                     //if artist button is clicked we highlight by changing color
                                 >
                                     Artists
                                 </button>
-                                <button className = {`release-button ${searchType === "releases" ? "active" : ""}`} onClick={() =>
-                                    handleSearchTypeChange("releases")}
+                                <button className = {`release-button ${searchType === "releases" ? "active" : ""}`} onClick={() =>{
+                                    handleSearchTypeChange("releases")
+                                    console.log(searchType)
+                                }}
                                 >
                                     Releases
+                                </button>
+                                <button className = {`track-button ${searchType === "tracks" ? "active" : ""}`} onClick={() =>{
+                                    handleSearchTypeChange("tracks")
+                                    console.log(searchType)
+                                }}
+                                >
+                                    Tracks
                                 </button>
                             </div>
                         )}

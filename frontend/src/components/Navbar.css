@@ -178,7 +178,7 @@ input:focus{
     align-items: center;
 }
 
-.artist-button{
+.artist-button, .release-button, .track-button{
     margin-right: 10px;
     width: 100px;
     height: 40px;
@@ -196,32 +196,16 @@ input:focus{
     transition: all 0.2s ease-in-out;
 }
 
-.release-button {
-    width: 100px;
-    height: 40px;
-    font-size: 16px;
-    font-family: Monaco, monospace;
-    color: #ffffff;
-    background-color: #1d6fa3;
-    box-shadow: 2px 2px 1px black;
-    border: #1E2023;
-    border-radius: 5px;
-    outline: none;
 
-    cursor: pointer;
-
-    transition: all 0.2s ease-in-out;
-}
-
-.release-button:hover, .artist-button:hover {
+.release-button:hover, .artist-button:hover, .track-button:hover {
     background-color: #1090e0;
 }
 
-.release-button.active, .artist-button.active{
+.release-button.active, .artist-button.active, .track-button.active{
     background-color: #30DBBF;
 }
 
-.release-button.active:hover, .artist-button.active:hover {
+.release-button.active:hover, .artist-button.active:hover, .track-button.active:hover {
     background-color: #1eFFE7;
 }
 
