@@ -8,7 +8,15 @@ import java.util.List;
 public class MBTrackResponse {
     private String title;
     private String id;
+    private String album;
+
+    @JsonProperty("first-release-date")
+    private String date;
 
     @JsonProperty("artist-credit")
     private List<MBArtistDTO> artistCredit;
+
+    private List<MBAlbumDTO> releases;
+
+    private MBTrackDTO recording;
 }

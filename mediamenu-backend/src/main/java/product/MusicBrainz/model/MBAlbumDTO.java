@@ -31,6 +31,9 @@ public class MBAlbumDTO {
     @JsonProperty("artist-credit")
     private List<MBArtistDTO> artistCredit;
 
+    @JsonProperty("release-group")
+    private MBAlbumDTO releaseGroup;
+
     public MBAlbumDTO(String id, String title, String date, String primaryType, List<String> secondaryTypes){
         this.id = id;
         this.title = title;

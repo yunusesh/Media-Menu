@@ -7,6 +7,7 @@ import { TV } from './pages/TV'
 import { Layout } from './Layout';
 import {Artist} from "./pages/music-pages/Artist";
 import {Album} from "./pages/music-pages/Album";
+import {Track} from "./pages/music-pages/Track";
 import {QueryClient, QueryClientProvider} from "react-query";
 import {ReactQueryDevtools} from "react-query/devtools";
 
@@ -24,6 +25,7 @@ function App(){
           <Route path = "/tv" element = {<TV/>}/>
           <Route path = "/music/artist/:id" element = {<Artist/>}/>
           <Route path = "/music/album/:id" element = {<Album/>}/>
+          <Route path = "/music/track/:id" element = {<Track/>}/>
       </Routes>
     </Router>
           <ReactQueryDevtools/>

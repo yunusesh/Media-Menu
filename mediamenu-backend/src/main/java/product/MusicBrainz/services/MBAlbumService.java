@@ -56,7 +56,7 @@
                     .toList();
 
             List<MBArtistDTO> artists = response.getBody().getArtistCredit().stream()
-                    .map(artist -> new MBArtistDTO(artist.getName(), artist.getArtist().getId()))
+                    .map(artist -> new MBArtistDTO(artist.getArtist().getName(), artist.getArtist().getId()))
                     .toList();
 
             MBAlbumDTO mbAlbumDTO = new MBAlbumDTO(

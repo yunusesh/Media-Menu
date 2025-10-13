@@ -29,4 +29,7 @@ public class MBAlbumResponse {
 
     @JsonProperty("secondary-types")
     private List<String> secondaryTypes;
+
+    @JsonProperty("release-group")
+    private MBAlbumDTO releaseGroup;
 } 

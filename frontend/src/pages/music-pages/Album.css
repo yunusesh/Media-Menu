@@ -59,6 +59,11 @@
     margin-left: 5px;
 }
 
+.tracklist-items:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 .links-under-img {
     display: flex;
     flex-direction: column; /* stack link under image */
