@@ -59,6 +59,12 @@ public class MBAlbumDTO {
         this.artistCredit = artistCredit;
     }
 
+    public MBAlbumDTO(String id, String title, String date) {
+        this.id = id;
+        this.title = title;
+        this.date = date;
+    }
+
     public MBAlbumDTO(String title, List<MBArtistDTO> artistCredit){
         this.title = title;
         this.artistCredit = artistCredit;

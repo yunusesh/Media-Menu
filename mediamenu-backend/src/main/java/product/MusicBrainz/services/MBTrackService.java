@@ -13,7 +13,10 @@ import product.MusicBrainz.model.MBTrackDTO;
 import product.MusicBrainz.model.MBTrackResponse;
 import product.Query;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class MBTrackService implements Query<String, MBTrackDTO> {
@@ -41,7 +44,17 @@ public class MBTrackService implements Query<String, MBTrackDTO> {
         );
 
 
-        MBAlbumDTO release = response.getBody().getReleases().get(0).getReleaseGroup();
+        //get list of releases the track is on, filter out duplicates
+        Set<String> seenIds = new HashSet<>();
+        List<MBAlbumDTO> releases = new ArrayList<>();
+
+        for(MBAlbumDTO release : response.getBody().getReleases()){
+            if(seenIds.contains(release.getReleaseGroup().getId())){
+                continue;
+            }
+            seenIds.add(release.getReleaseGroup().getId());
+            releases.add(release.getReleaseGroup());
+        }
 
         List<MBArtistDTO> artists = response.getBody().getArtistCredit().stream()
                 .map(artist -> new MBArtistDTO(artist.getArtist().getName(), artist.getArtist().getId()))
@@ -51,7 +64,7 @@ public class MBTrackService implements Query<String, MBTrackDTO> {
                 response.getBody().getId(),
                 response.getBody().getTitle(),
                 response.getBody().getDate(),
-                release,
+                releases,
                 artists
         );
         return ResponseEntity.ok(mbTrackDTO);

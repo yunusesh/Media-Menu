@@ -17,7 +17,7 @@ public class MBTrackDTO {
 
     private int position;
 
-    private MBAlbumDTO release;
+    private List<MBAlbumDTO> releases;
 
     @JsonProperty("artist-credit")
     private List<MBArtistDTO> artistCredit;
@@ -37,11 +37,11 @@ public class MBTrackDTO {
     }
 
     public MBTrackDTO(String id, String title, String date,
-                      MBAlbumDTO release, List<MBArtistDTO> artistCredit){
+                      List<MBAlbumDTO> releases, List<MBArtistDTO> artistCredit){
         this.id = id;
         this.title = title;
         this.date = date;
-        this.release = release;
+        this.releases = releases;
         this.artistCredit = artistCredit;
     }
 }

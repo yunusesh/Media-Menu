@@ -1,6 +1,6 @@
 .track-page{
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: flex-start;
 }
 
@@ -9,6 +9,9 @@
     width: 50vh;
     margin-right: 30px;
     margin-top: 10px;
+    margin-left: 50px;
+    border: black solid 4px;
+
 }
 
 .title, .artist, .date{
@@ -28,14 +31,27 @@
     flex-direction: column;
 }
 
-.release{
+.releases{
     margin-top: 20px;
     margin-bottom: 10px;
     color: #525457;
     letter-spacing: 1px;
 }
 
-.release-title:hover{
+.release-format{
+    display: inline;
+    margin-bottom: 10px;
+}
+
+.release{
+    display:inline;
+}
+.release:hover{
     cursor:pointer;
     text-decoration: underline;
+}
+
+.format{
+    display: inline;
+    color: #525457;
 }

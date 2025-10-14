@@ -54,13 +54,13 @@ export function Album(){
                 </div>
                 <div className = "tracklist">
                     {data.tracklist?.map(track =>(
-                        <h4 className = "tracklist-items"
+                        <h3 className = "tracklist-items"
                             key = {track.id}
                             onClick={() => {
                                 navigate(`/music/track/${track?.recording?.id}`)
                             }}
 
-                        >{track.title}</h4>
+                        >{track.title}</h3>
                     ))}
                     <h1></h1>
                 </div>

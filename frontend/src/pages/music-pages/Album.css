@@ -9,6 +9,8 @@
     width: 50vh;
     margin-right: 30px;
     margin-top: 10px;
+    border: black solid 4px;
+
 }
 
 .title, .artist, .date-format, .title-box, .date-artist{
