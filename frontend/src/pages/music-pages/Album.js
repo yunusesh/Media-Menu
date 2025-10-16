@@ -8,30 +8,50 @@ export function Album(){
     // grab state of releaseGroupId from search query b/c it is has the most general album cover (not specific to release)
     const navigate = useNavigate();
     const [visible, setVisible] = useState(false);
-
-    async function fetchAlbum(){
-        const response = await fetch(`http://localhost:8081/album/${id}`);
-        return response.json()
-    }
-
-    const { data, status} = useQuery({
-        queryKey: ['album', id],
-        queryFn: () => fetchAlbum(id), //replace w/ reissue fetchReisse(reissueId) upon change
-        enabled: !!id, //refetch and update page when key (id) changes (we are now on a new album page)
-    })
-
     const[albumImage, setAlbumImage] = useState("")
     const[albumTitle, setAlbumTitle] = useState("")
     const[albumDate, setAlbumDate] = useState("")
-    // tracklist
+    const[albumReissue, setAlbumReissue] = useState("")
+    const[reissueIds, setReissueIds] = useState([])
+    const[reissuesList, setReissuesList] = useState([])
 
+    async function fetchAlbum(){
+        const response = await fetch(`http://localhost:8081/album/${id}`)
+        return response.json()
+    }
+
+    const { data, status } = useQuery({
+        queryKey: ['album', id],
+        queryFn: () => fetchAlbum(id),
+        enabled: !!id, //refetch and update page when key (id) changes (we are now on a new album page)
+    })
+
+    //this only exists to dynamically update page contents based on what reissue is selected, default to releaseGroup
     useEffect( () => {
         if(data){
-            setAlbumImage(`release-group/${data.id}`)
+            setAlbumImage(`https://coverartarchive.org/release-group/${data.id}/front`)
             setAlbumTitle(data.title)
             setAlbumDate(data["first-release-date"].substring(0, 4))
+            setAlbumReissue(data)
+
+            const ids = data.releases.map(release => release.id)
+            setReissueIds(ids)
         }
         }, [data])
+
+    useEffect(() => {
+    const fetchReissues = async() => {
+        try {
+            const responses = await Promise.all(reissueIds.map(reissueId => fetch(`http://localhost:8081/reissue/${reissueId}`)))
+            const reissueData = await Promise.all(responses.map(response => response.json()))
+            setReissuesList(reissueData)
+        }
+        catch(err){
+            console.error("Failed to fetch releases", err)
+        }
+    }
+    fetchReissues()
+    }, [reissueIds])
 
     if(status === 'loading'){
         return <p>Loading...</p>
@@ -45,7 +65,7 @@ export function Album(){
 
         <div className = "album-page">
             <div className="links-under-img">
-                <img className = "img" src = {`https://coverartarchive.org/${albumImage}/front`} alt = "placeholder.jpg"/>
+                <img className = "img" src = {albumImage} alt = "placeholder.jpg"/>
                 <div className = "album-links">
                     <h5>www.youtube.com/album</h5>
                     <h5>www.spotify.com/album</h5>
@@ -69,19 +89,26 @@ export function Album(){
                     <div className = "reissues-container">
                         {visible && (
                             <div className = "reissues-list">
-                                {data.releases.map(reissue => (
-                                    <div className = "reissues-result" onClick={() =>{
-                                            setAlbumImage(`release/${reissue.id}`)
-                                            setAlbumTitle(
-                                                `${reissue.title}
-                                                ${reissue.disambiguation !== "" ?
-                                                    ` (${reissue.disambiguation})` : ""}`
-                                            )
-                                            setAlbumDate(reissue.date !== "" ?
-                                                reissue.date.substring(0, 4) :
-                                                albumDate)
-                                        }
-                                    }>
+                                {reissuesList.map(reissue => (
+                                    <div className = "reissues-result"
+                                         key = {reissue.id}
+                                         onClick={() =>{
+                                             //if a new reissue then do all the changes else go back to defaults
+                                             if(reissue.disambiguation !== ""){
+                                                 setAlbumImage(`https://coverartarchive.org/release/${reissue.id}/front`)
+                                                 setAlbumTitle(`${reissue.title} (${reissue.disambiguation})`)
+                                                 setAlbumReissue(reissue)
+                                                 if(reissue.date !== ""){
+                                                     setAlbumDate(reissue.date.substring(0, 4))
+                                                 }
+                                             }
+                                             else {
+                                                 setAlbumImage(`https://coverartarchive.org/release-group/${data.id}/front`)
+                                                 setAlbumTitle(data.title)
+                                                 setAlbumDate(data["first-release-date"].substring(0, 4))
+                                                 setAlbumReissue(data)
+                                             }
+                                         }}>
                                         {reissue.title}{reissue.disambiguation  !== "" ?
                                             ` (${reissue.disambiguation.charAt(0).toUpperCase() + reissue.disambiguation.slice(1)})` :
                                             ""}
@@ -93,11 +120,11 @@ export function Album(){
                         <button className = "reissues" onClick={() =>{
                             setVisible(!visible);
 
-                        }}> Reissues ({data.releases.length})</button>
+                        }}> Reissues ({data.releases?.length})</button>
                     </div>
                 </div>
                 <div className = "tracklist">
-                    {data.tracklist?.map(track =>(
+                    {albumReissue.tracklist?.map(track =>(
                         <h3 className = "tracklist-items"
                             key = {track.id}
                             onClick={() => {

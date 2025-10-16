@@ -48,16 +48,16 @@ public class MBReissueService implements Query<String, MBAlbumDTO> {
 
         MBAlbumDTO releaseGroup = new MBAlbumDTO(response.getBody().getReleaseGroup().getId());
 
-
         MBAlbumDTO mbAlbumDTO = new MBAlbumDTO(
                 response.getBody().getTitle(),
                 response.getBody().getId(),
-                response.getBody().getDate(),
+                response.getBody().getReissueDate(),
                 response.getBody().getPrimaryType(),
                 response.getBody().getSecondaryTypes(),
                 artists,
                 tracklist,
-                releaseGroup
+                releaseGroup,
+                response.getBody().getDisambiguation()
         );
 
         return ResponseEntity.ok(mbAlbumDTO);

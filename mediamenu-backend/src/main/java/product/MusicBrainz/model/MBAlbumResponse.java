@@ -10,10 +10,14 @@ import java.util.List;
 public class MBAlbumResponse {
     private String title;
     private String id;
+
     @JsonProperty("first-release-date")
     private String date;
+
+    @JsonProperty("date")
+    private String reissueDate;
+
     private String link; // #TO-DO
-    private String image; // # TO-DO
 
     private List<MBTrackDTO> tracklist;
 
@@ -32,4 +36,7 @@ public class MBAlbumResponse {
 
     @JsonProperty("release-group")
     private MBAlbumDTO releaseGroup;
+
+    private String disambiguation;
+
 } 

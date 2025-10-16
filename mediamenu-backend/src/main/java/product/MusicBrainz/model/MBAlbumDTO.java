@@ -18,6 +18,9 @@ public class MBAlbumDTO {
     @JsonProperty("first-release-date")
     private String date;
 
+    @JsonProperty("date")
+    private String reissueDate;
+
     @JsonProperty("primary-type")
     private String primaryType;
 
@@ -35,6 +38,8 @@ public class MBAlbumDTO {
 
     @JsonProperty("release-group")
     private MBAlbumDTO releaseGroup;
+
+    private String disambiguation;
 
     public MBAlbumDTO(String id, String title, String date, String primaryType, List<String> secondaryTypes){
         this.id = id;
@@ -78,16 +83,17 @@ public class MBAlbumDTO {
         this.id = id;
     }
 
-    public MBAlbumDTO(String title, String id, String date,
+    public MBAlbumDTO(String title, String id, String reissueDate,
                       String primaryType, List<String> secondaryTypes, List<MBArtistDTO> artistCredit,
-                      List<MBTrackDTO> tracklist, MBAlbumDTO releaseGroup) {
+                      List<MBTrackDTO> tracklist, MBAlbumDTO releaseGroup, String disambiguation) {
         this.title = title;
         this.id = id;
-        this.date = date;
+        this.reissueDate = reissueDate;
         this.primaryType = primaryType;
         this.secondaryTypes = secondaryTypes;
         this.artistCredit = artistCredit;
         this.tracklist = tracklist;
         this.releaseGroup = releaseGroup;
+        this.disambiguation = disambiguation;
     }
 }
