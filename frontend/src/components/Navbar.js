@@ -116,7 +116,6 @@ export function Navbar(){
                                 </button>
                                 <button className = {`track-button ${searchType === "tracks" ? "active" : ""}`} onClick={() =>{
                                     handleSearchTypeChange("tracks")
-                                    console.log(searchType)
                                 }}
                                 >
                                     Tracks

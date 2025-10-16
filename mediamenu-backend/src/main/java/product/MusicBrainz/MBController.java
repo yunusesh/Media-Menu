@@ -12,6 +12,7 @@ public class MBController {
     private final MBArtistService mbArtistService;
     private final MBAlbumService mbAlbumService;
     private final MBTrackService mbTrackService;
+    private final MBReissueService mbReissueService;
     private final SearchArtistService searchArtistService;
     private final SearchReleaseService searchReleaseService;
     private final SearchTrackService searchTrackService;
@@ -19,6 +20,7 @@ public class MBController {
     public MBController(MBArtistService mbArtistService,
                         MBAlbumService mbAlbumService,
                         MBTrackService mbTrackService,
+                        MBReissueService mbReissueService,
                         SearchArtistService searchArtistService,
                         SearchReleaseService searchReleaseService,
                         SearchTrackService searchTrackService)
@@ -26,6 +28,7 @@ public class MBController {
         this.mbArtistService = mbArtistService;
         this.mbAlbumService = mbAlbumService;
         this.mbTrackService = mbTrackService;
+        this.mbReissueService = mbReissueService;
         this.searchArtistService = searchArtistService;
         this.searchReleaseService = searchReleaseService;
         this.searchTrackService = searchTrackService;
@@ -39,6 +42,11 @@ public class MBController {
     @GetMapping("/album/{id}")
     public ResponseEntity<MBAlbumDTO> getAlbum(@PathVariable String id){
         return mbAlbumService.execute(id);
+    }
+
+    @GetMapping("/reissue/{id}")
+    public ResponseEntity<MBAlbumDTO> getReissue(@PathVariable String id){
+        return mbReissueService.execute(id);
     }
 
     @GetMapping("/track/{id}")

@@ -41,7 +41,7 @@
                     MBAlbumResponse.class
             );
 
-            //earliest release (for track list)
+            //earliest release (for initial track list)
             String firstRelease = response.getBody().getReleases().get(0).getId();
 
             ResponseEntity<MBAlbumResponse> releaseResponse = restTemplate.exchange(
@@ -55,6 +55,23 @@
                     .flatMap(media -> media.getTracks().stream())
                     .toList();
 
+            //get all unique reissues of the album
+            List<MBReleaseDTO> releases = new ArrayList<>();
+            Set<String> seenIds = new HashSet<>();
+            for(MBReleaseDTO release : response.getBody().getReleases()){
+                if(seenIds.contains(release.getDisambiguation())){
+                    continue;
+                }
+
+                seenIds.add(release.getDisambiguation());
+                System.out.println(release.getDisambiguation());
+                releases.add(release);
+            }
+
+            for(MBReleaseDTO release : releases){
+                System.out.println(release.getId());
+            }
+
             List<MBArtistDTO> artists = response.getBody().getArtistCredit().stream()
                     .map(artist -> new MBArtistDTO(artist.getArtist().getName(), artist.getArtist().getId()))
                     .toList();
@@ -66,7 +83,8 @@
                     response.getBody().getPrimaryType(),
                     response.getBody().getSecondaryTypes(),
                     artists,
-                    tracklist
+                    tracklist,
+                    releases
             );
             return ResponseEntity.ok(mbAlbumDTO);
         }

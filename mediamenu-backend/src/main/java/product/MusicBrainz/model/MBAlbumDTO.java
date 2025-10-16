@@ -24,6 +24,8 @@ public class MBAlbumDTO {
     @JsonProperty("secondary-types")
     private List<String> secondaryTypes;
 
+    private List<MBReleaseDTO> releases;
+
     private String link; // #TO-DO
 
     private List<MBTrackDTO> tracklist;
@@ -43,7 +45,8 @@ public class MBAlbumDTO {
     }
 
     public MBAlbumDTO(String title, String id, String date,
-                      String primaryType, List<String> secondaryTypes, List<MBArtistDTO> artistCredit, List<MBTrackDTO> tracklist){
+                      String primaryType, List<String> secondaryTypes, List<MBArtistDTO> artistCredit,
+                      List<MBTrackDTO> tracklist, List<MBReleaseDTO> releases){
         this.title = title;
         this.id = id;
         this.date = date;
@@ -51,6 +54,7 @@ public class MBAlbumDTO {
         this.artistCredit = artistCredit;
         this.tracklist = tracklist;
         this.secondaryTypes = secondaryTypes;
+        this.releases = releases;
     }
 
     public MBAlbumDTO(String title, String id, List<MBArtistDTO> artistCredit){
@@ -70,4 +74,20 @@ public class MBAlbumDTO {
         this.artistCredit = artistCredit;
     }
 
+    public MBAlbumDTO(String id) {
+        this.id = id;
+    }
+
+    public MBAlbumDTO(String title, String id, String date,
+                      String primaryType, List<String> secondaryTypes, List<MBArtistDTO> artistCredit,
+                      List<MBTrackDTO> tracklist, MBAlbumDTO releaseGroup) {
+        this.title = title;
+        this.id = id;
+        this.date = date;
+        this.primaryType = primaryType;
+        this.secondaryTypes = secondaryTypes;
+        this.artistCredit = artistCredit;
+        this.tracklist = tracklist;
+        this.releaseGroup = releaseGroup;
+    }
 }

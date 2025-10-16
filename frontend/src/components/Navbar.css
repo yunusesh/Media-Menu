@@ -119,16 +119,7 @@
     margin-top: 1rem;
     max-height: 300px;
     overflow-y: scroll;
-}
-
-.search-result{
-    padding: 10px 20px;
-}
-
-.search-result:hover{
-    background-color: #efefef;
-    color: black;
-    cursor: pointer;
+    z-index: 1;
 }
 
 .search-wrapper{

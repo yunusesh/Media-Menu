@@ -14,6 +14,7 @@ public class MBReleaseDTO {
     private String releaseGroupId;
     private String id;
     private String date;
+    public String disambiguation;
 
     @JsonProperty("artist-credit")
     private List<MBArtistDTO> artistCredit;
@@ -30,5 +31,11 @@ public class MBReleaseDTO {
     public MBReleaseDTO(String id, String date) {
         this.id = id;
         this.date = date;
+    }
+
+    public MBReleaseDTO(String title, String id, String disambiguation){
+        this.title = title;
+        this.id = id;
+        this.disambiguation = disambiguation;
     }
 }

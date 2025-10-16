@@ -13,6 +13,7 @@ public class MBReleaseResponse {
     private String releaseGroupId;
     private String id;
     public List <MBAlbumDTO> images;
+    public String disambiguation;
 
     @JsonProperty("artist-credit")
     private List<MBArtistDTO> artistCredit;

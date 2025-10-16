@@ -52,6 +52,7 @@ public class MBTrackService implements Query<String, MBTrackDTO> {
             if(seenIds.contains(release.getReleaseGroup().getId())){
                 continue;
             }
+
             seenIds.add(release.getReleaseGroup().getId());
             releases.add(release.getReleaseGroup());
         }

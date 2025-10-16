@@ -99,7 +99,7 @@ public class MBArtistService implements Query<String, MBArtistDTO> {
                 }
             }
             // we have a list of JSONS that we are parsing
-            // for every json we create a list of album DTOS
+            // for every json we create a list of album DTOs
             // we want to flatten this nested list into one big list
          releases = releaseGroupPages.stream()
                 .flatMap(page ->  page.getBody().getReleaseGroups().stream()

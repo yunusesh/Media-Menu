@@ -21,11 +21,12 @@ export function Artist(){
 
     useEffect( () => {
         if(data){
-        if(`${data.url}` == null){
-            setArtistImage(`https://coverartarchive.org/release-group/${data["release-groups"]?.[0]?.id}/front`)
+            if(`${data.url}` == null){
+                setArtistImage(`https://coverartarchive.org/release-group/${data["release-groups"]?.[0]?.id}/front`)
+            }
+            else setArtistImage(`${data.url}`);
         }
-        else setArtistImage(`${data.url}`);
-    }}, [data])
+        }, [data])
 
     if(status === 'loading'){
         return <p>Loading...</p>
