@@ -39,15 +39,17 @@ A **work in progress** website that tracks digital **music**, **movie**, and **T
    ```bash
    git clone https://github.com/yourusername/media-menu.git
    cd media-menu
-Install React dependencies
+2. **Install React dependencies**
 
-npm install react-dom@^19.1.1 \
-            react-icons@^5.5.0 \
-            react-query@^3.39.3 \
-            react-router@^7.9.3 \
-            react-router-dom@^7.8.2 \
-            react-scripts@5.0.1
-Set up PostgreSQL server
+```bash
+npm install react-dom \
+            react-icons \
+            react-query \
+            react-router \
+            react-router-dom \
+            react-scripts
+```
+3. **Set up PostgreSQL server**
 
 Configure environment
 
