@@ -5,21 +5,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import product.Command;
 import product.ProductRepository;
-import product.model.Product;
+import product.model.AppUser;
 
 import java.util.Optional;
 
 @Service
-public class DeleteProductService implements Command<Integer, Void> {
+public class DeleteUserService implements Command<Integer, Void> {
     private ProductRepository productRepository;
 
-    public DeleteProductService(ProductRepository productRepository) {
+    public DeleteUserService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
     @Override
     public ResponseEntity<Void> execute(Integer id) {
-        Optional<Product> productOptional = productRepository.findById(id);
+        Optional<AppUser> productOptional = productRepository.findById(id);
         if(productOptional.isPresent()){
             productRepository.deleteById(id);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

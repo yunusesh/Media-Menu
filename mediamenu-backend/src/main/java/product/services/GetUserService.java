@@ -2,29 +2,29 @@ package product.services;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import product.model.ProductDTO;
+import product.model.AppUser;
+import product.model.AppUserDTO;
 import product.ProductRepository;
 import product.Query;
-import product.model.Product;
 
 import java.util.Optional;
 
 @Service
-public class GetProductService implements Query<Integer, ProductDTO> {
+public class GetUserService implements Query<Integer, AppUserDTO> {
 
     private final ProductRepository productRepository;
 
-    public GetProductService(ProductRepository productRepository) {
+    public GetUserService(ProductRepository productRepository) {
 
         this.productRepository = productRepository;
     }
 
     @Override
-    public ResponseEntity<ProductDTO> execute(Integer input) {
+    public ResponseEntity<AppUserDTO> execute(Integer input) {
         //account for null value if database cant find it
-        Optional<Product> productOptional = productRepository.findById(input);
-        if(productOptional.isPresent()){
-            return ResponseEntity.ok(new ProductDTO(productOptional.get()));
+        Optional<AppUser> userOptional = productRepository.findById(input);
+        if(userOptional.isPresent()){
+            return ResponseEntity.ok(new AppUserDTO(userOptional.get()));
         }
 
         return null;//in future add a cant find response

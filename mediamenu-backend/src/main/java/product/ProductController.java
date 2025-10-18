@@ -1,10 +1,10 @@
 package product;
 
-import product.model.Product;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import product.model.ProductDTO;
-import product.model.UpdateProductCommand;
+import product.model.AppUser;
+import product.model.AppUserDTO;
+import product.model.UpdateUserCommand;
 import product.services.*;
 
 import java.util.List;
@@ -12,52 +12,54 @@ import java.util.List;
 //examples of controllers that are used to write and read data with HTTP requests
 @RestController
 public class ProductController {
-    private final CreateProductService createProductService;
+    private final CreateUserService createUserService;
 
-    private final UpdateProductService updateProductService;
+    private final UpdateUserService updateUserService;
 
-    private final GetProductsService getProductsService;
+    private final GetUsersService getUsersService;
 
-    private final DeleteProductService deleteProductService;
+    private final DeleteUserService deleteUserService;
 
-    private final GetProductService getProductService;
+    private final GetUserService getUserService;
 
 
-    public ProductController(CreateProductService createProductService,
-                             UpdateProductService updateProductService,
-                             GetProductsService getProductsService,
-                             DeleteProductService deleteProductService,
-                             GetProductService getProductService) {
-        this.createProductService = createProductService;
-        this.getProductsService = getProductsService;
-        this.updateProductService = updateProductService;
-        this.deleteProductService = deleteProductService;
-        this.getProductService = getProductService;
+    public ProductController(CreateUserService createUserService,
+                             UpdateUserService updateUserService,
+                             GetUsersService getUsersService,
+                             DeleteUserService deleteUserService,
+                             GetUserService getUserService) {
+        this.createUserService = createUserService;
+        this.getUsersService = getUsersService;
+        this.updateUserService = updateUserService;
+        this.deleteUserService = deleteUserService;
+        this.getUserService = getUserService;
     }
 
-    @PostMapping("/product")
-    public ResponseEntity<ProductDTO> createProduct(@RequestBody Product product) {
-        return createProductService.execute(product);
+    @PostMapping("/user")
+    public ResponseEntity<AppUserDTO> createUser(@RequestBody AppUser user) {
+        return createUserService.execute(user);
     }
 
-    @GetMapping("/products")
-    public ResponseEntity<List<ProductDTO>> getProducts() {
-        return getProductsService.execute(null);
+    @GetMapping("/users")
+    public ResponseEntity<List<AppUserDTO>> getUsers() {
+
+        return getUsersService.execute(null);
     }
 
-    @GetMapping("/product/{id}")
-    public ResponseEntity<ProductDTO> getProductById(@PathVariable Integer id){
-        return getProductService.execute(id);
+    @GetMapping("/user/{id}")
+    public ResponseEntity<AppUserDTO> getUserById(@PathVariable Integer id){
+
+        return getUserService.execute(id);
     }
 
-    @PutMapping("/product/{id}")
-    public ResponseEntity<ProductDTO> updateProduct(@PathVariable Integer id, @RequestBody Product product) {
-        return updateProductService.execute(new UpdateProductCommand(id, product));
+    @PutMapping("/user/{id}")
+    public ResponseEntity<AppUserDTO> updateUser(@PathVariable Integer id, @RequestBody AppUser user) {
+        return updateUserService.execute(new UpdateUserCommand(id, user));
     }
 
-    @DeleteMapping("/product/{id}") // id here must match id in ??
-    public ResponseEntity<Void> deleteProduct(@PathVariable Integer id) {
-        return deleteProductService.execute(id);
+    @DeleteMapping("/user/{id}") // id here must match id in ??
+    public ResponseEntity<Void> deleteUser(@PathVariable Integer id) {
+        return deleteUserService.execute(id);
     }
 
 
