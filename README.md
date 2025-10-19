@@ -51,10 +51,10 @@ npm install react-dom \
 ```
 3. **Set up PostgreSQL server**
 
-Configure environment
+   Run SQL script
+   
+4. **Configure environment**
 
-Fill in required fields in:
+      application.properties (backend)
 
-application.properties (backend)
-
-.env (frontend/backend as needed)
+      .env (frontend/backend as needed)

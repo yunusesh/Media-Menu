@@ -15,7 +15,10 @@ public class CacheConfig {
     @Primary
     @Bean
     public CacheManager searchCacheManager() {
-        CaffeineCacheManager cacheManager = new CaffeineCacheManager("searchAlbumCache", "searchArtistCache");
+        CaffeineCacheManager cacheManager = new CaffeineCacheManager(
+                "searchAlbumCache",
+                "searchArtistCache",
+                "searchTrackCache");
         cacheManager.setCaffeine(
                 Caffeine.newBuilder()
                         .initialCapacity(100)
@@ -28,7 +31,11 @@ public class CacheConfig {
 
     @Bean
     public CacheManager getCacheManager() {
-        CaffeineCacheManager cacheManager = new CaffeineCacheManager("getAlbumCache", "getArtistCache", "getTrackCache");
+        CaffeineCacheManager cacheManager = new CaffeineCacheManager(
+                "getAlbumCache",
+                "getArtistCache",
+                "getTrackCache",
+                "getReissueCache");
         cacheManager.setCaffeine(
                 Caffeine.newBuilder()
                         .initialCapacity(100)
