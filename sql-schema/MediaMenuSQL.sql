@@ -13,18 +13,21 @@ CREATE TABLE artist(
 	artist_name VARCHAR NOT NULL
 );
 
-CREATE TABLE music_release (
+CREATE TABLE release_group (
 	id SERIAL PRIMARY KEY,
 	mbid VARCHAR(36),
 	artist_id INTEGER REFERENCES artist(id) NOT NULL,
+	artist_name VARCHAR,
 	title VARCHAR NOT NULL
 );
 
 CREATE TABLE track (
 	id SERIAL PRIMARY KEY,
 	mbid VARCHAR(36),
-	release_id INTEGER REFERENCES music_release(id),
+	release_id INTEGER REFERENCES release_group(id),
 	artist_id INTEGER REFERENCES artist(id),
+	release_title VARCHAR,
+	artist_name VARCHAR,
 	title VARCHAR NOT NULL
 );
 
@@ -48,7 +51,7 @@ CREATE TABLE track_rating(
 
 CREATE TABLE release_rating(
 	user_id INTEGER REFERENCES app_user(id) NOT NULL,
-	release_id INTEGER REFERENCES music_release(id) NOT NULL,
+	release_id INTEGER REFERENCES release_group(id) NOT NULL,
 	mbid VARCHAR(36),
 	rating INTEGER,
 	rated_at TIMESTAMP,
