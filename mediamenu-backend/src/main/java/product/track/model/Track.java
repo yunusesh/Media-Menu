@@ -9,7 +9,6 @@ import lombok.Data;
 public class Track {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "id")
     private Integer id;
 

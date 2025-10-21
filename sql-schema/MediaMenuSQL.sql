@@ -31,7 +31,7 @@ CREATE TABLE track (
 	title VARCHAR NOT NULL
 );
 
-CREATE TABLE scrobbles(
+CREATE TABLE scrobble(
 	id SERIAL PRIMARY KEY,
 	user_id INTEGER REFERENCES app_user(id) NOT NULL,
 	track_id INTEGER REFERENCES track(id) NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE track_rating(
 	user_id INTEGER REFERENCES app_user(id) NOT NULL,
 	track_id INTEGER REFERENCES track(id) NOT NULL,
 	mbid VARCHAR(36),
-	rating INTEGER,
+	rating INTEGER check (rating between 0 and 10),
 	rated_at TIMESTAMP,
 	PRIMARY KEY (user_id, track_id)
 );
@@ -53,7 +53,7 @@ CREATE TABLE release_rating(
 	user_id INTEGER REFERENCES app_user(id) NOT NULL,
 	release_id INTEGER REFERENCES release_group(id) NOT NULL,
 	mbid VARCHAR(36),
-	rating INTEGER,
+	rating INTEGER check (rating between 0 and 10),
 	rated_at TIMESTAMP,
 	PRIMARY KEY (user_id, release_id)
 );

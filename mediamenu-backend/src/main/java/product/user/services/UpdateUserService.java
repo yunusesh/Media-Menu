@@ -22,12 +22,12 @@ public class UpdateUserService implements Command<UpdateUserCommand, AppUserDTO>
     @Override
     public ResponseEntity<AppUserDTO> execute(UpdateUserCommand command) {
         Optional<AppUser> productOptional = userRepository.findById(command.getId());
-        if (productOptional.isPresent()) {
+        if (productOptional.isPresent()) { //create a new user with the same id and updated object
             AppUser user = command.getUser();
             user.setId(command.getId());
             userRepository.save(user);
             return ResponseEntity.ok(new AppUserDTO(user));
         }
-        return null; //exception later;
+        return null;
     }
 }

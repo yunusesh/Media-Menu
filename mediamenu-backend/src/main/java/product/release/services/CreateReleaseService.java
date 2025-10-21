@@ -3,13 +3,13 @@ package product.release.services;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import product.Query;
+import product.Command;
 import product.release.ReleaseRepository;
 import product.release.model.Release;
 import product.release.model.ReleaseDTO;
 
 @Service
-public class CreateReleaseService implements Query<Release, ReleaseDTO> {
+public class CreateReleaseService implements Command<Release, ReleaseDTO> {
 
     private final ReleaseRepository releaseRepository;
 

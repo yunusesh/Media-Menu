@@ -3,13 +3,13 @@ package product.artist.services;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import product.Query;
+import product.Command;
 import product.artist.ArtistRepository;
 import product.artist.model.Artist;
 import product.artist.model.ArtistDTO;
 
 @Service
-public class CreateArtistService implements Query<Artist, ArtistDTO> {
+public class CreateArtistService implements Command<Artist, ArtistDTO> {
 
     private final ArtistRepository artistRepository;
 

@@ -9,7 +9,6 @@ import lombok.Data;
 public class Artist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "id")
     private Integer id;
 

@@ -11,7 +11,6 @@ public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //auto generates id, starting at 1
-
     @Column(name = "id")
     private Integer id;
 

@@ -3,14 +3,14 @@ package product.track.services;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import product.Query;
+import product.Command;
 import product.track.TrackRepository;
 import product.track.model.Track;
 
 import java.util.Optional;
 
 @Service
-public class DeleteTrackService implements Query<Integer, Void> {
+public class DeleteTrackService implements Command<Integer, Void> {
 
     private final TrackRepository trackRepository;
 

@@ -3,16 +3,17 @@ package product.track.services;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import product.Query;
+import product.Command;
 import product.track.TrackRepository;
 import product.track.model.Track;
 import product.track.model.TrackDTO;
 
 @Service
-public class CreateTrackService implements Query<Track, TrackDTO> {
+public class CreateTrackService implements Command<Track, TrackDTO> {
     private final TrackRepository trackRepository;
 
     public CreateTrackService(TrackRepository trackRepository) {
+
         this.trackRepository = trackRepository;
     }
 
