@@ -7,7 +7,7 @@ export function Album(){
     const {id} = useParams();
     // grab state of releaseGroupId from search query b/c it is has the most general album cover (not specific to release)
     const navigate = useNavigate();
-    const [visible, setVisible] = useState(false);
+    const[visible, setVisible] = useState(false);
     const[albumImage, setAlbumImage] = useState("")
     const[albumTitle, setAlbumTitle] = useState("")
     const[albumDate, setAlbumDate] = useState("")

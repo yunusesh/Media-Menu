@@ -12,6 +12,4 @@ public class TrackRatingKey {
         this.userId = userId;
         this.trackId = trackId;
     }
-
-
 }
