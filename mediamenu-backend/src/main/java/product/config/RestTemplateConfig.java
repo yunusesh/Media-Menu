@@ -7,7 +7,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Collections;
 
 @org.springframework.context.annotation.Configuration
-public class RestTemplateConfiguration {
+public class RestTemplateConfig {
 
     @Bean
     //beans get injected into spring container

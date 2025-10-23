@@ -10,7 +10,6 @@ public class AppUserDTO {
     private String username;
     private String hashedPassword;
     private String email;
-    private String profilePicture;
     private Timestamp createdAt;
 
     public AppUserDTO(AppUser user) {
@@ -18,7 +17,6 @@ public class AppUserDTO {
         this.username = user.getUsername();
         this.hashedPassword = user.getHashedPassword();
         this.email = user.getEmail();
-        this.profilePicture = user.getProfilePicture();
         this.createdAt = user.getCreatedAt();
     }
 }

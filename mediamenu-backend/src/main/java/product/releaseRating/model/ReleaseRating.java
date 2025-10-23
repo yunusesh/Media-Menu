@@ -7,6 +7,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 
@@ -25,6 +26,7 @@ public class ReleaseRating {
     @Column(name = "rating")
     private Integer rating;
 
+    @CreationTimestamp
     @Column(name = "rated_at")
     private Timestamp ratedAt;
 }

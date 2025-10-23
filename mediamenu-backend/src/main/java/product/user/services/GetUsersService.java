@@ -16,6 +16,7 @@ public class GetUsersService implements Query<Void, List<AppUserDTO>> {
     private final UserRepository userRepository;
 
     public GetUsersService(UserRepository userRepository) {
+
         this.userRepository = userRepository;
     }
     @Override

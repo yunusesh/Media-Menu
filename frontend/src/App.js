@@ -10,6 +10,7 @@ import {Album} from "./pages/music-pages/Album";
 import {Track} from "./pages/music-pages/Track";
 import {QueryClient, QueryClientProvider} from "react-query";
 import {ReactQueryDevtools} from "react-query/devtools";
+import {Profile} from "./pages/Profile";
 
 function App(){
     const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ function App(){
           <Route path = "/music/artist/:id" element = {<Artist/>}/>
           <Route path = "/music/album/:id" element = {<Album/>}/>
           <Route path = "/music/track/:id" element = {<Track/>}/>
+          <Route path = "/user" element = {<Profile/>}/>
       </Routes>
     </Router>
           <ReactQueryDevtools/>

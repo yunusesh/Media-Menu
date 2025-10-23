@@ -21,12 +21,6 @@ public class Track {
     @Column(name = "artist_id")
     private Integer artistId;
 
-    @Column(name = "release_title")
-    private String releaseTitle;
-
-    @Column(name = "artist_name")
-    private String artistName;
-
     @Column(name = "title")
     private String title;
 }

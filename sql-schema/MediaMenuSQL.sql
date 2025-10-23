@@ -1,9 +1,8 @@
 CREATE TABLE app_user (
     id SERIAL PRIMARY KEY,
-	username VARCHAR NOT NULL,
+	username VARCHAR,
 	hashed_password VARCHAR NOT NULL,
 	email VARCHAR NOT NULL,
-	profile_picture VARCHAR,
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -17,7 +16,6 @@ CREATE TABLE release_group (
 	id SERIAL PRIMARY KEY,
 	mbid VARCHAR(36),
 	artist_id INTEGER REFERENCES artist(id) NOT NULL,
-	artist_name VARCHAR,
 	title VARCHAR NOT NULL
 );
 
@@ -26,8 +24,6 @@ CREATE TABLE track (
 	mbid VARCHAR(36),
 	release_id INTEGER REFERENCES release_group(id),
 	artist_id INTEGER REFERENCES artist(id),
-	release_title VARCHAR,
-	artist_name VARCHAR,
 	title VARCHAR NOT NULL
 );
 

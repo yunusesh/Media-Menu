@@ -1,6 +1,8 @@
 package product.user;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import product.user.model.AppUser;
 import product.user.model.AppUserDTO;
@@ -46,6 +48,13 @@ public class UserController {
     public ResponseEntity<AppUserDTO> getUserById(@PathVariable Integer id){
 
         return getUserService.execute(id);
+    }
+
+    @GetMapping("/user/me")
+    public ResponseEntity<AppUser> authenticatedUser(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        AppUser currentUser = (AppUser) auth.getPrincipal();
+        return ResponseEntity.ok(currentUser);
     }
 
     @PutMapping("/user/{id}")

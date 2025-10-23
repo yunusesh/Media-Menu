@@ -14,6 +14,7 @@ public class CreateUserService implements Command<AppUser, AppUserDTO> {
     private final UserRepository userRepository;
 
     public CreateUserService(UserRepository userRepository) {
+
         this.userRepository = userRepository;
     }
 
@@ -23,4 +24,5 @@ public class CreateUserService implements Command<AppUser, AppUserDTO> {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(new AppUserDTO(savedUser));
     }
+
 }

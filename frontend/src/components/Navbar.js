@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import {useLocation} from "react-router-dom";
+import {useNavigate, useLocation} from "react-router-dom";
 import React, {useRef, useState} from "react";
 import {FaSearch} from "react-icons/fa";
 import "./Navbar.css"
@@ -7,6 +7,7 @@ import {SearchResult} from "./SearchResult";
 
 export function Navbar(){
     const location = useLocation();
+    const navigate = useNavigate();
     const [input, setInput] = useState("");
     const debounceTimeout = useRef(null); // store timeout ID
     const [results, setResults] = useState([]);
@@ -131,6 +132,15 @@ export function Navbar(){
                     </div>
 
                 </nav>
+            </div>
+            <div className = "profile_picture">
+                <img className = "pfp"
+                     src = "https://i.pinimg.com/1200x/83/bc/8b/83bc8b88cf6bc4b4e04d153a418cde62.jpg"
+                     alt = "placeholder.png"
+                     onClick={() =>{
+                         navigate(`/user`)
+                     }}
+                     />
             </div>
         </div>
 

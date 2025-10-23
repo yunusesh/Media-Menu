@@ -18,9 +18,6 @@ public class Release {
     @Column(name = "artist_id")
     private Integer artistId;
 
-    @Column(name = "artist_name")
-    private String artistName;
-
     @Column(name = "title")
     private String title;
 }

@@ -2,6 +2,7 @@ package product.scrobble.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 
@@ -23,9 +24,11 @@ public class Scrobble {
     @Column(name = "scrobbles")
     private Integer scrobbles;
 
+    @CreationTimestamp
     @Column(name = "listened_at")
-    private Timestamp listenedAt;
+    private Timestamp listenedAt; //make a list?
 
+    @CreationTimestamp
     @Column(name = "first_listened_at")
     private Timestamp firstListenedAt;
 }

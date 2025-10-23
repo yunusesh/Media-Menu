@@ -6,7 +6,8 @@
     box-sizing: border-box;
 }
 
-.container {
+.container{
+    position: relative;
     width: 100vw;
     min-height: 30vh;
     margin-bottom: 5vh;
@@ -14,6 +15,16 @@
     justify-content: center;
     align-items: center;
     background: #1E2023;
+}
+
+.container::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 90%;
+    transform: translateX(-50%);
+    border-bottom: 1px solid #4C5563;
 }
 
 .fullNavBar{
@@ -97,7 +108,7 @@
 .item:before {
     width: 15px;
     height: 100%;
-    top: 0px;
+    top: 0;
     transform: translateZ(0) rotate(0deg) skewY(-45deg) translate(-5px, 2px);
 }
 
@@ -198,5 +209,23 @@ input:focus{
 
 .release-button.active:hover, .artist-button.active:hover, .track-button.active:hover {
     background-color: #1eFFE7;
+}
+
+.profile_picture{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 35px;
+}
+
+.pfp{
+    height: 6vh;
+    width: 6vh;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.pfp:hover{
+    border: 2px solid #1eFFE7;
 }
 
