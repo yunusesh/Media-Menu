@@ -176,10 +176,6 @@ input:focus{
     cursor: pointer;
 }
 
-.search-buttons{
-    align-items: center;
-}
-
 .artist-button, .release-button, .track-button{
     margin-right: 10px;
     width: 100px;

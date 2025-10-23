@@ -32,7 +32,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginUserDTO loginUserDto) {
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginUserDTO loginUserDto) {
         AppUser authenticatedUser = authenticationService.authenticate(loginUserDto);
 
         String jwtToken = jwtService.generateToken(authenticatedUser);

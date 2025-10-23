@@ -1,11 +1,14 @@
-import { Link } from "react-router-dom"
+import {Link} from "react-router-dom"
 import {useNavigate, useLocation} from "react-router-dom";
-import React, {useRef, useState} from "react";
+import React, {useContext, useRef, useState} from "react";
 import {FaSearch} from "react-icons/fa";
 import "./Navbar.css"
 import {SearchResult} from "./SearchResult";
+import {AuthContext} from "../AuthContext";
 
 export function Navbar(){
+    const { user } = useContext(AuthContext)
+
     const location = useLocation();
     const navigate = useNavigate();
     const [input, setInput] = useState("");
@@ -138,7 +141,8 @@ export function Navbar(){
                      src = "https://i.pinimg.com/1200x/83/bc/8b/83bc8b88cf6bc4b4e04d153a418cde62.jpg"
                      alt = "placeholder.png"
                      onClick={() =>{
-                         navigate(`/user`)
+                        user == null ? navigate(`/login`) : navigate(`/user/${user.username}`
+                        )
                      }}
                      />
             </div>
