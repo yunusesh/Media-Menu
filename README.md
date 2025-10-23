@@ -1,4 +1,4 @@
-# Media Menu
+# Media Tracker
 
 A **work in progress** website that tracks digital **music**, **movie**, and **TV** consumption by integrating with multiple streaming service APIs.  
 > Currently, only the **music** portion is functional.
