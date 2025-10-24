@@ -14,28 +14,20 @@ import java.util.List;
 //examples of controllers that are used to write and read data with HTTP requests
 @RestController
 public class UserController {
-    private final CreateUserService createUserService;
     private final UpdateUserService updateUserService;
     private final GetUsersService getUsersService;
     private final DeleteUserService deleteUserService;
     private final GetUserService getUserService;
 
 
-    public UserController(CreateUserService createUserService,
-                          UpdateUserService updateUserService,
+    public UserController(UpdateUserService updateUserService,
                           GetUsersService getUsersService,
                           DeleteUserService deleteUserService,
                           GetUserService getUserService) {
-        this.createUserService = createUserService;
         this.getUsersService = getUsersService;
         this.updateUserService = updateUserService;
         this.deleteUserService = deleteUserService;
         this.getUserService = getUserService;
-    }
-
-    @PostMapping("/user")
-    public ResponseEntity<AppUserDTO> createUser(@RequestBody AppUser user) {
-        return createUserService.execute(user);
     }
 
     @GetMapping("/users")
@@ -53,6 +45,7 @@ public class UserController {
     @GetMapping("/user/me")
     public ResponseEntity<AppUser> authenticatedUser(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
         AppUser currentUser = (AppUser) auth.getPrincipal();
         return ResponseEntity.ok(currentUser);
     }

@@ -5,8 +5,11 @@ import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import product.releaseRating.model.ReleaseRating;
+import product.trackRating.model.TrackRating;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -33,6 +36,12 @@ public class AppUser implements UserDetails{
     @Column(name = "created_at")
     private Timestamp createdAt;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<ReleaseRating> releaseRatings = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TrackRating> trackRatings = new ArrayList<>();
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities(){
         return List.of();
@@ -46,25 +55,5 @@ public class AppUser implements UserDetails{
     @Override
     public String getUsername(){
         return username;
-    }
-
-    @Override
-    public boolean isAccountNonExpired(){
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked(){
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired(){
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled(){
-        return true;
     }
 }

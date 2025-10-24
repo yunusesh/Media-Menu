@@ -6,25 +6,27 @@ import product.releaseRating.model.ReleaseRating;
 import product.releaseRating.model.ReleaseRatingDTO;
 import product.releaseRating.model.ReleaseRatingKey;
 import product.releaseRating.model.UpdateReleaseRatingCommand;
-import product.releaseRating.services.CreateReleaseRatingService;
-import product.releaseRating.services.DeleteReleaseRatingService;
-import product.releaseRating.services.GetReleaseRatingService;
-import product.releaseRating.services.UpdateReleaseRatingService;
+import product.releaseRating.services.*;
+
+import java.util.List;
 
 @RestController
 public class ReleaseRatingController {
     private final CreateReleaseRatingService createReleaseRatingService;
     private final DeleteReleaseRatingService deleteReleaseRatingService;
     private final GetReleaseRatingService getReleaseRatingService;
+    private final GetUserReleaseRatingsService getUserReleaseRatingsService;
     private final UpdateReleaseRatingService updateReleaseRatingService;
 
     public ReleaseRatingController(CreateReleaseRatingService createReleaseRatingService,
                                    DeleteReleaseRatingService deleteReleaseRatingService,
                                    GetReleaseRatingService getReleaseRatingService,
+                                   GetUserReleaseRatingsService getUserReleaseRatingsService,
                                    UpdateReleaseRatingService updateReleaseRatingService) {
         this.createReleaseRatingService = createReleaseRatingService;
         this.deleteReleaseRatingService = deleteReleaseRatingService;
         this.getReleaseRatingService = getReleaseRatingService;
+        this.getUserReleaseRatingsService = getUserReleaseRatingsService;
         this.updateReleaseRatingService = updateReleaseRatingService;
     }
 
@@ -36,6 +38,11 @@ public class ReleaseRatingController {
     @GetMapping("/api/release-rating/user/{userId}/release/{releaseId}")
     public ResponseEntity<ReleaseRatingDTO> getReleaseRatingById(@PathVariable Integer userId, @PathVariable Integer releaseId){
         return getReleaseRatingService.execute(new ReleaseRatingKey(userId, releaseId));
+    }
+
+    @GetMapping("/api/release-rating/user/{userId}")
+    public ResponseEntity<List<ReleaseRatingDTO>> getUserReleaseRatings(@PathVariable Integer userId){
+        return getUserReleaseRatingsService.execute(userId);
     }
 
     @DeleteMapping("/api/release-rating/user/{userId}/release/{releaseId}")

@@ -6,9 +6,8 @@ import "./Navbar.css"
 import {SearchResult} from "./SearchResult";
 import {AuthContext} from "../AuthContext";
 
-export function Navbar(){
-    const { user } = useContext(AuthContext)
-
+export function Navbar() {
+    const {user, logout} = useContext(AuthContext)
     const location = useLocation();
     const navigate = useNavigate();
     const [input, setInput] = useState("");
@@ -22,7 +21,7 @@ export function Navbar(){
                     ? "releases"
                     : location.pathname.includes("/track")
                         ? "tracks"
-                    : ""
+                        : ""
         );
     const fetchData = (value) => {
         if (!value || value.trim() === "") {
@@ -35,14 +34,11 @@ export function Navbar(){
             .then((json) => {
                 if (json.artists) {
                     setResults(json.artists);
-                }
-                else if(json.releaseGroups){
+                } else if (json.releaseGroups) {
                     setResults(json.releaseGroups);
-                }
-                else if(json.tracks){
+                } else if (json.tracks) {
                     setResults(json.tracks);
-                }
-                else{
+                } else {
                     setResults([]);
                 }
             })
@@ -63,19 +59,21 @@ export function Navbar(){
         }, 400);
     };
 
-    const[visible, setVisible] = useState(false); // on search icon click we toggle searchbar visibility
-    const handleSearchTypeChange = (type) =>{
+    const [buttonsVisible, setButtonsVisible] = useState(false);
+    const [profileHoverVisible, setProfileHoverVisible] = useState(false);
+
+    const handleSearchTypeChange = (type) => {
         setInput("")
         setSearchType(type)
         setResults([])
     }
 
-    return(
+    return (
         <div className="container">
             <div className="fullNavBar">
                 <nav className="navbarLink">
                     <ul className="nav--list">
-                        <Link  to="/" className={`item ${location.pathname === "/" ? "active" : ""}`}
+                        <Link to="/" className={`item ${location.pathname === "/" ? "active" : ""}`}
                         >Home</Link>
                         <Link to="/music" className={`item ${location.pathname.includes("/music") ? "active" : ""}`}
                         >Music</Link>
@@ -88,7 +86,7 @@ export function Navbar(){
                         <FaSearch
                             id="search-icon"
                             onClick={() =>
-                                setVisible(!visible)
+                                setButtonsVisible(!buttonsVisible)
                             }
                         />
                         <div className="input-wrapper">
@@ -97,30 +95,33 @@ export function Navbar(){
                                 value={input}
                                 onChange={(e) => handleChange(e.target.value)}
                                 onClick={() =>
-                                    setVisible(true)}
+                                    setButtonsVisible(true)}
                             />
                         </div>
 
-                        {visible && (
-                            <div className = "search-buttons">
-                                <button className =  {`artist-button ${searchType === "artists" ? "active" : ""}`} onClick={() =>{
-                                    handleSearchTypeChange("artists")
-                                    console.log(searchType)
-                                }}
+                        {buttonsVisible && (
+                            <div className="search-buttons">
+                                <button className={`artist-button ${searchType === "artists" ? "active" : ""}`}
+                                        onClick={() => {
+                                            handleSearchTypeChange("artists")
+                                            console.log(searchType)
+                                        }}
                                     //if artist button is clicked we highlight by changing color
                                 >
                                     Artists
                                 </button>
-                                <button className = {`release-button ${searchType === "releases" ? "active" : ""}`} onClick={() =>{
-                                    handleSearchTypeChange("releases")
-                                    console.log(searchType)
-                                }}
+                                <button className={`release-button ${searchType === "releases" ? "active" : ""}`}
+                                        onClick={() => {
+                                            handleSearchTypeChange("releases")
+                                            console.log(searchType)
+                                        }}
                                 >
                                     Releases
                                 </button>
-                                <button className = {`track-button ${searchType === "tracks" ? "active" : ""}`} onClick={() =>{
-                                    handleSearchTypeChange("tracks")
-                                }}
+                                <button className={`track-button ${searchType === "tracks" ? "active" : ""}`}
+                                        onClick={() => {
+                                            handleSearchTypeChange("tracks")
+                                        }}
                                 >
                                     Tracks
                                 </button>
@@ -128,7 +129,7 @@ export function Navbar(){
                         )}
                         <div className="results-list">
                             {
-                                results.map((result, id) =>{
+                                results.map((result, id) => {
                                     return <SearchResult result={result} searchType={searchType} key={id}/>
                                 })}
                         </div>
@@ -136,15 +137,35 @@ export function Navbar(){
 
                 </nav>
             </div>
-            <div className = "profile_picture">
-                <img className = "pfp"
-                     src = "https://i.pinimg.com/1200x/83/bc/8b/83bc8b88cf6bc4b4e04d153a418cde62.jpg"
-                     alt = "placeholder.png"
-                     onClick={() =>{
+            <div className="profile-nav">
+                <img className="pfp"
+                     src="https://i.pinimg.com/1200x/83/bc/8b/83bc8b88cf6bc4b4e04d153a418cde62.jpg"
+                     alt="placeholder.png"
+                     onClick={() => {
+                         user == null ? navigate(`/login`) : navigate(`/user/${user.username}`
+                         )
+                     }}
+                     onMouseEnter={() => setProfileHoverVisible(true)}
+                />
+                <h5 className="pfp-username"
+                    onClick={() => {
                         user == null ? navigate(`/login`) : navigate(`/user/${user.username}`
                         )
-                     }}
-                     />
+                    }}
+                    onMouseEnter={() => setProfileHoverVisible(true)}
+                >{user == null ? `Log in` : `${user.username}`}</h5>
+                {profileHoverVisible && user && (
+                    <div className="pfp-hover"
+                         onMouseLeave={() => setProfileHoverVisible(false)}
+                    >
+                        <div className="logout"
+                             onClick={() => {
+                                 logout()
+                             }}>
+                            Logout
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
 

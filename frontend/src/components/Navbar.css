@@ -207,11 +207,15 @@ input:focus{
     background-color: #1eFFE7;
 }
 
-.profile_picture{
+.profile-nav{
     position: absolute;
     top: 0;
     right: 0;
     padding: 35px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .pfp{
@@ -219,9 +223,44 @@ input:focus{
     width: 6vh;
     border-radius: 50%;
     cursor: pointer;
+    margin-bottom: 5px;
 }
 
 .pfp:hover{
     border: 2px solid #1eFFE7;
+}
+
+.pfp-username{
+    cursor: pointer;
+}
+.pfp-username:hover{
+    text-decoration: underline;
+}
+
+.pfp-hover{
+    width: 100%;
+    height: 6vh;
+    font-size: 13px;
+    background-color: #4c4c4c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1;
+}
+
+.logout{
+    padding: 5px 10px;
+    display:block;
+    align-items: center;
+    white-space:nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+}
+
+.logout:hover{
+    background-color: #efefef;
+    color: black;
+    cursor: pointer;
 }
 

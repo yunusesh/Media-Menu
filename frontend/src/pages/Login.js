@@ -20,7 +20,6 @@ export function Login(){
             login(response.data.token)
             navigate(`/user/${user.username}`)
 
-
         } catch(error){
             console.log("Error fetching data:", error)
         }
