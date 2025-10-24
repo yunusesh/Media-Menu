@@ -26,7 +26,6 @@ export function Login(){
         }
     }
 
-
     return(
         <div className = "profile-page">
             <h1 className = "account-header"> You aren't signed in yet</h1>
@@ -36,7 +35,7 @@ export function Login(){
                     <div className = "username-wrapper">
                         <input
                             className = "username"
-                            id = "username"
+                            placeholder = "Enter your username"
                             onChange={(e) => {
                                 setUsername(e.target.value)
                             }}
@@ -45,7 +44,7 @@ export function Login(){
                     <div className = "password-wrapper">
                         <input
                             className = "password"
-                            id = "password"
+                            placeholder = "Enter your password"
                             onChange={(e) => {
                                 setPassword(e.target.value)
                             }}
@@ -55,9 +54,12 @@ export function Login(){
                     <button className = "login-button" onClick={handleSubmit}>
                         Login</button>
                 </div>
-                <div className = "register">
-                    <h3 className = "register-header">Don't have an account?</h3>
-                    <button className = "register-button">Create Account</button>
+                <div className = "signup">
+                    <h3 className = "signup-header">Don't have an account?</h3>
+                    <button className = "signup-button" onClick={() => {
+                        navigate('/register')
+                        }}
+                    >Create Account</button>
                 </div>
             </div>
         </div>

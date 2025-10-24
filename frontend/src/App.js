@@ -11,6 +11,7 @@ import {Track} from "./pages/music-pages/Track";
 import {QueryClient, QueryClientProvider} from "react-query";
 import {ReactQueryDevtools} from "react-query/devtools";
 import {Login} from "./pages/Login";
+import {Register} from "./pages/Register";
 import {AuthProvider} from "./AuthContext";
 import {User} from "./pages/User";
 
@@ -32,6 +33,7 @@ function App() {
                         <Route path="/music/track/:id" element={<Track/>}/>
                         <Route path="/login" element={<Login/>}/>
                         <Route path = "/user/:username" element={<User/>}/>
+                        <Route path = "/register" element = {<Register/>}/>
                     </Routes>
                 </Router>
                 <ReactQueryDevtools/>
