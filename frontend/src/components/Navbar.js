@@ -104,7 +104,6 @@ export function Navbar() {
                                 <button className={`artist-button ${searchType === "artists" ? "active" : ""}`}
                                         onClick={() => {
                                             handleSearchTypeChange("artists")
-                                            console.log(searchType)
                                         }}
                                     //if artist button is clicked we highlight by changing color
                                 >
@@ -113,7 +112,6 @@ export function Navbar() {
                                 <button className={`release-button ${searchType === "releases" ? "active" : ""}`}
                                         onClick={() => {
                                             handleSearchTypeChange("releases")
-                                            console.log(searchType)
                                         }}
                                 >
                                     Releases
@@ -146,6 +144,7 @@ export function Navbar() {
                          )
                      }}
                      onMouseEnter={() => setProfileHoverVisible(true)}
+                     onMouseLeave={() => setProfileHoverVisible(false)}
                 />
                 <h5 className="pfp-username"
                     onClick={() => {
@@ -153,6 +152,7 @@ export function Navbar() {
                         )
                     }}
                     onMouseEnter={() => setProfileHoverVisible(true)}
+
                 >{user == null ? `Log in` : `${user.username}`}</h5>
                 {profileHoverVisible && user && (
                     <div className="pfp-hover"

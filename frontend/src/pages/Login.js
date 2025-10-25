@@ -6,7 +6,6 @@ import {useNavigate} from "react-router-dom";
 
 export function Login(){
     const { login } = useContext(AuthContext)
-    const { user } = useContext(AuthContext)
     const[username, setUsername] = useState("")
     const[password, setPassword] = useState("")
     const navigate = useNavigate()
@@ -18,7 +17,7 @@ export function Login(){
                 password: password
             })
             login(response.data.token)
-            navigate(`/user/${user.username}`)
+            navigate(`/user/${response.data.username}`)
 
         } catch(error){
             console.log("Error fetching data:", error)

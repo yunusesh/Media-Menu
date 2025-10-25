@@ -16,7 +16,6 @@ export function Register() {
                 password: password,
                 email: email
             })
-            console.log(response.data)
             navigate('/login')
         } catch(error){
             console.log("Error registering user", error)

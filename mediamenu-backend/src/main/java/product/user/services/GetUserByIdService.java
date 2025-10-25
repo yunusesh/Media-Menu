@@ -10,11 +10,11 @@ import product.Query;
 import java.util.Optional;
 
 @Service
-public class GetUserService implements Query<Integer, AppUserDTO> {
+public class GetUserByIdService implements Query<Integer, AppUserDTO> {
 
     private final UserRepository userRepository;
 
-    public GetUserService(UserRepository userRepository) {
+    public GetUserByIdService(UserRepository userRepository) {
 
         this.userRepository = userRepository;
     }

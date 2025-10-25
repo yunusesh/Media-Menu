@@ -17,17 +17,20 @@ public class UserController {
     private final UpdateUserService updateUserService;
     private final GetUsersService getUsersService;
     private final DeleteUserService deleteUserService;
-    private final GetUserService getUserService;
+    private final GetUserByIdService getUserByIdService;
+    private final GetUserByUsernameService getUserByUsernameService;
 
 
     public UserController(UpdateUserService updateUserService,
                           GetUsersService getUsersService,
                           DeleteUserService deleteUserService,
-                          GetUserService getUserService) {
+                          GetUserByIdService getUserByIdService,
+                          GetUserByUsernameService getUserByUsernameService) {
         this.getUsersService = getUsersService;
         this.updateUserService = updateUserService;
         this.deleteUserService = deleteUserService;
-        this.getUserService = getUserService;
+        this.getUserByIdService = getUserByIdService;
+        this.getUserByUsernameService = getUserByUsernameService;
     }
 
     @GetMapping("/users")
@@ -36,18 +39,25 @@ public class UserController {
         return getUsersService.execute(null);
     }
 
-    @GetMapping("/user/{id}")
-    public ResponseEntity<AppUserDTO> getUserById(@PathVariable Integer id){
+    @GetMapping("/user/id/{id}")
+    public ResponseEntity<AppUserDTO> getUserById(@PathVariable Integer id) {
 
-        return getUserService.execute(id);
+        return getUserByIdService.execute(id);
+    }
+
+    @GetMapping("/user/{username}")
+    public ResponseEntity<AppUserDTO> getUserById(@PathVariable String username) {
+
+        return getUserByUsernameService.execute(username);
     }
 
     @GetMapping("/user/me")
-    public ResponseEntity<AppUser> authenticatedUser(){
+    public ResponseEntity<AppUserDTO> authenticatedUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         AppUser currentUser = (AppUser) auth.getPrincipal();
-        return ResponseEntity.ok(currentUser);
+        AppUserDTO currentUserDTO = new AppUserDTO(currentUser);
+        return ResponseEntity.ok(currentUserDTO);
     }
 
     @PutMapping("/user/{id}")

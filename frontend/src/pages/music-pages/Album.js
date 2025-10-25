@@ -138,7 +138,6 @@ export function Album() {
                 </div>
             </div>
             <div className="rating">
-
             </div>
         </div>
     )

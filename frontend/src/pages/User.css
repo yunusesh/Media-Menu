@@ -1,0 +1,15 @@
+.rating {
+    display: inline-block;
+    padding: 15px;
+}
+
+.rating-img {
+    width: 26vh;
+    height: 26vh;
+    border: black solid 2px;
+}
+
+.rating-img:hover {
+    border: #30DBBF solid 2px;
+    cursor: pointer;
+}
