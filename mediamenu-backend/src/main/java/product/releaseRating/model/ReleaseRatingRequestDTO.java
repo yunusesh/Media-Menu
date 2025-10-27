@@ -16,6 +16,7 @@ public class ReleaseRatingRequestDTO {
     private Timestamp ratedAt;
     private String releaseMbid;
     private String title;
+    private String format;
     private Integer artistId;
     private String artistMbid;
     private String artistName;
@@ -27,6 +28,7 @@ public class ReleaseRatingRequestDTO {
         this.ratedAt = rating.getRatedAt();
         this.releaseMbid = rating.getRelease().getMbid();
         this.title = rating.getRelease().getTitle();
+        this.format = rating.getRelease().getFormat();
         this.artistId = rating.getRelease().getArtistId();
         this.artistMbid = rating.getRelease().getArtist().getMbid();
         this.artistName = rating.getRelease().getArtist().getArtistName();

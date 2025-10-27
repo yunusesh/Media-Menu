@@ -71,7 +71,14 @@
     text-decoration: underline;
 }
 
-.rating-value {
+.star{
+    display: inline;
+    font-size: 20px;
+
+}
+
+.rating-value h4{
+    display: inline;
     color: #30DBBF;
     font-weight: bold;
     text-align: center;

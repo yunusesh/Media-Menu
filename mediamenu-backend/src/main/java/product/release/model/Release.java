@@ -22,6 +22,9 @@ public class Release {
     @Column(name = "title")
     private String title;
 
+    @Column(name = "format")
+    private String format;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "artist_id", insertable = false, updatable = false)
     Artist artist;

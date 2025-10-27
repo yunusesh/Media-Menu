@@ -2,6 +2,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useQuery} from "react-query";
 import "./User.css"
+import {FaStar} from "react-icons/fa";
 
 export function User() {
     const navigate = useNavigate()
@@ -76,15 +77,21 @@ export function User() {
                                         navigate(`/music/album/${rating.releaseMbid}`)
                                     }}
                                 >{rating.title} </h3>
+                                <h5 className = "format" key = {rating.format}>
+                                    • {rating.format.charAt(0).toUpperCase() + rating.format.slice(1)}
+                                </h5>
                                 <h4 className="rating-artist"
                                     key={rating.artistName}
                                     onClick={() => {
                                         navigate(`/music/artist/${rating.artistMbid}`)
                                     }}
                                 >{rating.artistName}</h4>
-                                <h4 className="rating-value" key={rating.value}>
-                                    {rating.rating}/10
-                                </h4>
+                                <div className="rating-value">
+                                    <FaStar className = "star"/>
+                                    <h4 key={rating.value}>
+                                        {rating.rating}/10
+                                    </h4>
+                                </div>
                             </div>
                         ))}
                     </div>

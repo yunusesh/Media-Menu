@@ -1,3 +1,6 @@
+.album-page{
+    padding: 30px;
+}
 .album-info {
     display: flex;
     align-items: flex-start;
@@ -173,6 +176,19 @@
     justify-content: center;
 }
 .star{
+    display: inline;
     color:orange;
     font-size: 30px;
+}
+
+.star:hover{
+    cursor: pointer;
+    color: yellow;
+}
+.rating h3{
+    display: inline;
+    color: #30DBBF;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 2px;
 }

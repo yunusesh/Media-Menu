@@ -34,8 +34,8 @@ artist_final AS (
     LIMIT 1
 ),
 inserted_release AS (
-    INSERT INTO release_group (mbid, artist_id, title)
-    SELECT :releaseMbid, artist_final.id, :title
+    INSERT INTO release_group (mbid, artist_id, title, format)
+    SELECT :releaseMbid, artist_final.id, :title, :format
     FROM artist_final
     ON CONFLICT (mbid) DO UPDATE SET title = EXCLUDED.title
     RETURNING *
@@ -51,6 +51,7 @@ LIMIT 1;
     Release upsertReleaseGroup(
             @Param("releaseMbid") String releaseMbid,
             @Param("title") String title,
+            @Param("format") String format,
             @Param("artistMbid") String artistMbid,
             @Param("artistName") String artistName
     );

@@ -2,13 +2,13 @@ import './Album.css'
 import {useNavigate, useParams} from "react-router-dom";
 import {useQuery} from "react-query"
 import {useContext, useEffect, useState} from "react";
-import { FaStar } from "react-icons/fa";
-import { AuthContext } from "../../AuthContext";
+import {FaStar} from "react-icons/fa";
+import {AuthContext} from "../../AuthContext";
 import axios from "axios";
 
 export function Album() {
     const {id} = useParams();
-    const { user } = useContext(AuthContext);
+    const {user} = useContext(AuthContext);
     // grab state of releaseGroupId from search query b/c it is has the most general album cover (not specific to release)
     const navigate = useNavigate();
     const [visible, setVisible] = useState(false);
@@ -18,6 +18,8 @@ export function Album() {
     const [albumReissue, setAlbumReissue] = useState("")
     const [reissueIds, setReissueIds] = useState([])
     const [reissuesList, setReissuesList] = useState([])
+    const [rating, setRating] = useState()
+    const [isEditing, setIsEditing] = useState(false)
 
     async function fetchAlbum() {
         const response = await fetch(`http://localhost:8081/album/${id}`)
@@ -37,11 +39,53 @@ export function Album() {
             setAlbumTitle(data.title)
             setAlbumDate(data["first-release-date"].substring(0, 4))
             setAlbumReissue(data)
-
             const ids = data.releases.map(release => release.id)
             setReissueIds(ids)
         }
     }, [data])
+
+    async function fetchReleaseFromDB() {
+        if(user && data) {
+            const response = await axios.post(`http://localhost:8081/api/release/getOrCreate`, {
+                releaseMbid: id,
+                title: data.title,
+                format: data["primary-type"],
+                artistMbid: data["artist-credit"]?.[0]?.id,
+                artistName: data["artist-credit"]?.[0]?.name,
+            })
+            return response.data
+        }
+    }
+
+    const {data: releaseDB} = useQuery({
+        queryKey: ['releaseDB', id],
+        queryFn: () => fetchReleaseFromDB(),
+        enabled: !!id
+    })
+
+    async function fetchRating(){
+        if(user && releaseDB) {
+            const response = await fetch(`http://localhost:8081/api/release-rating/user/${user.id}/release/${releaseDB.id}`)
+            return response.json()
+        }
+    }
+
+    const {data: userRating} = useQuery({
+        queryKey: ['userRating', id],
+        queryFn: () => fetchRating(),
+        enabled: !!rating
+    })
+
+    const handleSubmit = async () => {
+        if(user && releaseDB){
+            axios.post('http://localhost:8081/api/release-rating',{
+                userId: user.id,
+                releaseId: releaseDB.id,
+                rating: rating
+            })
+            setIsEditing(false)
+        }
+    }
 
     useEffect(() => {
         const fetchReissues = async () => {
@@ -56,7 +100,6 @@ export function Album() {
         fetchReissues()
     }, [reissueIds])
 
-
     if (status === 'loading') {
         return <p>Loading...</p>
     }
@@ -66,7 +109,6 @@ export function Album() {
     }
 
     return (
-
         <div className="album-page">
             <div className="album-info">
                 <div className="links-under-img">
@@ -142,8 +184,30 @@ export function Album() {
                 </div>
             </div>
             <div className="rating">
-                <FaStar className = "star"/>
-
+                <FaStar className="star" onClick={() => {
+                    setIsEditing(!isEditing)
+                }}/>
+                {!isEditing ? (
+                <h3>{userRating ? `${userRating.rating}/10` : ""}</h3>
+                ) :
+                    <div className = "edit-rating">
+                        <input
+                            type = "number"
+                            min = "0"
+                            max = "10"
+                            value = {rating}
+                            onChange={(e) => setRating(e.target.value)}
+                        />
+                        <button onClick={handleSubmit}>
+                            Submit
+                        </button>
+                        <button onClick={() =>{
+                            setIsEditing(false)
+                        }}>
+                            Cancel
+                        </button>
+                    </div>
+                }
             </div>
         </div>
     )
