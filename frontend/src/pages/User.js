@@ -10,12 +10,12 @@ export function User() {
     const {username} = useParams()
     const [ratings, setRatings] = useState([])
 
-    async function fetchUser(){
+    async function fetchUser() {
         const response = await fetch(`http://localhost:8081/user/${username}`)
         return response.json()
     }
 
-    const { data:userData } = useQuery({
+    const {data: userData} = useQuery({
         queryKey: ["user", username],
         queryFn: () => fetchUser(),
         enabled: !!username,
@@ -23,7 +23,7 @@ export function User() {
 
     async function fetchUserRatings() {
         const response = await fetch(`http://localhost:8081/api/release-rating/user/${userData?.id}`)
-            return response.json()
+        return response.json()
     }
 
     const {data: userRatings, status} = useQuery({
@@ -48,33 +48,48 @@ export function User() {
 
     return (
         <div className="user-page">
-            <div className="top-5">
-                <h1>Top 5</h1>
-            </div>
-            <div className="top-year">
-                <h1>Top of {currentYear}</h1>
-            </div>
-            <div className="recently-listened">
-                <h1>Recently Listened</h1>
-            </div>
-            <div className="ratings">
-                <h1>Ratings</h1>
-                {ratings.map(rating => (
-                    <div className="rating" key={rating.mbid}>
-                        <img className="rating-img"
-                             src={`https://coverartarchive.org/release-group/${rating.mbid}/front`}
-                             alt="placeholder.png"
-                             onClick={() =>{
-                                 navigate(`/music/album/${rating.mbid}`)
-                             }}
-                        />
-                        <h3 className="rating-name">
-                            {rating.rating}/10
-                        </h3>
+            <div className="profile">
+                <div className="profile-categories">
+                    <h1 className="category">Top 5</h1>
+                </div>
+                <div className="profile-categories">
+                    <h1 className="category">Top of {currentYear}</h1>
+                </div>
+                <div className="profile-categories">
+                    <h1 className="category">Recently Listened</h1>
+                </div>
+                <div className="profile-categories">
+                    <h1 className="category">Ratings</h1>
+                    <div className="category-releases">
+                        {ratings.map(rating => (
+                            <div className="releaseGroup-items" key={rating.mbid}>
+                                <img className="rating-img"
+                                     src={`https://coverartarchive.org/release-group/${rating.releaseMbid}/front`}
+                                     alt="placeholder.png"
+                                     onClick={() => {
+                                         navigate(`/music/album/${rating.releaseMbid}`)
+                                     }}
+                                />
+                                <h3 className="rating-title"
+                                    key={rating.title}
+                                    onClick={() => {
+                                        navigate(`/music/album/${rating.releaseMbid}`)
+                                    }}
+                                >{rating.title} </h3>
+                                <h4 className="rating-artist"
+                                    key={rating.artistName}
+                                    onClick={() => {
+                                        navigate(`/music/artist/${rating.artistMbid}`)
+                                    }}
+                                >{rating.artistName}</h4>
+                                <h4 className="rating-value" key={rating.value}>
+                                    {rating.rating}/10
+                                </h4>
+                            </div>
+                        ))}
                     </div>
-                ))}
+                </div>
             </div>
-
         </div>
     )
 }

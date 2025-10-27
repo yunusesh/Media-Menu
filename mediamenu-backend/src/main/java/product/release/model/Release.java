@@ -2,6 +2,7 @@ package product.release.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import product.artist.model.Artist;
 
 @Entity
 @Data
@@ -20,4 +21,8 @@ public class Release {
 
     @Column(name = "title")
     private String title;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "artist_id", insertable = false, updatable = false)
+    Artist artist;
 }

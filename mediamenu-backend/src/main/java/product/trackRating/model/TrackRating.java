@@ -16,9 +16,6 @@ import java.sql.Timestamp;
 public class TrackRating {
     @EmbeddedId
     private TrackRatingId id;
-    
-    @Column(name = "mbid")
-    private String mbid;
 
     @Column(name = "rating")
     private Integer rating;
@@ -27,9 +24,8 @@ public class TrackRating {
     @Column(name = "rated_at")
     private Timestamp ratedAt;
 
-    public TrackRating(TrackRatingId id, String mbid, Integer rating, Timestamp ratedAt) {
+    public TrackRating(TrackRatingId id, Integer rating, Timestamp ratedAt) {
         this.id = id;
-        this.mbid = mbid;
         this.rating = rating;
         this.ratedAt = ratedAt;
     }

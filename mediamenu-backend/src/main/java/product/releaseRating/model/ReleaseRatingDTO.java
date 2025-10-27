@@ -10,14 +10,12 @@ import java.sql.Timestamp;
 public class ReleaseRatingDTO {
     private Integer userId;
     private Integer releaseId;
-    private String mbid;
     private Integer rating;
     private Timestamp ratedAt;
 
     public ReleaseRatingDTO(ReleaseRating rating) {
         this.userId = rating.getId().getUserId();
         this.releaseId = rating.getId().getReleaseId();
-        this.mbid = rating.getMbid();
         this.rating = rating.getRating();
         this.ratedAt = rating.getRatedAt();
     }

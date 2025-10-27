@@ -42,6 +42,8 @@
     width:20vh;
     margin: 15px;
     border: black solid 2px;
+    transition: border 0.2s;
+
 }
 
 .releaseGroup-img:hover{

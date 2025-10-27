@@ -6,12 +6,13 @@ import product.Query;
 import product.releaseRating.ReleaseRatingRepository;
 import product.releaseRating.model.ReleaseRating;
 import product.releaseRating.model.ReleaseRatingDTO;
+import product.releaseRating.model.ReleaseRatingRequestDTO;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class GetUserReleaseRatingsService implements Query<Integer, List<ReleaseRatingDTO>> {
+public class GetUserReleaseRatingsService implements Query<Integer, List<ReleaseRatingRequestDTO>>{
     private ReleaseRatingRepository releaseRatingRepository;
 
     public GetUserReleaseRatingsService(ReleaseRatingRepository releaseRatingRepository) {
@@ -19,11 +20,8 @@ public class GetUserReleaseRatingsService implements Query<Integer, List<Release
     }
 
     @Override
-    public ResponseEntity<List<ReleaseRatingDTO>> execute(Integer userId) {
-        List<ReleaseRatingDTO> userRatings = releaseRatingRepository.findByUser_Id(userId).stream()
-                .map(rating -> new ReleaseRatingDTO(rating))
-                .toList();
+    public ResponseEntity<List<ReleaseRatingRequestDTO>> execute(Integer userId) {
 
-        return ResponseEntity.ok(userRatings);
+        return ResponseEntity.ok(releaseRatingRepository.findAllByUserId(userId));
     }
 }

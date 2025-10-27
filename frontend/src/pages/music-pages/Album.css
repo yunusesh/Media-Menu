@@ -1,10 +1,12 @@
-
-.album-info{
-    display:flex;
+.album-info {
+    display: flex;
     align-items: flex-start;
+    position: relative;
+    padding-bottom: 20px;
+    margin-bottom: 10px;
 }
 
-.album-info:after{
+.album-info::after {
     content: "";
     position: absolute;
     bottom: 0;
@@ -163,4 +165,14 @@
     background-color: #efefef;
     color: black;
     cursor: pointer;
+}
+
+.rating{
+    padding-left: 10vh;
+    align-items: center;
+    justify-content: center;
+}
+.star{
+    color:orange;
+    font-size: 30px;
 }

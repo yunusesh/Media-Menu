@@ -8,20 +8,20 @@ CREATE TABLE app_user (
 
 CREATE TABLE artist(
 	id SERIAL PRIMARY KEY,
-	mbid VARCHAR(36),
+	mbid VARCHAR(36) UNIQUE,
 	artist_name VARCHAR NOT NULL
 );
 
 CREATE TABLE release_group (
 	id SERIAL PRIMARY KEY,
-	mbid VARCHAR(36),
+	mbid VARCHAR(36) UNIQUE,
 	artist_id INTEGER REFERENCES artist(id) NOT NULL,
 	title VARCHAR NOT NULL
 );
 
 CREATE TABLE track (
 	id SERIAL PRIMARY KEY,
-	mbid VARCHAR(36),
+	mbid VARCHAR(36) UNIQUE,
 	release_id INTEGER REFERENCES release_group(id),
 	artist_id INTEGER REFERENCES artist(id),
 	title VARCHAR NOT NULL
@@ -39,7 +39,6 @@ CREATE TABLE scrobble(
 CREATE TABLE track_rating(
 	user_id INTEGER REFERENCES app_user(id) NOT NULL,
 	track_id INTEGER REFERENCES track(id) NOT NULL,
-	mbid VARCHAR(36),
 	rating INTEGER check (rating between 0 and 10),
 	rated_at TIMESTAMP,
 	PRIMARY KEY (user_id, track_id)
@@ -48,7 +47,6 @@ CREATE TABLE track_rating(
 CREATE TABLE release_rating(
 	user_id INTEGER REFERENCES app_user(id) NOT NULL,
 	release_id INTEGER REFERENCES release_group(id) NOT NULL,
-	mbid VARCHAR(36),
 	rating INTEGER check (rating between 0 and 10),
 	rated_at TIMESTAMP,
 	PRIMARY KEY (user_id, release_id)

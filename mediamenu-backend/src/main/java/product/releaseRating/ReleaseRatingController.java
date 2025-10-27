@@ -2,10 +2,7 @@ package product.releaseRating;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import product.releaseRating.model.ReleaseRating;
-import product.releaseRating.model.ReleaseRatingDTO;
-import product.releaseRating.model.ReleaseRatingKey;
-import product.releaseRating.model.UpdateReleaseRatingCommand;
+import product.releaseRating.model.*;
 import product.releaseRating.services.*;
 
 import java.util.List;
@@ -41,7 +38,7 @@ public class ReleaseRatingController {
     }
 
     @GetMapping("/api/release-rating/user/{userId}")
-    public ResponseEntity<List<ReleaseRatingDTO>> getUserReleaseRatings(@PathVariable Integer userId){
+    public ResponseEntity<List<ReleaseRatingRequestDTO>> getUserReleaseRatings(@PathVariable Integer userId){
         return getUserReleaseRatingsService.execute(userId);
     }
 

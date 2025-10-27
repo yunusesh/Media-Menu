@@ -21,7 +21,6 @@ public class CreateReleaseRatingService implements Command<ReleaseRatingDTO, Rel
     public ResponseEntity<ReleaseRatingDTO> execute(ReleaseRatingDTO releaseRating){
         ReleaseRating savedRating = new ReleaseRating(
                 new ReleaseRatingId(releaseRating.getUserId(), releaseRating.getReleaseId()),
-                releaseRating.getMbid(),
                 releaseRating.getRating(),
                 releaseRating.getRatedAt()
         );

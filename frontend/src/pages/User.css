@@ -1,15 +1,79 @@
-.rating {
-    display: inline-block;
-    padding: 15px;
+.user-page {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 20px;
 }
 
+
+.profile-categories {
+    margin-bottom: 30px;
+    padding-left: 20px;
+}
+
+.category {
+    color: #fff;
+    margin-bottom: 15px;
+    text-align: left;
+    text-shadow: 2px 2px 1px #333;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1.5rem;
+}
+
+.category-releases {
+    display:grid;
+    flex-direction: column;
+    grid-template-columns:repeat(6, 1fr);
+    align-items: center;
+}
+
+.releaseGroup-items{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom:20px;
+}
 .rating-img {
-    width: 26vh;
-    height: 26vh;
-    border: black solid 2px;
+    height: 25vh;
+    width: 25vh;
+    border: 2px solid black;
+    margin: 15px;
+    transition: border 0.2s;
 }
 
 .rating-img:hover {
-    border: #30DBBF solid 2px;
+    border: 2px solid #30DBBF;
     cursor: pointer;
+}
+
+.rating-title {
+    color: #fff;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    max-width: 25vh;
+}
+
+.rating-title:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.rating-artist {
+    text-align: center;
+    margin-top: 2px;
+
+}
+
+.rating-artist:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.rating-value {
+    color: #30DBBF;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 2px;
 }

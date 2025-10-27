@@ -1,13 +1,31 @@
 package product.releaseRating;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import product.releaseRating.model.ReleaseRating;
 import product.releaseRating.model.ReleaseRatingId;
+import product.releaseRating.model.ReleaseRatingRequestDTO;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ReleaseRatingRepository extends JpaRepository<ReleaseRating, ReleaseRatingId>{
-    List<ReleaseRating> findByUser_Id(Integer id);
-    Optional<ReleaseRating> findByUser_IdAndMbid(Integer id, String mbid);
+    @Query("""
+            SELECT new product.releaseRating.model.ReleaseRatingRequestDTO(
+                rr.id.userId,
+                rr.id.releaseId,
+                rr.rating,
+                rr.ratedAt,
+                r.mbid,
+                r.title,
+                r.artistId,
+                a.mbid,
+                a.artistName
+            )
+                FROM ReleaseRating rr
+                JOIN rr.release r
+                JOIN r.artist a
+                WHERE rr.id.userId = :userId
+            """)
+    List<ReleaseRatingRequestDTO> findAllByUserId(@Param("userId") Integer userId);
 }

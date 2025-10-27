@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import product.release.model.Release;
 import product.user.model.AppUser;
 
 import java.sql.Timestamp;
@@ -17,9 +18,6 @@ public class ReleaseRating {
     @EmbeddedId
     private ReleaseRatingId id;
 
-    @Column(name = "mbid")
-    private String mbid;
-
     @Column(name = "rating")
     private Integer rating;
 
@@ -31,10 +29,12 @@ public class ReleaseRating {
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private AppUser user;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "release_id", insertable = false, updatable = false)
+    private Release release;
 
-    public ReleaseRating(ReleaseRatingId id, String mbid, Integer rating, Timestamp ratedAt){
+    public ReleaseRating(ReleaseRatingId id, Integer rating, Timestamp ratedAt){
         this.id = id;
-        this.mbid = mbid;
         this.rating = rating;
         this.ratedAt = ratedAt;
     }

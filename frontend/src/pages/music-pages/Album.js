@@ -1,10 +1,14 @@
 import './Album.css'
 import {useNavigate, useParams} from "react-router-dom";
 import {useQuery} from "react-query"
-import { useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
+import { FaStar } from "react-icons/fa";
+import { AuthContext } from "../../AuthContext";
+import axios from "axios";
 
 export function Album() {
     const {id} = useParams();
+    const { user } = useContext(AuthContext);
     // grab state of releaseGroupId from search query b/c it is has the most general album cover (not specific to release)
     const navigate = useNavigate();
     const [visible, setVisible] = useState(false);
@@ -138,6 +142,8 @@ export function Album() {
                 </div>
             </div>
             <div className="rating">
+                <FaStar className = "star"/>
+
             </div>
         </div>
     )

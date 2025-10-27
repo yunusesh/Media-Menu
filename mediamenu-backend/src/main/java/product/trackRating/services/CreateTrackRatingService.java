@@ -20,7 +20,6 @@ public class CreateTrackRatingService implements Command<TrackRatingDTO, TrackRa
     public ResponseEntity<TrackRatingDTO> execute (TrackRatingDTO trackRating){
         TrackRating savedRating = new TrackRating(
                 new TrackRatingId(trackRating.getUserId(), trackRating.getTrackId()),
-                trackRating.getMbid(),
                 trackRating.getRating(),
                 trackRating.getRatedAt()
         );
