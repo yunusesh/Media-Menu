@@ -17,7 +17,7 @@ export function Login(){
                 password: password
             })
             login(response.data.token)
-            navigate(`/user/${response.data.username}`)
+            navigate(`/user/${username}`)
 
 
         } catch(error){

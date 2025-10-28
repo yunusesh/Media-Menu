@@ -45,7 +45,7 @@ export function Album() {
     }, [data])
 
     async function fetchReleaseFromDB() {
-        if(user && data) {
+        if (user && data) {
             const response = await axios.post(`http://localhost:8081/api/release/getOrCreate`, {
                 releaseMbid: id,
                 title: data.title,
@@ -63,22 +63,28 @@ export function Album() {
         enabled: !!id
     })
 
-    async function fetchRating(){
-        if(user && releaseDB) {
+    async function fetchRating() {
+        if (user && releaseDB) {
             const response = await fetch(`http://localhost:8081/api/release-rating/user/${user.id}/release/${releaseDB.id}`)
             return response.json()
         }
     }
 
     const {data: userRating} = useQuery({
-        queryKey: ['userRating', id],
+        queryKey: ['userRating', user?.id, releaseDB?.id],
         queryFn: () => fetchRating(),
-        enabled: !!rating
+        enabled: !!user && !!releaseDB
     })
 
+    useEffect(() => {
+        if (userRating) {
+            setRating(userRating.rating)
+        }
+    }, [userRating])
+
     const handleSubmit = async () => {
-        if(user && releaseDB){
-            axios.post('http://localhost:8081/api/release-rating',{
+        if (user && releaseDB) {
+            axios.post('http://localhost:8081/api/release-rating', {
                 userId: user.id,
                 releaseId: releaseDB.id,
                 rating: rating
@@ -183,31 +189,52 @@ export function Album() {
                     </div>
                 </div>
             </div>
-            <div className="rating">
-                <FaStar className="star" onClick={() => {
-                    setIsEditing(!isEditing)
-                }}/>
-                {!isEditing ? (
-                <h3>{userRating ? `${userRating.rating}/10` : ""}</h3>
-                ) :
-                    <div className = "edit-rating">
-                        <input
-                            type = "number"
-                            min = "0"
-                            max = "10"
-                            value = {rating}
-                            onChange={(e) => setRating(e.target.value)}
-                        />
-                        <button onClick={handleSubmit}>
-                            Submit
-                        </button>
-                        <button onClick={() =>{
-                            setIsEditing(false)
-                        }}>
-                            Cancel
-                        </button>
-                    </div>
-                }
+            <div className={isEditing ? "stats-editing" : "stats"}>
+                Your Stats
+                <div className = "activity">
+                    <h3>500 Total Listens</h3>
+                    <h3>400 Listens In 2025</h3>
+                    <h3>200 Listens This Month</h3>
+                    <h3>100 Listens Today</h3>
+                </div>
+                <div className="rating">
+                    <FaStar className="star" onClick={() => {
+                        user ? setIsEditing(!isEditing) : setIsEditing(false)
+                    }}/>
+                    {!isEditing ? (
+                            <h3 className={
+                                !rating ? "rating-absent" :
+                                    rating == 10 ? "rating-ten" :
+                                     rating >= 8 && rating <= 9? "rating-high" :
+                                         rating >= 6 && rating <= 7 ? "rating-med" :
+                                             rating >= 4 && rating <= 5 ? "rating-medlow" :
+                                                 rating >= 1 && rating <= 3 ? "rating-low" :
+                                                "rating-zero"
+
+                            }>
+
+                                {rating ? `${rating}/10` : "1-10"}</h3>
+                        ) :
+                        <div className="edit-rating">
+                            <input
+                                placeholder="0-10"
+                                type="number"
+                                value={rating}
+                                onChange={(e) => setRating(e.target.value)}
+                            />
+                            <div className="rating-buttons">
+                                <button className="rate-button" onClick={handleSubmit}>
+                                    RATE
+                                </button>
+                                <button className="cancel-rate-button" onClick={() => {
+                                    setIsEditing(false)
+                                }}>
+                                    CANCEL
+                                </button>
+                            </div>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
     )

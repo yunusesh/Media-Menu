@@ -10,6 +10,7 @@ export function User() {
     const currentYear = currentDate.getFullYear();
     const {username} = useParams()
     const [ratings, setRatings] = useState([])
+    const [topOfYear, setTopOfYear] = useState([])
 
     async function fetchUser() {
         const response = await fetch(`http://localhost:8081/user/${username}`)
@@ -55,12 +56,15 @@ export function User() {
                 </div>
                 <div className="profile-categories">
                     <h1 className="category">Top of {currentYear}</h1>
+                    <div className = "category-releases">
+
+                    </div>
                 </div>
                 <div className="profile-categories">
                     <h1 className="category">Recently Listened</h1>
                 </div>
                 <div className="profile-categories">
-                    <h1 className="category">Ratings</h1>
+                    <h1 className="category">Recently Rated</h1>
                     <div className="category-releases">
                         {ratings.map(rating => (
                             <div className="releaseGroup-items" key={rating.mbid}>
@@ -87,8 +91,16 @@ export function User() {
                                     }}
                                 >{rating.artistName}</h4>
                                 <div className="rating-value">
-                                    <FaStar className = "star"/>
-                                    <h4 key={rating.value}>
+                                    <FaStar className = "star-profile"/>
+                                    <h4 className= {
+                                        rating.rating == 10 ? "rating-value-ten" :
+                                            rating.rating >= 8 && rating.rating <= 9? "rating-value-high" :
+                                                rating.rating >= 6 && rating.rating <= 7 ? "rating-value-med" :
+                                                    rating.rating >= 4 && rating.rating <= 5 ? "rating-value-medlow" :
+                                                            rating.rating >= 1 && rating.rating <= 3 ? "rating-value-low" :
+                                                                "rating-value-zero"
+
+                                    } key = {rating.id}>
                                         {rating.rating}/10
                                     </h4>
                                 </div>

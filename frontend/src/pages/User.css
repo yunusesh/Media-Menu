@@ -71,16 +71,41 @@
     text-decoration: underline;
 }
 
-.star{
+.star-profile{
     display: inline;
     font-size: 20px;
+    color:orange;
 
 }
 
+
 .rating-value h4{
     display: inline;
-    color: #30DBBF;
     font-weight: bold;
     text-align: center;
     margin-top: 2px;
+}
+
+.rating-value-ten{
+    color: #1eFFE7;
+}
+
+.rating-value-high{
+    color: #2EFF66;
+}
+
+.rating-value-med{
+    color: #7BFF00;
+}
+
+.rating-value-medlow{
+    color: #FFF700;
+}
+
+.rating-value-low{
+    color: #FF8C00;
+}
+
+.rating-value-zero{
+    color: #FF0000;
 }

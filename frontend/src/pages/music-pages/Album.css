@@ -170,25 +170,125 @@
     cursor: pointer;
 }
 
-.rating{
-    padding-left: 10vh;
+.stats{
+    font-family: "Malgun Gothic Semilight";
+    font-size: 23px;
+    margin-left: 10vh;
+    padding: 10px;
     align-items: center;
     justify-content: center;
+    border: 2.5px solid #4C5563;
+    min-width: 20vh;
+    max-width: 55vh;
+}
+
+.stats-editing{
+    font-family: "Malgun Gothic Semilight";
+    font-size: 25px;
+    margin-left: 10vh;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    border: 2.5px solid #4C5563;
+    min-width: 50vh;
+    max-width: 60vh;
+}
+
+.rating{
+    padding: 5px;
 }
 .star{
     display: inline;
     color:orange;
-    font-size: 30px;
+    font-size: 22px;
 }
 
 .star:hover{
     cursor: pointer;
     color: yellow;
 }
-.rating h3{
+.rating-absent, .rating-ten, .rating-high, .rating-med, .rating-medlow, .rating-low, .rating-zero{
+    font-size: 22px;
     display: inline;
-    color: #30DBBF;
     font-weight: bold;
     text-align: center;
     margin-top: 2px;
+    padding: 5px;
+}
+
+.rating-ten{
+    color: #1eFFE7;
+}
+
+.rating-high{
+    color: #2EFF66;
+}
+
+.rating-med{
+    color: #7BFF00;
+}
+
+.rating-medlow{
+    color: #FFF700;
+}
+
+.rating-low{
+    color: #FF8C00;
+}
+
+.rating-zero{
+    color: #FF0000;
+}
+
+.rating-absent{
+    color: gray;
+    font-weight: lighter;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.rating-buttons{
+    position: relative;
+}
+
+.rate-button{
+    position: absolute;
+    bottom: 0;
+    right: 3.5rem;
+    margin: 0 1.5rem;
+    width: 50px;
+}
+
+.cancel-rate-button{
+    position: absolute;
+    bottom: 0;
+    right: 0rem;
+    width: 70px;
+}
+
+.rate-button, .cancel-rate-button {
+    height: 20px;
+    font-size: 16px;
+    box-shadow: 2px 2px 1px black;
+    color: #D9D9D9;
+    background-color: #4C5563;
+    border: #1E2023;
+    font-family: "Malgun Gothic Semilight";
+    outline: none;
+    cursor: pointer;
+
+    transition: all 0.2s ease-in-out;
+}
+
+.activity{
+    padding: 5px;
+    font-size: 22px;
+}
+
+.activity h3{
+    font-family: "Malgun Gothic Semilight";
 }
