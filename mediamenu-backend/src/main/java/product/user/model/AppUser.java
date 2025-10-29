@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import product.releaseRating.model.ReleaseRating;
+import product.scrobble.model.Scrobble;
 import product.trackRating.model.TrackRating;
 
 import java.sql.Timestamp;
@@ -41,6 +42,9 @@ public class AppUser implements UserDetails{
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TrackRating> trackRatings = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Scrobble> scrobbles = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities(){

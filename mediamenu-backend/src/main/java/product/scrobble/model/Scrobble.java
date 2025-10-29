@@ -3,6 +3,8 @@ package product.scrobble.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
+import product.track.model.Track;
+import product.user.model.AppUser;
 
 import java.sql.Timestamp;
 
@@ -21,14 +23,15 @@ public class Scrobble {
     @Column(name = "track_id")
     private Integer trackId;
 
-    @Column(name = "scrobbles")
-    private Integer scrobbles;
-
-    @CreationTimestamp
-    @Column(name = "listened_at")
-    private Timestamp listenedAt; //make a list?
-
     @CreationTimestamp
     @Column(name = "first_listened_at")
     private Timestamp firstListenedAt;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private AppUser user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "track_id", insertable = false, updatable = false)
+    private Track track;
 }

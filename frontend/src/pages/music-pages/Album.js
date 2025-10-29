@@ -3,6 +3,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {useQuery} from "react-query"
 import {useContext, useEffect, useState} from "react";
 import {FaStar} from "react-icons/fa";
+import {FaRegEdit} from "react-icons/fa";
 import {AuthContext} from "../../AuthContext";
 import axios from "axios";
 
@@ -191,25 +192,26 @@ export function Album() {
             </div>
             <div className={isEditing ? "stats-editing" : "stats"}>
                 Your Stats
-                <div className = "activity">
-                    <h3>500 Total Listens</h3>
-                    <h3>400 Listens In 2025</h3>
-                    <h3>200 Listens This Month</h3>
-                    <h3>100 Listens Today</h3>
+                <FaRegEdit className = "edit" onClick={() =>{
+                    user ? setIsEditing(!isEditing) : setIsEditing(false)
+                }}/>
+                <div className="activity">
+                    <h4>500 Total Listens</h4>
+                    <h4>400 Listens In 2025</h4>
+                    <h4>200 Listens This Month</h4>
+                    <h4>100 Listens Today</h4>
                 </div>
                 <div className="rating">
-                    <FaStar className="star" onClick={() => {
-                        user ? setIsEditing(!isEditing) : setIsEditing(false)
-                    }}/>
+                    <FaStar className="star"/>
                     {!isEditing ? (
                             <h3 className={
                                 !rating ? "rating-absent" :
                                     rating == 10 ? "rating-ten" :
-                                     rating >= 8 && rating <= 9? "rating-high" :
-                                         rating >= 6 && rating <= 7 ? "rating-med" :
-                                             rating >= 4 && rating <= 5 ? "rating-medlow" :
-                                                 rating >= 1 && rating <= 3 ? "rating-low" :
-                                                "rating-zero"
+                                        rating >= 8 && rating <= 9 ? "rating-high" :
+                                            rating >= 6 && rating <= 7 ? "rating-med" :
+                                                rating >= 4 && rating <= 5 ? "rating-medlow" :
+                                                    rating >= 1 && rating <= 3 ? "rating-low" :
+                                                        "rating-zero"
 
                             }>
 
@@ -224,7 +226,7 @@ export function Album() {
                             />
                             <div className="rating-buttons">
                                 <button className="rate-button" onClick={handleSubmit}>
-                                    RATE
+                                    UPDATE
                                 </button>
                                 <button className="cancel-rate-button" onClick={() => {
                                     setIsEditing(false)
@@ -233,6 +235,8 @@ export function Album() {
                                 </button>
                             </div>
                         </div>
+
+
                     }
                 </div>
             </div>

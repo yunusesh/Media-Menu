@@ -2,6 +2,8 @@ package product.track.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import product.artist.model.Artist;
+import product.release.model.Release;
 
 @Entity
 @Data
@@ -23,4 +25,12 @@ public class Track {
 
     @Column(name = "title")
     private String title;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "release_id", insertable = false, updatable = false)
+    private Release release;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "artist_id", insertable = false, updatable = false)
+    private Artist artist;
 }

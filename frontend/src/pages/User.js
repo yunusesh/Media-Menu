@@ -10,6 +10,7 @@ export function User() {
     const currentYear = currentDate.getFullYear();
     const {username} = useParams()
     const [ratings, setRatings] = useState([])
+    const [listened, setListened] = useState([])
     const [topOfYear, setTopOfYear] = useState([])
 
     async function fetchUser() {
@@ -34,11 +35,29 @@ export function User() {
         enabled: !!userData?.id,
     })
 
+    async function fetchUserListens() {
+        const response = await fetch(`http://localhost:8081/api/scrobble/user/${userData?.id}`)
+        return response.json()
+    }
+
+    const {data: userListens} = useQuery({
+        queryKey: ["userListens", userData?.id],
+        queryFn: () => fetchUserListens(),
+        enabled: !!userData?.id
+    })
+
     useEffect(() => {
         if (userRatings) {
-            setRatings(userRatings.map(rating => rating))
+            setRatings(userRatings.reverse().map(rating => rating))
         }
     }, [userRatings]);
+
+    useEffect(() => {
+        if (userListens) {
+            setListened(userListens.reverse().map(listen => listen))
+        }
+    }, [userListens])
+
 
     if (status === 'loading') {
         return <p>Loading...</p>
@@ -56,51 +75,75 @@ export function User() {
                 </div>
                 <div className="profile-categories">
                     <h1 className="category">Top of {currentYear}</h1>
-                    <div className = "category-releases">
+                    <div className="category-releases">
 
                     </div>
                 </div>
                 <div className="profile-categories">
                     <h1 className="category">Recently Listened</h1>
+                    <div className="category-releases">
+                        {listened.map(listen => (
+                            <div className="releaseGroup-items" key={listen.trackMbid}>
+                                <img className="profile-item-img"
+                                     src={`https://coverartarchive.org/release-group/${listen.releaseMbid}/front`}
+                                     alt="placeholder.png"
+                                     onClick={() => {
+                                         navigate(`/music/album/${listen.releaseMbid}`)
+                                     }}
+                                />
+                                <h3 className="profile-item-title"
+                                    key={listen.trackId}
+                                    onClick={() => {
+                                        navigate(`/music/track/${listen.trackMbid}`)
+                                    }}> {listen.trackTitle}</h3>
+                                <h4 className="profile-item-artist"
+                                    key={listen.artistName}
+                                    onClick={() => {
+                                        navigate(`/music/artist/${listen.artistMbid}`)
+                                    }}
+                                >{listen.artistName}</h4>
+                            </div>
+                        ))}
+                    </div>
                 </div>
                 <div className="profile-categories">
                     <h1 className="category">Recently Rated</h1>
                     <div className="category-releases">
                         {ratings.map(rating => (
                             <div className="releaseGroup-items" key={rating.mbid}>
-                                <img className="rating-img"
+                                <img className="profile-item-img"
                                      src={`https://coverartarchive.org/release-group/${rating.releaseMbid}/front`}
                                      alt="placeholder.png"
                                      onClick={() => {
                                          navigate(`/music/album/${rating.releaseMbid}`)
                                      }}
                                 />
-                                <h3 className="rating-title"
+                                <h3 className="profile-item-title"
                                     key={rating.title}
                                     onClick={() => {
                                         navigate(`/music/album/${rating.releaseMbid}`)
                                     }}
                                 >{rating.title} </h3>
-                                <h5 className = "format" key = {rating.format}>
+                                <h5 className="format" key={rating.format}>
                                     • {rating.format.charAt(0).toUpperCase() + rating.format.slice(1)}
                                 </h5>
-                                <h4 className="rating-artist"
+                                <h4 className="profile-item-artist"
                                     key={rating.artistName}
                                     onClick={() => {
                                         navigate(`/music/artist/${rating.artistMbid}`)
                                     }}
                                 >{rating.artistName}</h4>
                                 <div className="rating-value">
-                                    <FaStar className = "star-profile"/>
-                                    <h4 className= {
+                                    <h4 className={
                                         rating.rating == 10 ? "rating-value-ten" :
-                                            rating.rating >= 8 && rating.rating <= 9? "rating-value-high" :
+                                            rating.rating >= 8 && rating.rating <= 9 ? "rating-value-high" :
                                                 rating.rating >= 6 && rating.rating <= 7 ? "rating-value-med" :
                                                     rating.rating >= 4 && rating.rating <= 5 ? "rating-value-medlow" :
-                                                            rating.rating >= 1 && rating.rating <= 3 ? "rating-value-low" :
-                                                                "rating-value-zero"
+                                                        rating.rating >= 1 && rating.rating <= 3 ? "rating-value-low" :
+                                                            "rating-value-zero"
 
-                                    } key = {rating.id}>
+                                    } key={rating.id}>
+                                        <FaStar className="star-profile"/>
                                         {rating.rating}/10
                                     </h4>
                                 </div>

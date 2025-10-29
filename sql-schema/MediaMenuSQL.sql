@@ -32,8 +32,6 @@ CREATE TABLE scrobble(
 	id SERIAL PRIMARY KEY,
 	user_id INTEGER REFERENCES app_user(id) NOT NULL,
 	track_id INTEGER REFERENCES track(id) NOT NULL,
-	scrobbles INTEGER,
-	listened_at TIMESTAMP,
 	first_listened_at TIMESTAMP
 );
 
@@ -53,3 +51,4 @@ CREATE TABLE track_rating(
 	rated_at TIMESTAMP,
 	PRIMARY KEY (user_id, track_id)
 )
+

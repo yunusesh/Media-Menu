@@ -10,7 +10,7 @@ import product.scrobble.model.ScrobbleDTO;
 import java.util.Optional;
 
 @Service
-public class GetScrobbleService implements Query<Integer, ScrobbleDTO> {
+public class GetScrobbleService {
 
     private final ScrobbleRepository scrobbleRepository;
 
@@ -18,9 +18,8 @@ public class GetScrobbleService implements Query<Integer, ScrobbleDTO> {
         this.scrobbleRepository = scrobbleRepository;
     }
 
-    @Override
-    public ResponseEntity<ScrobbleDTO> execute (Integer id){
-        Optional<Scrobble> scrobbleOptional = scrobbleRepository.findById(id);
+    public ResponseEntity<ScrobbleDTO> execute (Integer userId, Integer trackId){
+        Optional<Scrobble> scrobbleOptional = scrobbleRepository.findByUserIdAndTrackId(userId, trackId);
         if(scrobbleOptional.isPresent()){
             return ResponseEntity.ok(new ScrobbleDTO(scrobbleOptional.get()));
         }
