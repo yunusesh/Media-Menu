@@ -94,6 +94,18 @@ export function Album() {
         }
     }
 
+    const handleLog = async () => {
+        if (user && data) {
+            {albumReissue.tracklist.map(track => {
+                    axios.post(`http://localhost:8081/api/scrobble`, { // GET OR CREATE
+                        userId: user.id,
+                        trackId: track.id
+                    })
+                }
+            )}
+        }
+    }
+
     useEffect(() => {
         const fetchReissues = async () => {
             try {
@@ -192,7 +204,7 @@ export function Album() {
             </div>
             <div className={isEditing ? "stats-editing" : "stats"}>
                 Your Stats
-                <FaRegEdit className = "edit" onClick={() =>{
+                <FaRegEdit className="edit" onClick={() => {
                     user ? setIsEditing(!isEditing) : setIsEditing(false)
                 }}/>
                 <div className="activity">
@@ -202,7 +214,6 @@ export function Album() {
                     <h4>100 Listens Today</h4>
                 </div>
                 <div className="rating">
-                    <FaStar className="star"/>
                     {!isEditing ? (
                             <h3 className={
                                 !rating ? "rating-absent" :
@@ -215,15 +226,21 @@ export function Album() {
 
                             }>
 
+                                <FaStar className="star"/>
                                 {rating ? `${rating}/10` : "1-10"}</h3>
                         ) :
                         <div className="edit-rating">
+                            <FaStar className="star"/>
                             <input
                                 placeholder="0-10"
                                 type="number"
                                 value={rating}
                                 onChange={(e) => setRating(e.target.value)}
                             />
+                            <button className="manual-log"
+                            onClick={handleLog}>
+                                Log Album
+                            </button>
                             <div className="rating-buttons">
                                 <button className="rate-button" onClick={handleSubmit}>
                                     UPDATE

@@ -28,4 +28,5 @@ public class Release {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "artist_id", insertable = false, updatable = false)
     Artist artist;
+
 }

@@ -192,9 +192,11 @@
     border: 2.5px solid #4C5563;
     min-width: 50vh;
     max-width: 60vh;
+    position: relative;
 }
 
 .rating{
+    display: inline;
     padding: 5px;
 }
 .star{
@@ -254,20 +256,19 @@ input[type=number]::-webkit-inner-spin-button {
 .rate-button{
     position: absolute;
     bottom: 0;
-    right: 3.5rem;
+    right: 3.8rem;
     margin: 0 1.5rem;
-    width: 70px;
 }
 
 .cancel-rate-button{
     position: absolute;
     bottom: 0;
-    right: 0rem;
-    width: 70px;
+    right: 0;
 }
 
 .rate-button, .cancel-rate-button {
-    height: 20px;
+    height: 25px;
+    width: 75px;
     font-size: 16px;
     box-shadow: 2px 2px 1px black;
     color: #D9D9D9;
@@ -280,6 +281,32 @@ input[type=number]::-webkit-inner-spin-button {
     transition: all 0.2s ease-in-out;
 }
 
+.rate-button:hover, .cancel-rate-button:hover{
+    background-color: #687487;
+}
+
+.manual-log{
+    height: 25px;
+    width: 90px;
+    font-size: 16px;
+    box-shadow: 2px 2px 1px black;
+    color: #D9D9D9;
+    background-color: #1d6fa3;
+    border: #1E2023;
+    font-family: "Malgun Gothic Semilight";
+    outline: none;
+    cursor: pointer;
+
+    transition: all 0.2s ease-in-out;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 15px;
+}
+
+.manual-log:hover{
+    background-color: #1090e0;
+}
 .activity{
     padding: 5px;
     font-size: 22px;

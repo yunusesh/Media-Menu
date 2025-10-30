@@ -6,9 +6,11 @@ import lombok.Data;
 public class TrackDTO {
     private Integer id;
     private String mbid;
+    private String releaseDate;
     private Integer releaseId;
     private Integer artistId;
     private String title;
+
 
     public TrackDTO(Track track) {
         this.id = track.getId();
@@ -16,5 +18,6 @@ public class TrackDTO {
         this.releaseId = track.getReleaseId();
         this.artistId = track.getArtistId();
         this.title = track.getTitle();
+        this.releaseDate = track.getReleaseDate();
     }
 }

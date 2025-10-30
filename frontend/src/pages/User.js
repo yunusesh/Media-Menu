@@ -88,7 +88,7 @@ export function User() {
                                      src={`https://coverartarchive.org/release-group/${listen.releaseMbid}/front`}
                                      alt="placeholder.png"
                                      onClick={() => {
-                                         navigate(`/music/album/${listen.releaseMbid}`)
+                                         navigate(`/music/track/${listen.trackMbid}`)
                                      }}
                                 />
                                 <h3 className="profile-item-title"

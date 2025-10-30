@@ -1,7 +1,22 @@
 .track-page{
+    padding: 30px;
+}
+.track-info {
     display: flex;
-    justify-content: left;
     align-items: flex-start;
+    position: relative;
+    padding-bottom: 20px;
+    margin-bottom: 10px;
+}
+
+.track-info::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 90%;
+    transform: translateX(-50%);
+    border-bottom: 1px solid #4C5563;
 }
 
 .img{

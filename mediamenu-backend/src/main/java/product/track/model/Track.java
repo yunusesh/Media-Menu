@@ -26,6 +26,9 @@ public class Track {
     @Column(name = "title")
     private String title;
 
+    @Column(name = "release_date")
+    private String releaseDate;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "release_id", insertable = false, updatable = false)
     private Release release;

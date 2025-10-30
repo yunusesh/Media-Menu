@@ -25,7 +25,8 @@ CREATE TABLE track (
 	mbid VARCHAR(36) UNIQUE,
 	release_id INTEGER REFERENCES release_group(id),
 	artist_id INTEGER REFERENCES artist(id),
-	title VARCHAR NOT NULL
+	title VARCHAR NOT NULL,
+	release_date VARCHAR
 );
 
 CREATE TABLE scrobble(
@@ -51,4 +52,3 @@ CREATE TABLE track_rating(
 	rated_at TIMESTAMP,
 	PRIMARY KEY (user_id, track_id)
 )
-
