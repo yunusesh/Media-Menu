@@ -21,6 +21,7 @@ export function Album() {
     const [reissuesList, setReissuesList] = useState([])
     const [rating, setRating] = useState()
     const [isEditing, setIsEditing] = useState(false)
+    const [tracklistDB, setTracklistDB] = useState([])
 
     async function fetchAlbum() {
         const response = await fetch(`http://localhost:8081/album/${id}`)
@@ -94,30 +95,58 @@ export function Album() {
         }
     }
 
-    const handleLog = async () => {
-        if (user && data) {
-            {albumReissue.tracklist.map(track => {
-                    axios.post(`http://localhost:8081/api/scrobble`, { // GET OR CREATE
-                        userId: user.id,
-                        trackId: track.id
-                    })
-                }
-            )}
-        }
-    }
-
     useEffect(() => {
         const fetchReissues = async () => {
             try {
                 const responses = await Promise.all(reissueIds.map(reissueId => fetch(`http://localhost:8081/reissue/${reissueId}`)))
                 const reissueData = await Promise.all(responses.map(response => response.json()))
                 setReissuesList(reissueData)
-            } catch (err) {
-                console.error("Failed to fetch releases", err)
+            } catch (error) {
+                console.error("Failed to fetch releases", error)
             }
         }
         fetchReissues()
     }, [reissueIds])
+
+
+    useEffect(() => {
+        const fetchTrackListFromDB = async () => {
+            try {
+                const responses = await Promise.all(albumReissue?.tracklist.map(track => axios.post('http://localhost:8081/api/track/getOrCreate', {
+                    trackMbid: track.recording.id,
+                    trackTitle: track.title,
+                    releaseDate: track.recording["first-release-date"],
+                    releaseMbid: id,
+                    releaseTitle: albumReissue.title,
+                    format: data["primary-type"],
+                    artistMbid: data["artist-credit"]?.[0]?.id,
+                    artistName: data["artist-credit"]?.[0]?.name
+                })))
+                const tracklistData = await Promise.all(responses.map(response => response.data))
+                setTracklistDB(tracklistData)
+            } catch (error) {
+                console.error("Failed to fetch tracklist", error)
+            }
+        }
+        if (albumReissue && data) {
+            fetchTrackListFromDB()
+        }
+    }, [id, albumReissue, data])
+
+    const handleLog = async () => {
+        if (user && data) {
+            console.log(tracklistDB)
+            {
+                tracklistDB.map(track => {
+                        axios.post(`http://localhost:8081/api/scrobble`, {
+                            userId: user.id,
+                            trackId: track.id
+                        })
+                    }
+                )
+            }
+        }
+    }
 
     if (status === 'loading') {
         return <p>Loading...</p>
@@ -238,8 +267,8 @@ export function Album() {
                                 onChange={(e) => setRating(e.target.value)}
                             />
                             <button className="manual-log"
-                            onClick={handleLog}>
-                                Log Album
+                                    onClick={handleLog}>
+                                Log Release
                             </button>
                             <div className="rating-buttons">
                                 <button className="rate-button" onClick={handleSubmit}>

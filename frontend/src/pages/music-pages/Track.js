@@ -1,14 +1,16 @@
 import "./Track.css"
 import {useNavigate, useParams} from "react-router-dom";
 import {useQuery} from "react-query";
-import {FaRegEdit} from "react-icons/fa";
+import {FaRegEdit, FaStar} from "react-icons/fa";
 import {useContext, useState} from "react";
 import {AuthContext} from "../../AuthContext";
+import axios from "axios";
 
 export function Track() {
     const {id} = useParams()
     const {user} = useContext(AuthContext)
     const navigate = useNavigate()
+    const [rating, setRating] = useState()
     const [isEditing, setIsEditing] = useState(false)
 
     async function fetchTrack() {
@@ -22,6 +24,42 @@ export function Track() {
         enabled: !!id
     })
 
+    async function fetchTrackFromDB() {
+        if (user && data) {
+            const response = await axios.post(`http://localhost:8081/api/track/getOrCreate`, {
+                trackMbid: id,
+                trackTitle: data.title,
+                releaseDate: data["first-release-date"],
+                releaseMbid: data.releases[0].id,
+                releaseTitle: data.releases[0].title,
+                format: data.releases[0]["primary-type"],
+                artistMbid: data["artist-credit"]?.[0]?.id,
+                artistName: data["artist-credit"]?.[0]?.name
+            })
+            return response.data
+        }
+    }
+
+    const {data: trackDB} = useQuery({
+        queryKey: ['trackDB', id],
+        queryFn: () => fetchTrackFromDB(),
+        enabled: !!id
+    })
+
+    const handleSubmit = async () => {
+        console.log("wip")
+    }
+
+    const handleLog = async () => {
+        if (user && data && trackDB) {
+            {
+                axios.post(`http://localhost:8081/api/scrobble`, {
+                    userId: user.id,
+                    trackId: trackDB.id
+                })
+            }
+        }
+    }
     if (status === `loading`) {
         <p>Loading...</p>
     }
@@ -67,10 +105,48 @@ export function Track() {
                     <h4>200 Listens This Month</h4>
                     <h4>100 Listens Today</h4>
                 </div>
+                <div className="rating">
+                    {!isEditing ? (
+                            <h3 className={
+                                !rating ? "rating-absent" :
+                                    rating == 10 ? "rating-ten" :
+                                        rating >= 8 && rating <= 9 ? "rating-high" :
+                                            rating >= 6 && rating <= 7 ? "rating-med" :
+                                                rating >= 4 && rating <= 5 ? "rating-medlow" :
+                                                    rating >= 1 && rating <= 3 ? "rating-low" :
+                                                        "rating-zero"
+
+                            }>
+
+                                <FaStar className="star"/>
+                                {rating ? `${rating}/10` : "1-10"}</h3>
+                        ) :
+                        <div className="edit-rating">
+                            <FaStar className="star"/>
+                            <input
+                                placeholder="0-10"
+                                type="number"
+                                value={rating}
+                                onChange={(e) => setRating(e.target.value)}
+                            />
+                            <button className="manual-log"
+                                    onClick={handleLog}>
+                                Log Release
+                            </button>
+                            <div className="rating-buttons">
+                                <button className="rate-button" onClick={handleSubmit}>
+                                    UPDATE
+                                </button>
+                                <button className="cancel-rate-button" onClick={() => {
+                                    setIsEditing(false)
+                                }}>
+                                    CANCEL
+                                </button>
+                            </div>
+                        </div>
 
 
-                <div className="editing">
-
+                    }
                 </div>
             </div>
         </div>
