@@ -4,8 +4,8 @@ import {useEffect, useState} from "react";
 import {FaStar} from "react-icons/fa";
 import "./UserRatings.css"
 
-export function UserRatings(){
-    const { username } = useParams()
+export function UserRatings() {
+    const {username} = useParams()
     const navigate = useNavigate()
     const [ratings, setRatings] = useState([])
 
@@ -37,9 +37,9 @@ export function UserRatings(){
         }
     }, [userRatings]);
 
-    return(
-        <div className = "user-ratings-page">
-            <div className = "user-ratings">
+    return (
+        <div className="user-ratings-page">
+            <div className="user-ratings">
                 {ratings.map(rating => (
                     <div className="ratings-page-item" key={rating.mbid}>
                         <img className="ratings-item-img"
@@ -49,8 +49,25 @@ export function UserRatings(){
                                  navigate(`/music/album/${rating.releaseMbid}`)
                              }}
                         />
+                        <div className="ratings-release-info">
+                            <h5 className="profile-item-title"
+                                key={rating.title}
+                                onClick={() => {
+                                    navigate(`/music/album/${rating.releaseMbid}`)
+                                }}
+                            >{rating.title} </h5>
+                            <h5 className="format" key={rating.format}>
+                                {rating.format.charAt(0).toUpperCase() + rating.format.slice(1)} by
+                            </h5>
+                            <h5 className="profile-item-artist"
+                                key={rating.artistName}
+                                onClick={() => {
+                                    navigate(`/music/artist/${rating.artistMbid}`)
+                                }}
+                            >{rating.artistName}</h5>
+                        </div>
                         <div className="rating-value">
-                            <h4 className={
+                            <h5 className={
                                 rating.rating == 10 ? "rating-value-ten" :
                                     rating.rating >= 8 && rating.rating <= 9 ? "rating-value-high" :
                                         rating.rating >= 6 && rating.rating <= 7 ? "rating-value-med" :
@@ -61,7 +78,7 @@ export function UserRatings(){
                             } key={rating.id}>
                                 <FaStar className="star-profile"/>
                                 {rating.rating}/10
-                            </h4>
+                            </h5>
                         </div>
                     </div>
                 ))}

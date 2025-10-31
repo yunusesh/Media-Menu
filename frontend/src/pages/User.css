@@ -93,13 +93,14 @@
     transform: translateX(-50%);
     border-bottom: 1px solid #4C5563;
 }
+
 .profile-item-title {
     color: #fff;
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
     text-align: center;
-    max-width: 25vh;
+    max-width: 100%;
     margin-bottom: 5px;
 }
 
@@ -114,7 +115,7 @@
     overflow:hidden;
     text-overflow:ellipsis;
     text-align: center;
-    max-width: 25vh;
+    max-width: 100%;
     margin-top: 5px;
 }
 
@@ -162,4 +163,9 @@
 
 .rating-value-zero{
     color: #FF0000;
+}
+
+.listen-timestamp{
+    padding: 5px;
+    color: #525457;
 }

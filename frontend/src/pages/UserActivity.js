@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {useQuery} from "react-query";
 import {useNavigate, useParams} from "react-router-dom";
 import "./UserActivity.css"
+
 export function UserActivity(){
     const {username} = useParams()
     const navigate = useNavigate()
@@ -35,33 +36,47 @@ export function UserActivity(){
         }
     }, [userListens])
 
-    return(
-        <div className = "user-activity-page">
-            <div className = "user-activity">
-                        {listened.map(listen => (
-                            <div className="user-activity-items" key={listen.trackMbid}>
-                                <img className="activity-item-img"
-                                     src={`https://coverartarchive.org/release-group/${listen.releaseMbid}/front`}
-                                     alt="placeholder.png"
-                                     onClick={() => {
-                                         navigate(`/music/track/${listen.trackMbid}`)
-                                     }}
-                                />
-                                <div className="activity-track-info">
-                                    <h4 className="activity-track-title"
-                                        key={listen.trackId}
-                                        onClick={() => {
-                                            navigate(`/music/track/${listen.trackMbid}`)
-                                        }}> {listen.trackTitle}</h4>
-                                    <h4 className="activity-track-artist"
-                                        key={listen.artistName}
-                                        onClick={() => {
-                                            navigate(`/music/artist/${listen.artistMbid}`)
-                                        }}
-                                    >{listen.artistName}</h4>
-                                </div>
-                            </div>
-                        ))}
+    function handleDate(sqlDate){
+        const timestamp = new Date(sqlDate).toLocaleString()
+
+        return [timestamp.substring(0, timestamp.indexOf(",")), timestamp.substring(timestamp.indexOf(",") + 1)]
+    }
+
+    return (
+        <div className="user-ratings-page">
+            <div className="user-ratings">
+                {listened.map(track => (
+                    <div className="ratings-page-item" key={track.trackMbid}>
+                        <img className="ratings-item-img"
+                             src={`https://coverartarchive.org/release-group/${track.releaseMbid}/front`}
+                             alt="placeholder.png"
+                             onClick={() => {
+                                 navigate(`/music/track/${track.trackMbid}`)
+                             }}
+                        />
+                        <div className="ratings-release-info">
+                            <h5 className="profile-item-title"
+                                key={track.trackTitle}
+                                onClick={() => {
+                                    navigate(`/music/track/${track.trackMbid}`)
+                                }}
+                            >{track.trackTitle} </h5>
+                            <h5 className="format" key={track.format}>
+                                {track.format.charAt(0).toUpperCase() + track.format.slice(1)} by
+                            </h5>
+                            <h5 className="profile-item-artist"
+                                key={track.artistName}
+                                onClick={() => {
+                                    navigate(`/music/artist/${track.artistMbid}`)
+                                }}
+                            >{track.artistName}</h5>
+                        </div>
+                        <div className = "listen-timestamp">
+                            <h5>{handleDate(track.firstListenedAt)[1]}</h5>
+                            <h5>{handleDate(track.firstListenedAt)[0]}</h5>
+                        </div>
+                    </div>
+                ))}
             </div>
         </div>
     )

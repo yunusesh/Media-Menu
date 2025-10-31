@@ -9,13 +9,9 @@
     grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
     gap: 10px;
     justify-items: center;
-    width: 60%;
+    width: 70%;
 }
 
-.ratings-page-item{
-    display: flex;
-    justify-content: center;
-}
 .ratings-item-img{
     width: 20vh;
     height: 20vh;
@@ -33,4 +29,23 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+
+.ratings-release-info{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    padding-bottom: 5px;
+    width: 20vh;
+}
+
+.ratings-release-info::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 100%;
+    transform: translateX(-50%);
+    border-bottom: 1px solid #4C5563;
 }

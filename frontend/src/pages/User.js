@@ -13,6 +13,12 @@ export function User() {
     const [listened, setListened] = useState([])
     const [topOfYear, setTopOfYear] = useState([])
 
+    function handleDate(sqlDate){
+        const timestamp = new Date(sqlDate).toLocaleString()
+
+        return [timestamp.substring(0, timestamp.indexOf(",")), timestamp.substring(timestamp.indexOf(",") + 1)]
+    }
+
     async function fetchUser() {
         const response = await fetch(`http://localhost:8081/user/${username}`)
         return response.json()
@@ -91,30 +97,34 @@ export function User() {
                         >SEE MORE</h3>
                     </div>
                     <div className="category-releases">
-                        {listened.map(listen => (
-                            <div className="releaseGroup-items" key={listen.trackMbid}>
+                        {listened.map(track => (
+                            <div className="releaseGroup-items" key={track.trackMbid}>
                                 <img className="profile-item-img"
-                                     src={`https://coverartarchive.org/release-group/${listen.releaseMbid}/front`}
+                                     src={`https://coverartarchive.org/release-group/${track.releaseMbid}/front`}
                                      alt="placeholder.png"
                                      onClick={() => {
-                                         navigate(`/music/track/${listen.trackMbid}`)
+                                         navigate(`/music/track/${track.trackMbid}`)
                                      }}
                                 />
                                 <div className="release-info">
                                     <h4 className="profile-item-title"
-                                        key={listen.trackId}
+                                        key={track.trackId}
                                         onClick={() => {
-                                            navigate(`/music/track/${listen.trackMbid}`)
-                                        }}> {listen.trackTitle}</h4>
+                                            navigate(`/music/track/${track.trackMbid}`)
+                                        }}> {track.trackTitle}</h4>
                                     <h5 className="format">
                                         Track by
                                     </h5>
                                     <h4 className="profile-item-artist"
-                                        key={listen.artistName}
+                                        key={track.artistName}
                                         onClick={() => {
-                                            navigate(`/music/artist/${listen.artistMbid}`)
+                                            navigate(`/music/artist/${track.artistMbid}`)
                                         }}
-                                    >{listen.artistName}</h4>
+                                    >{track.artistName}</h4>
+                                </div>
+                                <div className = "listen-timestamp">
+                                    <h5>{handleDate(track.firstListenedAt)[1]}</h5>
+                                    <h5>{handleDate(track.firstListenedAt)[0]}</h5>
                                 </div>
                             </div>
                         ))}
