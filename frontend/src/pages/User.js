@@ -12,8 +12,6 @@ export function User() {
     const [ratings, setRatings] = useState([])
     const [listened, setListened] = useState([])
     const [topOfYear, setTopOfYear] = useState([])
-    const [last12Ratings, setLast12Ratings] = useState([])
-    const [last6Listens, setLast6Listens] = useState([])
 
     async function fetchUser() {
         const response = await fetch(`http://localhost:8081/user/${username}`)
@@ -87,7 +85,10 @@ export function User() {
                 <div className="profile-categories">
                     <div className="category-header">
                         <h1 className="category">Recently Listened</h1>
-                        <h3 className="see-more">SEE MORE</h3>
+                        <h3 className="see-more" onClick={() => {
+                            navigate(`/user/${username}/music/activity`)
+                        }}
+                        >SEE MORE</h3>
                     </div>
                     <div className="category-releases">
                         {listened.map(listen => (
@@ -99,17 +100,22 @@ export function User() {
                                          navigate(`/music/track/${listen.trackMbid}`)
                                      }}
                                 />
-                                <h3 className="profile-item-title"
-                                    key={listen.trackId}
-                                    onClick={() => {
-                                        navigate(`/music/track/${listen.trackMbid}`)
-                                    }}> {listen.trackTitle}</h3>
-                                <h4 className="profile-item-artist"
-                                    key={listen.artistName}
-                                    onClick={() => {
-                                        navigate(`/music/artist/${listen.artistMbid}`)
-                                    }}
-                                >{listen.artistName}</h4>
+                                <div className="release-info">
+                                    <h4 className="profile-item-title"
+                                        key={listen.trackId}
+                                        onClick={() => {
+                                            navigate(`/music/track/${listen.trackMbid}`)
+                                        }}> {listen.trackTitle}</h4>
+                                    <h5 className="format">
+                                        Track by
+                                    </h5>
+                                    <h4 className="profile-item-artist"
+                                        key={listen.artistName}
+                                        onClick={() => {
+                                            navigate(`/music/artist/${listen.artistMbid}`)
+                                        }}
+                                    >{listen.artistName}</h4>
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -117,7 +123,10 @@ export function User() {
                 <div className="profile-categories">
                     <div className="category-header">
                         <h1 className="category">Recently Rated</h1>
-                        <h3 className="see-more">SEE MORE</h3>
+                        <h3 className="see-more" onClick={() => {
+                            navigate(`/user/${username}/music/ratings`)
+                        }}
+                        >SEE MORE</h3>
                     </div>
                     <div className="category-releases">
                         {ratings.map(rating => (
@@ -137,7 +146,7 @@ export function User() {
                                         }}
                                     >{rating.title} </h4>
                                     <h5 className="format" key={rating.format}>
-                                        {rating.format.charAt(0).toUpperCase() + rating.format.slice(1)}
+                                        {rating.format.charAt(0).toUpperCase() + rating.format.slice(1)} by
                                     </h5>
                                     <h4 className="profile-item-artist"
                                         key={rating.artistName}

@@ -14,6 +14,8 @@ import {Login} from "./pages/Login";
 import {Register} from "./pages/Register";
 import {AuthProvider} from "./AuthContext";
 import {User} from "./pages/User";
+import {UserRatings} from "./pages/UserRatings";
+import {UserActivity} from "./pages/UserActivity";
 
 function App() {
     const queryClient = new QueryClient();
@@ -34,6 +36,8 @@ function App() {
                         <Route path="/login" element={<Login/>}/>
                         <Route path = "/user/:username" element={<User/>}/>
                         <Route path = "/register" element = {<Register/>}/>
+                        <Route path = "/user/:username/music/ratings" element = {<UserRatings/>}/>
+                        <Route path = "/user/:username/music/activity" element = {<UserActivity/>}/>
                     </Routes>
                 </Router>
                 <ReactQueryDevtools/>

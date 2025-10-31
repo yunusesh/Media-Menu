@@ -1,0 +1,36 @@
+.user-ratings-page{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+.user-ratings{
+    display: grid;
+    grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    justify-items: center;
+    width: 60%;
+}
+
+.ratings-page-item{
+    display: flex;
+    justify-content: center;
+}
+.ratings-item-img{
+    width: 20vh;
+    height: 20vh;
+    margin: 15px 0 5px 0;
+    border: 2px solid black;
+    cursor: pointer;
+}
+
+.ratings-item-img:hover{
+    border: 2px solid #30DBBF;
+}
+
+.ratings-page-item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
