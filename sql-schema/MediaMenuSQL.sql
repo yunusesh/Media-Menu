@@ -33,7 +33,7 @@ CREATE TABLE scrobble(
 	id SERIAL PRIMARY KEY,
 	user_id INTEGER REFERENCES app_user(id) NOT NULL,
 	track_id INTEGER REFERENCES track(id) NOT NULL,
-	first_listened_at TIMESTAMP
+	first_listened_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 );
 
 
@@ -41,7 +41,7 @@ CREATE TABLE release_rating(
 	user_id INTEGER REFERENCES app_user(id) NOT NULL,
 	release_id INTEGER REFERENCES release_group(id) NOT NULL,
 	rating INTEGER check (rating between 0 and 10),
-	rated_at TIMESTAMP,
+	rated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (user_id, release_id)
 );
 
@@ -49,6 +49,30 @@ CREATE TABLE track_rating(
 	user_id INTEGER REFERENCES app_user(id) NOT NULL,
 	track_id INTEGER REFERENCES track(id) NOT NULL,
 	rating INTEGER check (rating between 0 and 10),
-	rated_at TIMESTAMP,
+	rated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (user_id, track_id)
 )
+
+CREATE OR REPLACE FUNCTION update_timestamp()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.first_listened_at = CURRENT_TIMESTAMP;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- triggers for each table that needs automatic timestamp updates
+CREATE TRIGGER update_scrobble_timestamp
+BEFORE UPDATE ON scrobble
+FOR EACH ROW
+EXECUTE FUNCTION update_timestamp('first_listened_at');
+
+CREATE TRIGGER update_release_rating_timestamp
+BEFORE UPDATE ON release_rating
+FOR EACH ROW
+EXECUTE FUNCTION update_timestamp('rated_at');
+
+CREATE TRIGGER update_track_rating_timestamp
+BEFORE UPDATE ON track_rating
+FOR EACH ROW
+EXECUTE FUNCTION update_timestamp('rated_at');
